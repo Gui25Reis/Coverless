@@ -1,6 +1,6 @@
 # Coverless
 [![Version](https://img.shields.io/badge/version-0.1.0-orange)]()
-[![Plataform](https://img.shields.io/badge/plataforma-Web-lightgrey?)]()
+[![Plataform](https://img.shields.io/badge/plataforma-IOS-lightgrey?)]()
 [![License](https://img.shields.io/badge/licença-GNU%20v3.0-brightgreen?)](https://github.com/Gui25Reis/Coverless/blob/main/LICENSE)
 
 App para buscar livros a partir da sinopse
@@ -8,7 +8,7 @@ App para buscar livros a partir da sinopse
 1. [Código](#código)
 2. [Documentação](#documentação)
 3. [Licença](#licença)
-4. [Autor](#author)
+4. [Autores](#autores)
 
 ## Código
 Código em construção.
@@ -19,7 +19,7 @@ Documentação se encontra na [wiki](https://github.com/Gui25Reis/Coverless/wiki
 ## Licença
 Esse projeto é licenciado pela [GNU General Public License v3.0](https://github.com/Gui25Reis/Coverless/blob/dev/LICENSE).
 
-## Autor
+## Autores
 <table>
     <tr>
         <td align="center">
