@@ -18,6 +18,8 @@
 		5BBAFA6526F21B9000A8DEF9 /* DesignSpacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BBAFA6426F21B9000A8DEF9 /* DesignSpacing.swift */; };
 		5BBAFA6726F2256C00A8DEF9 /* DesignText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BBAFA6626F2256C00A8DEF9 /* DesignText.swift */; };
 		5BBAFA6926F2258100A8DEF9 /* TextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BBAFA6826F2258100A8DEF9 /* TextStyle.swift */; };
+		5BC4634C26F25D43007155C1 /* LabelDesignable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC4634B26F25D43007155C1 /* LabelDesignable.swift */; };
+		5BC4634E26F25E31007155C1 /* ButtonTextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC4634D26F25E31007155C1 /* ButtonTextStyle.swift */; };
 		5BE28DFC26F12D940043F19E /* DefaultDesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE28DFB26F12D940043F19E /* DefaultDesignSystem.swift */; };
 		5BE28E0126F134EB0043F19E /* UIColor+Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE28E0026F134EB0043F19E /* UIColor+Palette.swift */; };
 		5BE28E0326F135A10043F19E /* DefaultDesignPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE28E0226F135A10043F19E /* DefaultDesignPalette.swift */; };
@@ -40,6 +42,8 @@
 		5BBAFA6426F21B9000A8DEF9 /* DesignSpacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSpacing.swift; sourceTree = "<group>"; };
 		5BBAFA6626F2256C00A8DEF9 /* DesignText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignText.swift; sourceTree = "<group>"; };
 		5BBAFA6826F2258100A8DEF9 /* TextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyle.swift; sourceTree = "<group>"; };
+		5BC4634B26F25D43007155C1 /* LabelDesignable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelDesignable.swift; sourceTree = "<group>"; };
+		5BC4634D26F25E31007155C1 /* ButtonTextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTextStyle.swift; sourceTree = "<group>"; };
 		5BE28DFB26F12D940043F19E /* DefaultDesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDesignSystem.swift; sourceTree = "<group>"; };
 		5BE28E0026F134EB0043F19E /* UIColor+Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Palette.swift"; sourceTree = "<group>"; };
 		5BE28E0226F135A10043F19E /* DefaultDesignPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDesignPalette.swift; sourceTree = "<group>"; };
@@ -157,6 +161,7 @@
 				5BE28DFB26F12D940043F19E /* DefaultDesignSystem.swift */,
 				5BE28E0226F135A10043F19E /* DefaultDesignPalette.swift */,
 				5BE28E0426F136E50043F19E /* DefaultDesignSpacing.swift */,
+				5BC4634D26F25E31007155C1 /* ButtonTextStyle.swift */,
 			);
 			path = Implementations;
 			sourceTree = "<group>";
@@ -208,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				5BE28E0B26F142E40043F19E /* Designable.swift */,
+				5BC4634B26F25D43007155C1 /* LabelDesignable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -292,9 +298,11 @@
 				5BBAFA6326F21B8100A8DEF9 /* DesignPalette.swift in Sources */,
 				5BBAFA6726F2256C00A8DEF9 /* DesignText.swift in Sources */,
 				5BBAFA6126F21B6000A8DEF9 /* DesignSystem.swift in Sources */,
+				5BC4634E26F25E31007155C1 /* ButtonTextStyle.swift in Sources */,
 				5BE28E0526F136E50043F19E /* DefaultDesignSpacing.swift in Sources */,
 				224DBC8826F113B3002303F3 /* AppDelegate.swift in Sources */,
 				224DBC8A26F113B3002303F3 /* SceneDelegate.swift in Sources */,
+				5BC4634C26F25D43007155C1 /* LabelDesignable.swift in Sources */,
 				5BBAFA6526F21B9000A8DEF9 /* DesignSpacing.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

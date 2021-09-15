@@ -10,4 +10,5 @@ import Foundation
 protocol DesignSystem {
     var palette: DesignPalette { get }
     var spacing: DesignSpacing { get }
+    var text: DesignText { get }
 }

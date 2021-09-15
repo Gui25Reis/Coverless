@@ -26,13 +26,11 @@ final class SynopsisCellButton: UIButton, Designable {
         NSLayoutConstraint.activate([
             label.topAnchor.constraint(equalTo: imageView!.bottomAnchor, constant: 4),
             label.leadingAnchor.constraint(equalTo: leadingAnchor),
-            label.trailingAnchor.constraint(equalTo: trailingAnchor),
-            label.bottomAnchor.constraint(equalTo: bottomAnchor)
+            label.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
         
         label.text = text
         stylize(with: designSystem)
-        backgroundColor = .blue.withAlphaComponent(0.4)
         addAction(UIAction(handler: {[weak self] _ in
             guard
                 let self = self,
@@ -48,13 +46,10 @@ final class SynopsisCellButton: UIButton, Designable {
     
     func stylize(with designSystem: DesignSystem) {
         imageView?.tintColor = designSystem.palette.accent
-        label.textColor = designSystem.palette.accent
-        label.font = UIFontMetrics.default.scaledFont(for: .systemFont(ofSize: 12))
-        //DS
-        label.textAlignment = .center
+        label.stylize(with: designSystem.text.button)
         
         adjustsImageSizeForAccessibilityContentSizeCategory = true
-        imageView?.adjustsImageSizeForAccessibilityContentSizeCategory = true
+        imageView!.adjustsImageSizeForAccessibilityContentSizeCategory = true
         label.adjustsFontForContentSizeCategory = true
     }
 }

@@ -8,7 +8,7 @@
 import UIKit
 
 struct DefaultDesignSystem: DesignSystem {
-    
+    let text: DesignText = DesignText()
     let palette: DesignPalette = DefaultDesignPalette()
     let spacing: DesignSpacing = DefaultDesignSpacing()
 }

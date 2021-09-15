@@ -9,4 +9,7 @@ import UIKit
 
 protocol TextStyle {
     
+    var font: UIFont { get }
+    var color: UIColor { get }
+    var alignment: NSTextAlignment { get }
 }
