@@ -37,59 +37,60 @@ struct Book {
 
 class BookRepository {
     private let token = "AIzaSyCN2r5ED0n-OeohIezXvWCGzskdhZ61x-E"
+    private var books:[Book] = []
     
     public func getRandomizedBooks(_ completionHandler: @escaping (Result<[Book], Error>) -> Void) {
         
+        self.books = []
+        
         let session = URLSession.shared
         
-        let randomNumber:Int = Int.random(in: 0...500)
+        let randomNumber:Int = Int.random(in: 0...200)
         
-        let apiUrl = "https://www.googleapis.com/books/v1/volumes?q=aventura+subject:&startIndex=\(randomNumber)&maxResults=40"
-
+        let apiUrl = "https://www.googleapis.com/books/v1/volumes?q=amor+subject:&startIndex=\(randomNumber)&maxResults=40&printType=books"
+        
         session.dataTask(with: URL(string: apiUrl+"&key=\(self.token)")!) { data, response, error in
-            
             if let error = error {
                 completionHandler(.failure(error))
-            } else {
-                
-                if let response = response as? HTTPURLResponse, response.statusCode == 200 {
-                    // print("Requisição bem sucessida -> Index: \(start)")
-                    
-                    if let data = data {
-                        let decoder = JSONDecoder()
-                        let books = try! decoder.decode(Items.self, from: data)
-                        
-                        completionHandler(.success(self.compactInfo(items: books)))
-                    }
-                }
+                return
             }
             
+            if let response = response as? HTTPURLResponse, response.statusCode == 200 {
+                if let data = data {
+                    let decoder = JSONDecoder()
+                    let books = try! decoder.decode(Items.self, from: data)
+                    
+                    self.compactInfo(items: books)
+                    
+                    completionHandler(.success(self.books))
+                }
+            }
         }.resume()
     }
     
-    
-    private func compactInfo (items:Items) -> [Book] {
+
+    private func compactInfo (items:Items) -> Void {
         // Uso com Filter
-        return items.items.filter { item in
-            item.volumeInfo.title != nil &&
-            item.volumeInfo.description != nil &&
-            item.volumeInfo.language != nil &&
-            item.volumeInfo.language == "pt"
-        }.map {
-            Book(id: $0.id, title: $0.volumeInfo.title! , description: $0.volumeInfo.description!)
-        }
+//        return items.items.filter { item in
+//            item.volumeInfo.title != nil &&
+//            item.volumeInfo.description != nil &&
+//            item.volumeInfo.language != nil &&
+//            item.volumeInfo.language == "pt"
+//        }.map {
+//            Book(id: $0.id, title: $0.volumeInfo.title! , description: $0.volumeInfo.description!)
+//        }
         
         // Uso com for
-        /*
-        var allBooks:[Book] = []
         for b in items.items {
-            if (b.volumeInfo.title != nil && b.volumeInfo.description != nil) {
-                allBooks.append(
-                    Book(id: b.id, title: b.volumeInfo.title!, description: b.volumeInfo.description!)
+            if b.volumeInfo.title != nil, b.volumeInfo.description != nil, b.volumeInfo.language != nil, b.volumeInfo.language == "pt" {
+                self.books.append (
+                    Book(
+                        id: b.id,
+                        title: b.volumeInfo.title!,
+                        description: b.volumeInfo.description!
+                    )
                 )
             }
         }
-        return allBooks
-        */
     }
 }
