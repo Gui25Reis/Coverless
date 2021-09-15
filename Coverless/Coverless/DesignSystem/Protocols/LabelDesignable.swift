@@ -18,9 +18,10 @@ extension UILabel: LabelDesignable {
         self.font = textStyle.font
         self.textColor = textStyle.color
         self.textAlignment = textStyle.alignment
+        setupAcessibility()
     }
     
     func setupAcessibility() {
-        
+        self.adjustsFontForContentSizeCategory = true
     }
 }

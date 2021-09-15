@@ -12,7 +12,7 @@ final class SynopsisCellButton: UIButton, Designable {
     let label = UILabel(frame: .zero)
     var action: (() -> Void)?
     
-    init(text: String, systemName: String, designSystem: DesignSystem) {
+    init(text: String, systemName: String, designSystem: DesignSystem = DefaultDesignSystem())  {
         super.init(frame: .zero)
         let configuarion = UIImage.SymbolConfiguration(scale: .large)
         let image = UIImage(systemName: systemName, withConfiguration: configuarion)
@@ -30,6 +30,7 @@ final class SynopsisCellButton: UIButton, Designable {
         ])
         
         label.text = text
+        label.numberOfLines = 0
         stylize(with: designSystem)
         addAction(UIAction(handler: {[weak self] _ in
             guard

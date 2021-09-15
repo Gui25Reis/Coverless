@@ -8,9 +8,16 @@
 import UIKit
 
 struct DefaultDesignSpacing: DesignSpacing {
-    let xSmall: CGFloat = 4
-    let small: CGFloat = 8
-    let medium: CGFloat = 12
-    let large: CGFloat = 16
-    let xLarge: CGFloat = 20
+    var xSmallPositive: CGFloat = 4
+    var smallPositive: CGFloat  = 8
+    var mediumPositive: CGFloat = 12
+    var largePositive: CGFloat = 16
+    var xLargePositive: CGFloat = 20
+    
+    
+    var xSmallNegative: CGFloat = -4
+    var smallNegative: CGFloat = -8
+    var mediumNegative: CGFloat = -12
+    var largeNegative: CGFloat = -16
+    var xLargeNegative: CGFloat = -20
 }

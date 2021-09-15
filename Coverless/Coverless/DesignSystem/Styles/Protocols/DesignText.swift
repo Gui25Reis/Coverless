@@ -7,4 +7,5 @@
 
 struct DesignText {
     let button: TextStyle = ButtonTextStyle()
+    let body: TextStyle = BodyTextStyle()
 }
