@@ -23,4 +23,8 @@ extension UIColor {
     static var titlePrimary: UIColor {
         UIColor(named: "TitlePrimary")!
     }
+    
+    static var backgroundCell: UIColor {
+        UIColor(named: "BackgroundCell")!
+    }
 }

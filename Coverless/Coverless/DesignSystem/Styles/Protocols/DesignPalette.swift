@@ -12,4 +12,5 @@ protocol DesignPalette {
     var accent: UIColor { get }
     var textPrimary: UIColor { get }
     var titlePrimary: UIColor { get }
+    var backgroundCell: UIColor { get }
 }
