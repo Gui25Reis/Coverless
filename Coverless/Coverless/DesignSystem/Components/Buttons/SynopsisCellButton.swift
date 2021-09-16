@@ -10,21 +10,34 @@ import UIKit
 final class SynopsisCellButton: UIButton, Designable {
     
     let label = UILabel(frame: .zero)
+    let symbolView = UIImageView(frame: .zero)
     var action: (() -> Void)?
     
     init(text: String, systemName: String, designSystem: DesignSystem = DefaultDesignSystem())  {
         super.init(frame: .zero)
-        let configuarion = UIImage.SymbolConfiguration(scale: .large)
-        let image = UIImage(systemName: systemName, withConfiguration: configuarion)
-        setImage(image, for: .normal)
+        
+        let symbol = UIImage(systemName: systemName)
+        
+        if let symbol = symbol {
+            symbolView.contentMode = .scaleAspectFit
+            symbolView.image = symbol
+                .applyingSymbolConfiguration(symbol.getSymbolConfiguration(for: traitCollection))
+        }
         
         label.translatesAutoresizingMaskIntoConstraints = false
         label.isUserInteractionEnabled = false
+        symbolView.translatesAutoresizingMaskIntoConstraints = false
+        symbolView.isUserInteractionEnabled = false
         
         addSubview(label)
+        addSubview(symbolView)
         
         NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: imageView!.bottomAnchor, constant: 4),
+            symbolView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            symbolView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            symbolView.bottomAnchor.constraint(equalTo: centerYAnchor, constant: \.xSmallPositive),
+            symbolView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.40),
+            label.topAnchor.constraint(equalTo: centerYAnchor, constant: \.smallPositive),
             label.leadingAnchor.constraint(equalTo: leadingAnchor),
             label.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
@@ -46,11 +59,11 @@ final class SynopsisCellButton: UIButton, Designable {
     }
     
     func stylize(with designSystem: DesignSystem) {
-        imageView?.tintColor = designSystem.palette.accent
+        symbolView.tintColor = designSystem.palette.accent
         label.stylize(with: designSystem.text.button)
         
         adjustsImageSizeForAccessibilityContentSizeCategory = true
-        imageView!.adjustsImageSizeForAccessibilityContentSizeCategory = true
+        symbolView.adjustsImageSizeForAccessibilityContentSizeCategory = true
         label.adjustsFontForContentSizeCategory = true
     }
 }

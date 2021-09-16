@@ -17,7 +17,7 @@ class MenuViewController: UIViewController {
     public override func viewDidLoad() -> Void {
         super.viewDidLoad()
         //let button = SynopsisCellButton(text: "Descubra", systemName: "trash", designSystem: designSystem)
-            
+        view.backgroundColor = designSystem.palette.backgroundPrimary
         cv.translatesAutoresizingMaskIntoConstraints = false
         cv.delegate = self
         cv.dataSource = self
@@ -31,7 +31,7 @@ class MenuViewController: UIViewController {
             cv.leadingAnchor.constraint(equalTo: view.leadingAnchor)
         ])
         cv.register(SynopsisCell.self, forCellWithReuseIdentifier: "cell")
-        view.backgroundColor = .secondarySystemBackground
+        
     }
     
     
@@ -51,13 +51,16 @@ class MenuViewController: UIViewController {
 
         // Create Item
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        
 
         // Define Group Size
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(500.0))
 
         // Create Group
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [ item ])
-
+        
+        group.edgeSpacing = .init(leading: .fixed(0), top: .fixed(4), trailing: .fixed(0), bottom: .fixed(4))
         // Create Section
         let section = NSCollectionLayoutSection(group: group)
 
