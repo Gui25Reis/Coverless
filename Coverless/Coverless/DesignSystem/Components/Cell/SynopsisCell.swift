@@ -5,18 +5,10 @@
 //  Created by Beatriz Duque on 15/09/21.
 //
 
-/**
- 
- TODO:
- * RECEBER DADOS
- * DELEGAR FUNCOES DO BOTÃO
- * ACESSIBILIDADE DO BUTTON SHAPE
- * VOICE OVER
- */
 
 import UIKit
 
-class SynopsisCell: UICollectionViewCell{
+class SynopsisCell: UICollectionViewCell, Designable{
     private let synopsisLabel: UILabel
     private let infoButton: SynopsisCellButton
     private let discoverButton: SynopsisCellButton
@@ -66,6 +58,8 @@ class SynopsisCell: UICollectionViewCell{
         contentView.addSubview(infoButton)
         contentView.addSubview(discoverButton)
         setupLayout()
+        setupActions()
+
     }
     
     required init?(coder: NSCoder) {
@@ -73,17 +67,12 @@ class SynopsisCell: UICollectionViewCell{
     }
     
     private func setupLayout(){
-        backgroundColor = .systemBackground
-        layer.cornerRadius = 12
-        synopsisLabel.stylize(with: DefaultDesignSystem.shared.text.body)
-                
         /* MARK: - Constraints da Label de sinopse */
         synopsisLabel.translatesAutoresizingMaskIntoConstraints = false
         infoButton.translatesAutoresizingMaskIntoConstraints = false
         discoverButton.translatesAutoresizingMaskIntoConstraints = false
                 
         activateConstraints()
-        setupActions()
     }
     
     private func activateConstraints(){
@@ -115,6 +104,7 @@ class SynopsisCell: UICollectionViewCell{
     //MARK: Adicionar estrutura de dados
     func setup(synopsis: String, delegate: SynopsisCellDelegate?) {
         synopsisLabel.text = synopsis
+        stylize(with: DefaultDesignSystem.shared)
         self.delegate = delegate
     }
     
@@ -128,5 +118,24 @@ class SynopsisCell: UICollectionViewCell{
     private func discoverBook() {
         guard let delegate = delegate else { return }
         delegate.discoverBook()
+    }
+    
+    //MARK: Stylize + VoiceOver
+    func stylize(with designSystem: DesignSystem) {
+        backgroundColor = designSystem.palette.backgroundCell
+        layer.cornerRadius = 12
+        synopsisLabel.stylize(with: designSystem.text.body)
+        synopsisLabel.isAccessibilityElement = true
+        synopsisLabel.accessibilityLabel = "Card de sinopse:\(synopsisLabel.text ?? "")"
+        //synopsisLabel.accessibilityHint = "Card da sinopse"
+        infoButton.isAccessibilityElement = true
+        infoButton.accessibilityLabel = "Saiba mais"
+        
+        discoverButton.isAccessibilityElement = true
+        discoverButton.accessibilityLabel = "Descubra"
+        discoverButton.accessibilityHint = "Adicione na Estante"
+        
+        self.accessibilityElements = [synopsisLabel, infoButton, discoverButton]
+        
     }
 }

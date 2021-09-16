@@ -31,6 +31,8 @@ class MenuViewController: UIViewController {
             cv.leadingAnchor.constraint(equalTo: view.leadingAnchor)
         ])
         cv.register(SynopsisCell.self, forCellWithReuseIdentifier: "cell")
+        cv.isAccessibilityElement = false
+        cv.shouldGroupAccessibilityChildren = true 
         
     }
     
