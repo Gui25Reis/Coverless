@@ -11,7 +11,6 @@ final class SynopsisCellButton: UIButton, Designable {
     
     let label = UILabel(frame: .zero)
     let symbolView = UIImageView(frame: .zero)
-    var action: (() -> Void)?
     
     init(text: String, systemName: String, designSystem: DesignSystem = DefaultDesignSystem())  {
         super.init(frame: .zero)
@@ -45,13 +44,6 @@ final class SynopsisCellButton: UIButton, Designable {
         label.text = text
         label.numberOfLines = 0
         stylize(with: designSystem)
-        addAction(UIAction(handler: {[weak self] _ in
-            guard
-                let self = self,
-                let action = self.action
-            else { return }
-            action()
-        }), for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {

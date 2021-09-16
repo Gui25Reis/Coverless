@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct BodyTextStyle: TextStyle{
+struct BodyTextStyle: TextStyle, CustomLabelDesignable{
     var font: UIFont = {
         let descriptor = UIFont.systemFont(ofSize: 17).fontDescriptor
         if let serif = descriptor.withDesign(.serif){
@@ -15,8 +15,11 @@ struct BodyTextStyle: TextStyle{
         }
         return UIFont.init(descriptor: descriptor, size: 0)
     }()
-    
     var color: UIColor = .textPrimary
-    
     var alignment: NSTextAlignment = .natural
+    
+    func custom(_ label: UILabel) {
+        label.numberOfLines = 0
+        label.lineBreakMode = .byTruncatingHead
+    }
 }

@@ -5,12 +5,24 @@
 //  Created by Beatriz Duque on 15/09/21.
 //
 
+/**
+ 
+ TODO:
+ * RECEBER DADOS
+ * DELEGAR FUNCOES DO BOTÃO
+ * ACESSIBILIDADE DO BUTTON SHAPE
+ * VOICE OVER
+ */
+
 import UIKit
 
 class SynopsisCell: UICollectionViewCell{
     private let synopsisLabel: UILabel
     private let infoButton: SynopsisCellButton
     private let discoverButton: SynopsisCellButton
+    
+    private weak var delegate: SynopsisCellDelegate? = nil
+    
     private lazy var normalLayout = [
         synopsisLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.70),
         synopsisLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: \.mediumPositive),
@@ -54,32 +66,27 @@ class SynopsisCell: UICollectionViewCell{
         contentView.addSubview(infoButton)
         contentView.addSubview(discoverButton)
         setupLayout()
-        
-        infoButton.action = { print("info") }
-        discoverButton.action = { print("discover") }
     }
     
-    func setupLayout(){
-        
-        ///label
-        synopsisLabel.text = "Harry Potter é um garoto órfão que vive infeliz com seus tios, os Dursleys. Ele recebe uma carta contendo um convite para ingressar em Hogwarts, uma famosa escola especializada em formar jovens…"
-        synopsisLabel.numberOfLines = 0
-        synopsisLabel.lineBreakMode = .byTruncatingHead
-        
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupLayout(){
         backgroundColor = .systemBackground
         layer.cornerRadius = 12
-        synopsisLabel.stylize(with: BodyTextStyle())
+        synopsisLabel.stylize(with: DefaultDesignSystem.shared.text.body)
                 
         /* MARK: - Constraints da Label de sinopse */
         synopsisLabel.translatesAutoresizingMaskIntoConstraints = false
         infoButton.translatesAutoresizingMaskIntoConstraints = false
         discoverButton.translatesAutoresizingMaskIntoConstraints = false
                 
-        //NSLayoutConstraint.activate()
         activateConstraints()
+        setupActions()
     }
     
-    func activateConstraints(){
+    private func activateConstraints(){
         if (traitCollection.preferredContentSizeCategory
                 < .accessibilityMedium) { // Default font sizes
             accessibilityLayout.forEach{
@@ -95,11 +102,31 @@ class SynopsisCell: UICollectionViewCell{
         }
         
     }
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    
+    private func setupActions() {
+        infoButton.addTarget(self, action: #selector(showInfo), for: .touchUpInside)
+        discoverButton.addTarget(self, action: #selector(discoverBook), for: .touchUpInside)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         activateConstraints()
+    }
+    
+    //MARK: Adicionar estrutura de dados
+    func setup(synopsis: String, delegate: SynopsisCellDelegate?) {
+        synopsisLabel.text = synopsis
+        self.delegate = delegate
+    }
+    
+    @objc
+    private func showInfo() {
+        guard let delegate = delegate else { return }
+        delegate.showInfo()
+    }
+    
+    @objc
+    private func discoverBook() {
+        guard let delegate = delegate else { return }
+        delegate.discoverBook()
     }
 }

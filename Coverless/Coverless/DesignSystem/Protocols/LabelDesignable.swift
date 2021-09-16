@@ -18,6 +18,11 @@ extension UILabel: LabelDesignable {
         self.font = textStyle.font
         self.textColor = textStyle.color
         self.textAlignment = textStyle.alignment
+        
+        if let textStyle = textStyle as? CustomLabelDesignable {
+            textStyle.custom(self)
+        }
+        
         setupAcessibility()
     }
     

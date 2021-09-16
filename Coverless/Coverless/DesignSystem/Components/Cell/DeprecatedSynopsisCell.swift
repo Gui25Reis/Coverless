@@ -28,9 +28,6 @@ final class DeprecatedSynopsisCell: UICollectionViewCell{
     }
     
     func setupLayout(){
-        
-        ///label
-        //synopsisLabel.text = "Harry Potter é um garoto órfão que vive infeliz com seus tios, os Dursleys. Ele recebe uma carta contendo um convite para ingressar em Hogwarts, uma famosa escola especializada em formar jovens…"
         synopsisLabel.backgroundColor = .systemPink
         cellButtonStack.backgroundColor = .blue
         synopsisLabel.numberOfLines = 0
@@ -110,16 +107,5 @@ final class DeprecatedSynopsisCell: UICollectionViewCell{
             cellButtonStack.distribution = .fillProportionally
             
         }
-    }
-}
-
-extension NSLayoutYAxisAnchor{
-    func constraint(equalTo anchor: NSLayoutAnchor<NSLayoutYAxisAnchor>, constant: KeyPath<DesignSpacing,CGFloat>) -> NSLayoutConstraint {
-        constraint(equalTo: anchor, constant: DefaultDesignSystem.shared.spacing[keyPath: constant])
-    }
-}
-extension NSLayoutXAxisAnchor{
-    func constraint(equalTo anchor: NSLayoutAnchor<NSLayoutXAxisAnchor>, constant: KeyPath<DesignSpacing,CGFloat>) -> NSLayoutConstraint {
-        constraint(equalTo: anchor, constant: DefaultDesignSystem.shared.spacing[keyPath: constant])
     }
 }

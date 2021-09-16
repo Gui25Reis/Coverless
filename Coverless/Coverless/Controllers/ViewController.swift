@@ -80,8 +80,23 @@ extension MenuViewController:UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? SynopsisCell else {
+            preconditionFailure("Cell Register not configured correctily")
+        }
+        cell.setup(synopsis: "Harry Potter é um garoto órfão que vive infeliz com seus tios, os Dursleys. Ele recebe uma carta contendo um convite para ingressar em Hogwarts, uma famosa escola especializada em formar jovens…", delegate: self)
         return cell
+    }
+    
+    
+}
+
+extension MenuViewController: SynopsisCellDelegate {
+    func showInfo() {
+        print("info pressed")
+    }
+    
+    func discoverBook() {
+        print("discorver pressed")
     }
     
     
