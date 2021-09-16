@@ -2,4 +2,4 @@
 *.DS_Store
 
 # Tirando token da API
-*.Environment.plist
+*Environment.plist
