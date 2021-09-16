@@ -36,20 +36,18 @@ struct Book {
 
 
 class BookRepository {
-    private let token = "AIzaSyCN2r5ED0n-OeohIezXvWCGzskdhZ61x-E"
     private var books:[Book] = []
     
-    public func getRandomizedBooks(_ completionHandler: @escaping (Result<[Book], Error>) -> Void) {
-        
+    public func getRandomizedBooks(text:String, _ completionHandler: @escaping (Result<[Book], Error>) -> Void) {
         self.books = []
         
         let session = URLSession.shared
         
         let randomNumber:Int = Int.random(in: 0...200)
         
-        let apiUrl = "https://www.googleapis.com/books/v1/volumes?q=amor+subject:&startIndex=\(randomNumber)&maxResults=40&printType=books"
+        let apiUrl = "https://www.googleapis.com/books/v1/volumes?q=\(text)+subject:&startIndex=\(randomNumber)&maxResults=40&printType=books"
         
-        session.dataTask(with: URL(string: apiUrl+"&key=\(self.token)")!) { data, response, error in
+        session.dataTask(with: URL(string: apiUrl+"&key=\(self.getToken())")!) { data, response, error in
             if let error = error {
                 completionHandler(.failure(error))
                 return
@@ -68,21 +66,19 @@ class BookRepository {
         }.resume()
     }
     
+    
+    private func getToken() -> String {
+        var myDict: [String:String]?
+        if let path = Bundle.main.path(forResource: "Environment", ofType: "plist") {
+            myDict = NSDictionary(contentsOfFile: path) as? [String:String]
+        }
+        return myDict!["token"]!
+    }
 
+    
     private func compactInfo (items:Items) -> Void {
-        // Uso com Filter
-//        return items.items.filter { item in
-//            item.volumeInfo.title != nil &&
-//            item.volumeInfo.description != nil &&
-//            item.volumeInfo.language != nil &&
-//            item.volumeInfo.language == "pt"
-//        }.map {
-//            Book(id: $0.id, title: $0.volumeInfo.title! , description: $0.volumeInfo.description!)
-//        }
-        
-        // Uso com for
         for b in items.items {
-            if b.volumeInfo.title != nil, b.volumeInfo.description != nil, b.volumeInfo.language != nil, b.volumeInfo.language == "pt" {
+            if b.volumeInfo.title != nil, b.volumeInfo.description != nil { //, b.volumeInfo.language != nil, b.volumeInfo.language == "pt" {
                 self.books.append (
                     Book(
                         id: b.id,
@@ -94,3 +90,32 @@ class BookRepository {
         }
     }
 }
+
+
+/* Como usar a função:
+ 
+@objc func buttonAction() -> Void {
+    
+    api.getRandomizedBooks(text: "adventure") { result in
+        
+        switch result {
+            case .success(let book):
+                self.success(book)
+                break
+                
+            case .failure(let error):
+                print("Erro API: \(error)")
+                break
+        }
+    }
+}
+ 
+private func success(_ books:[Book]) -> Void {
+    for b in books {
+        print("Id: \(b.id)")
+        print("Title: \(b.title)")
+        print("Sinopse: \(b.description)\n\n")
+    }
+    print("===== Total de livros: \(books.count) =====\n")
+}
+*/

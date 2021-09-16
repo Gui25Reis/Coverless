@@ -13,7 +13,7 @@ class MenuViewController: UIViewController {
     private var button:UIButton!
     
     
-    /* MARK: - Civlo de Vida */
+    /* MARK: - Ciclo de Vida */
     public override func loadView() -> Void {
         super.loadView()
         
@@ -53,7 +53,6 @@ class MenuViewController: UIViewController {
             print("Title: \(b.title)")
             print("Sinopse: \(b.description)\n\n")
         }
-        
         print("===== Total de livros: \(books.count) =====\n")
     }
     
@@ -64,7 +63,7 @@ class MenuViewController: UIViewController {
     
     @objc func buttonAction() -> Void {
         
-        api.getRandomizedBooks() { result in
+        self.api.getRandomizedBooks(text: "drama") { result in
             
             switch result {
                 case .success(let book):
@@ -74,9 +73,7 @@ class MenuViewController: UIViewController {
                 case .failure(let error):
                     print("Erro API: \(error)")
                     break
-                    
             }
-            
         }
     }
 }
