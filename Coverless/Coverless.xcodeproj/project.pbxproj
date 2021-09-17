@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		222DB62B26F5234600BFA412 /* ApiDatas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222DB62A26F5234600BFA412 /* ApiDatas.swift */; };
 		223D0F5226F131A200CF69D2 /* BookRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223D0F5126F131A200CF69D2 /* BookRepository.swift */; };
+		13471FBB26F283C4007296E2 /* BodyTextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13471FBA26F283C4007296E2 /* BodyTextStyle.swift */; };
+		13471FBD26F28ED3007296E2 /* SynopsisCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13471FBC26F28ED3007296E2 /* SynopsisCell.swift */; };
 		224DBC8826F113B3002303F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224DBC8726F113B3002303F3 /* AppDelegate.swift */; };
 		224DBC8A26F113B3002303F3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224DBC8926F113B3002303F3 /* SceneDelegate.swift */; };
 		224DBC9126F113B3002303F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 224DBC9026F113B3002303F3 /* Assets.xcassets */; };
@@ -20,6 +22,8 @@
 /* Begin PBXFileReference section */
 		222DB62A26F5234600BFA412 /* ApiDatas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiDatas.swift; sourceTree = "<group>"; };
 		223D0F5126F131A200CF69D2 /* BookRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookRepository.swift; sourceTree = "<group>"; };
+		13471FBA26F283C4007296E2 /* BodyTextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyTextStyle.swift; sourceTree = "<group>"; };
+		13471FBC26F28ED3007296E2 /* SynopsisCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynopsisCell.swift; sourceTree = "<group>"; };
 		224DBC8426F113B3002303F3 /* Coverless.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Coverless.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		224DBC8726F113B3002303F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		224DBC8926F113B3002303F3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -28,6 +32,33 @@
 		224DBC9526F113B4002303F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		224DBCA126F114DD002303F3 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		229B0B0A26F14049007B51D3 /* Environment.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Environment.plist; sourceTree = "<group>"; };
+		5B47F64326F2CB4200FDF48D /* SymbolAccesibilityConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolAccesibilityConfiguration.swift; sourceTree = "<group>"; };
+		5B47F64526F2CCA800FDF48D /* UIImageView+TraitCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+TraitCollection.swift"; sourceTree = "<group>"; };
+		5B47F64726F3700500FDF48D /* UIImage+TraitCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+TraitCollection.swift"; sourceTree = "<group>"; };
+		5B47F64926F3B39C00FDF48D /* SynopsisCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynopsisCellDelegate.swift; sourceTree = "<group>"; };
+		5B47F64B26F3B65A00FDF48D /* CustomLabelDesignable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabelDesignable.swift; sourceTree = "<group>"; };
+		5B47F64D26F3B78000FDF48D /* NSLayoutAnchor+DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutAnchor+DesignSystem.swift"; sourceTree = "<group>"; };
+		5B47F65026F3DB9800FDF48D /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		5B47F65226F3DC3100FDF48D /* DiscoverCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCoordinator.swift; sourceTree = "<group>"; };
+		5B47F65426F3DCBF00FDF48D /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		5B47F65626F3E1B400FDF48D /* ShelfCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfCoordinator.swift; sourceTree = "<group>"; };
+		5B47F65826F3E2CB00FDF48D /* ShelfViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfViewController.swift; sourceTree = "<group>"; };
+		5B47F65A26F4079500FDF48D /* PropertyListDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PropertyListDecoder.swift; path = Coverless/Controllers/PropertyListDecoder.swift; sourceTree = SOURCE_ROOT; };
+		5BBAFA6026F21B6000A8DEF9 /* DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
+		5BBAFA6226F21B8100A8DEF9 /* DesignPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignPalette.swift; sourceTree = "<group>"; };
+		5BBAFA6426F21B9000A8DEF9 /* DesignSpacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSpacing.swift; sourceTree = "<group>"; };
+		5BBAFA6626F2256C00A8DEF9 /* DesignText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignText.swift; sourceTree = "<group>"; };
+		5BBAFA6826F2258100A8DEF9 /* TextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyle.swift; sourceTree = "<group>"; };
+		5BC4634B26F25D43007155C1 /* LabelDesignable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelDesignable.swift; sourceTree = "<group>"; };
+		5BC4634D26F25E31007155C1 /* ButtonTextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTextStyle.swift; sourceTree = "<group>"; };
+		5BE28DFB26F12D940043F19E /* DefaultDesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDesignSystem.swift; sourceTree = "<group>"; };
+		5BE28E0026F134EB0043F19E /* UIColor+Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Palette.swift"; sourceTree = "<group>"; };
+		5BE28E0226F135A10043F19E /* DefaultDesignPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDesignPalette.swift; sourceTree = "<group>"; };
+		5BE28E0426F136E50043F19E /* DefaultDesignSpacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDesignSpacing.swift; sourceTree = "<group>"; };
+		5BE28E0726F138020043F19E /* SynopsisCellButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynopsisCellButton.swift; sourceTree = "<group>"; };
+		5BE28E0B26F142E40043F19E /* Designable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Designable.swift; sourceTree = "<group>"; };
+		A7F3AF9426F3B27300C5289E /* environment.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = environment.plist; sourceTree = "<group>"; };
+		A7F3AF9626F3B88A00C5289E /* ManipulacaoArquivo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManipulacaoArquivo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +92,8 @@
 			isa = PBXGroup;
 			children = (
 				224F21DB26F3E03B00BF8015 /* API */,
+				5B47F64F26F3DB7300FDF48D /* Coordinators */,
+				5BE28DFA26F12D380043F19E /* DesignSystem */,
 				224DBC9D26F11452002303F3 /* Controllers */,
 				224DBC9E26F1145D002303F3 /* Views */,
 				224DBC9F26F1146B002303F3 /* Modals */,
@@ -93,6 +126,10 @@
 		224DBC9D26F11452002303F3 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				A7F3AF9626F3B88A00C5289E /* ManipulacaoArquivo.swift */,
+				224DBC8B26F113B3002303F3 /* DiscoverViewController.swift */,
+				5B47F65426F3DCBF00FDF48D /* MainTabBarController.swift */,
+				5B47F65826F3E2CB00FDF48D /* ShelfViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -127,6 +164,98 @@
 				222DB62A26F5234600BFA412 /* ApiDatas.swift */,
 			);
 			path = API;
+		5B47F64F26F3DB7300FDF48D /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				5B47F65026F3DB9800FDF48D /* Coordinator.swift */,
+				5B47F65226F3DC3100FDF48D /* DiscoverCoordinator.swift */,
+				5B47F65626F3E1B400FDF48D /* ShelfCoordinator.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		5BBAFA5E26F21AFD00A8DEF9 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				5BBAFA6026F21B6000A8DEF9 /* DesignSystem.swift */,
+				5BBAFA6226F21B8100A8DEF9 /* DesignPalette.swift */,
+				5BBAFA6426F21B9000A8DEF9 /* DesignSpacing.swift */,
+				5BBAFA6626F2256C00A8DEF9 /* DesignText.swift */,
+				5BBAFA6826F2258100A8DEF9 /* TextStyle.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		5BBAFA5F26F21B0600A8DEF9 /* Implementations */ = {
+			isa = PBXGroup;
+			children = (
+				5BE28DFB26F12D940043F19E /* DefaultDesignSystem.swift */,
+				5BE28E0226F135A10043F19E /* DefaultDesignPalette.swift */,
+				5BE28E0426F136E50043F19E /* DefaultDesignSpacing.swift */,
+				13471FBA26F283C4007296E2 /* BodyTextStyle.swift */,
+				5BC4634D26F25E31007155C1 /* ButtonTextStyle.swift */,
+				5B47F64326F2CB4200FDF48D /* SymbolAccesibilityConfiguration.swift */,
+			);
+			path = Implementations;
+			sourceTree = "<group>";
+		};
+		5BE28DFA26F12D380043F19E /* DesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+				5BE28DFF26F134D30043F19E /* Extensions */,
+				5BE28E0A26F142D40043F19E /* Protocols */,
+				5BE28DFE26F12DA00043F19E /* Components */,
+				5BE28DFD26F12D980043F19E /* Styles */,
+			);
+			path = DesignSystem;
+			sourceTree = "<group>";
+		};
+		5BE28DFD26F12D980043F19E /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				5BBAFA5F26F21B0600A8DEF9 /* Implementations */,
+				5BBAFA5E26F21AFD00A8DEF9 /* Protocols */,
+			);
+			path = Styles;
+			sourceTree = "<group>";
+		};
+		5BE28DFE26F12DA00043F19E /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				13471FB726F26529007296E2 /* Cell */,
+				5BE28E0626F137C20043F19E /* Buttons */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		5BE28DFF26F134D30043F19E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5BE28E0026F134EB0043F19E /* UIColor+Palette.swift */,
+				5B47F64526F2CCA800FDF48D /* UIImageView+TraitCollection.swift */,
+				5B47F64726F3700500FDF48D /* UIImage+TraitCollection.swift */,
+				5B47F64D26F3B78000FDF48D /* NSLayoutAnchor+DesignSystem.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		5BE28E0626F137C20043F19E /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				5BE28E0726F138020043F19E /* SynopsisCellButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		5BE28E0A26F142D40043F19E /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				5BE28E0B26F142E40043F19E /* Designable.swift */,
+				5BC4634B26F25D43007155C1 /* LabelDesignable.swift */,
+				5B47F64926F3B39C00FDF48D /* SynopsisCellDelegate.swift */,
+				5B47F64B26F3B65A00FDF48D /* CustomLabelDesignable.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,7 +316,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				224DBC9426F113B3002303F3 /* LaunchScreen.storyboard in Resources */,
-				229B0B0B26F14049007B51D3 /* Environment.plist in Resources */,
 				224DBC9126F113B3002303F3 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -199,10 +327,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BBAFA6926F2258100A8DEF9 /* TextStyle.swift in Sources */,
+				5B47F64626F2CCA800FDF48D /* UIImageView+TraitCollection.swift in Sources */,
+				5B47F65526F3DCBF00FDF48D /* MainTabBarController.swift in Sources */,
+				5BE28E0826F138020043F19E /* SynopsisCellButton.swift in Sources */,
+				5B47F64826F3700500FDF48D /* UIImage+TraitCollection.swift in Sources */,
+				5B47F65926F3E2CB00FDF48D /* ShelfViewController.swift in Sources */,
+				5BE28E0C26F142E40043F19E /* Designable.swift in Sources */,
+				224DBC8C26F113B3002303F3 /* DiscoverViewController.swift in Sources */,
+				5BE28E0326F135A10043F19E /* DefaultDesignPalette.swift in Sources */,
+				5B47F64A26F3B39C00FDF48D /* SynopsisCellDelegate.swift in Sources */,
+				5BE28DFC26F12D940043F19E /* DefaultDesignSystem.swift in Sources */,
+				5B47F65B26F4079500FDF48D /* PropertyListDecoder.swift in Sources */,
 				224DBCA226F114DD002303F3 /* MenuView.swift in Sources */,
 				223D0F5226F131A200CF69D2 /* BookRepository.swift in Sources */,
 				224DBC8826F113B3002303F3 /* AppDelegate.swift in Sources */,
-				222DB62B26F5234600BFA412 /* ApiDatas.swift in Sources */,
 				224DBC8A26F113B3002303F3 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
