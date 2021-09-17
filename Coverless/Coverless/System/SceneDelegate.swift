@@ -15,7 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         self.window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = MainTabBarController()  // Coloque aqui a ViewController que vai ser iniciada
+        window?.rootViewController = MenuViewController()  // Coloque aqui a ViewController que vai ser iniciada
         window?.makeKeyAndVisible()
     }
 
