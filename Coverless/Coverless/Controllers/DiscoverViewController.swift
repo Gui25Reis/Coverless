@@ -7,10 +7,12 @@
 
 import UIKit
 
-class MenuViewController: UIViewController {
+class DiscoverViewController: UIViewController {
+    
+    weak var coordinator: DiscoverCoordinator?
     
     let designSystem: DesignSystem = DefaultDesignSystem()
-    let cv: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: MenuViewController.createCollectionViewLayout())
+    let cv: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: DiscoverViewController.createCollectionViewLayout())
     
     /* MARK: - Ciclo de Vida */
     
@@ -72,11 +74,11 @@ class MenuViewController: UIViewController {
         return UICollectionViewCompositionalLayout(section: section)
     }
 }
-extension MenuViewController:UICollectionViewDelegate{
+extension DiscoverViewController:UICollectionViewDelegate{
     
 }
 
-extension MenuViewController:UICollectionViewDataSource{
+extension DiscoverViewController:UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 10
     }
@@ -92,7 +94,7 @@ extension MenuViewController:UICollectionViewDataSource{
     
 }
 
-extension MenuViewController: SynopsisCellDelegate {
+extension DiscoverViewController: SynopsisCellDelegate {
     func showInfo() {
         print("info pressed")
     }

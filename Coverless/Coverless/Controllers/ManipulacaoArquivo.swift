@@ -7,9 +7,12 @@
 
 import Foundation
 
+struct Env: Codable {
+    let token: String
+    static let shared = PropertyListDecoder.decode("environment", to: Env.self)
+}
 
-
-func manipulacao (){
+func manipulacao(){
     
 //    var mainGroup = [String]()
 

@@ -14,7 +14,6 @@ struct DefaultDesignSpacing: DesignSpacing {
     var largePositive: CGFloat = 16
     var xLargePositive: CGFloat = 20
     
-    
     var xSmallNegative: CGFloat = -4
     var smallNegative: CGFloat = -8
     var mediumNegative: CGFloat = -12
