@@ -3,3 +3,6 @@
 
 # Tirando token da API
 *Environment.plist
+xcuserdata/
+Coverless/Coverless.xcodeproj/project.xcworkspace/xcuserdata/
+
