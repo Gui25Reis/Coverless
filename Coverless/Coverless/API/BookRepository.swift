@@ -9,36 +9,24 @@ import UIKit
 import Foundation
 
 
-/* MARK: - Structs para receber dados da API */
-
-struct Items: Decodable {
-    let items:[BookId]
-}
-
-struct BookId: Decodable {
-    let id:String
-    let volumeInfo:BookInformation
-}
-
-struct BookInformation: Decodable {
-    var title:String?
-    var description:String?
-    var language:String?
-}
-
-
-struct Book {
-    let id:String
-    let title:String
-    let description:String
-}
-
-
-
+/**
+    Classe responsável pela comunicação direta com a API do Google Books
+*/
 class BookRepository {
     private var books:[Book] = []
     
-    public func getRandomizedBooks(text:String, _ completionHandler: @escaping (Result<[Book], Error>) -> Void) {
+    
+    /**
+        Faz a chamada da API com base na palavra chave.
+     
+        - Parametros:
+            - text: palavra chave para fazer a busca na API
+ 
+        - CompletionHandler:
+            - Result: lista dos livors recebidos (lista com no máximo 40 livros)
+            - Error: erro caso tenha algum
+    */
+    public func getBooks(text:String, _ completionHandler: @escaping (Result<[Book], Error>) -> Void) -> Void {
         self.books = []
         
         let session = URLSession.shared
@@ -67,6 +55,11 @@ class BookRepository {
     }
     
     
+    /**
+        Pega a chave para acessa a API
+     
+        - Return: chave da API
+    */
     private func getToken() -> String {
         var myDict: [String:String]?
         if let path = Bundle.main.path(forResource: "Environment", ofType: "plist") {
@@ -76,7 +69,10 @@ class BookRepository {
     }
 
     
-    private func compactInfo (items:Items) -> Void {
+    /**
+        Faz a filtragem dos dados recebido e retorna os parâmetros necessários e escolhidos
+    */
+    private func compactInfo(items:Items) -> Void {
         for b in items.items {
             if b.volumeInfo.title != nil, b.volumeInfo.description != nil { //, b.volumeInfo.language != nil, b.volumeInfo.language == "pt" {
                 self.books.append (
@@ -96,7 +92,7 @@ class BookRepository {
  
 @objc func buttonAction() -> Void {
     
-    api.getRandomizedBooks(text: "adventure") { result in
+    api.getBooks(text: "adventure") { result in
         
         switch result {
             case .success(let book):
