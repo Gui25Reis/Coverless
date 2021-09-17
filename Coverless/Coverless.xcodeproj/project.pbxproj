@@ -7,22 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		13471FB926F26540007296E2 /* DeprecatedSynopsisCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13471FB826F26540007296E2 /* DeprecatedSynopsisCell.swift */; };
 		13471FBB26F283C4007296E2 /* BodyTextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13471FBA26F283C4007296E2 /* BodyTextStyle.swift */; };
 		13471FBD26F28ED3007296E2 /* SynopsisCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13471FBC26F28ED3007296E2 /* SynopsisCell.swift */; };
 		224DBC8826F113B3002303F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224DBC8726F113B3002303F3 /* AppDelegate.swift */; };
 		224DBC8A26F113B3002303F3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224DBC8926F113B3002303F3 /* SceneDelegate.swift */; };
-		224DBC8C26F113B3002303F3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224DBC8B26F113B3002303F3 /* ViewController.swift */; };
+		224DBC8C26F113B3002303F3 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224DBC8B26F113B3002303F3 /* DiscoverViewController.swift */; };
 		224DBC9126F113B3002303F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 224DBC9026F113B3002303F3 /* Assets.xcassets */; };
 		224DBC9426F113B3002303F3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 224DBC9226F113B3002303F3 /* LaunchScreen.storyboard */; };
 		224DBCA226F114DD002303F3 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224DBCA126F114DD002303F3 /* MenuView.swift */; };
-
 		5B47F64426F2CB4200FDF48D /* SymbolAccesibilityConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B47F64326F2CB4200FDF48D /* SymbolAccesibilityConfiguration.swift */; };
 		5B47F64626F2CCA800FDF48D /* UIImageView+TraitCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B47F64526F2CCA800FDF48D /* UIImageView+TraitCollection.swift */; };
 		5B47F64826F3700500FDF48D /* UIImage+TraitCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B47F64726F3700500FDF48D /* UIImage+TraitCollection.swift */; };
 		5B47F64A26F3B39C00FDF48D /* SynopsisCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B47F64926F3B39C00FDF48D /* SynopsisCellDelegate.swift */; };
 		5B47F64C26F3B65A00FDF48D /* CustomLabelDesignable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B47F64B26F3B65A00FDF48D /* CustomLabelDesignable.swift */; };
 		5B47F64E26F3B78000FDF48D /* NSLayoutAnchor+DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B47F64D26F3B78000FDF48D /* NSLayoutAnchor+DesignSystem.swift */; };
+		5B47F65126F3DB9800FDF48D /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B47F65026F3DB9800FDF48D /* Coordinator.swift */; };
+		5B47F65326F3DC3100FDF48D /* DiscoverCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B47F65226F3DC3100FDF48D /* DiscoverCoordinator.swift */; };
+		5B47F65526F3DCBF00FDF48D /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B47F65426F3DCBF00FDF48D /* MainTabBarController.swift */; };
+		5B47F65726F3E1B400FDF48D /* ShelfCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B47F65626F3E1B400FDF48D /* ShelfCoordinator.swift */; };
+		5B47F65926F3E2CB00FDF48D /* ShelfViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B47F65826F3E2CB00FDF48D /* ShelfViewController.swift */; };
+		5B47F65B26F4079500FDF48D /* PropertyListDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B47F65A26F4079500FDF48D /* PropertyListDecoder.swift */; };
 		5BBAFA6126F21B6000A8DEF9 /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BBAFA6026F21B6000A8DEF9 /* DesignSystem.swift */; };
 		5BBAFA6326F21B8100A8DEF9 /* DesignPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BBAFA6226F21B8100A8DEF9 /* DesignPalette.swift */; };
 		5BBAFA6526F21B9000A8DEF9 /* DesignSpacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BBAFA6426F21B9000A8DEF9 /* DesignSpacing.swift */; };
@@ -41,13 +45,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		13471FB826F26540007296E2 /* DeprecatedSynopsisCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeprecatedSynopsisCell.swift; sourceTree = "<group>"; };
 		13471FBA26F283C4007296E2 /* BodyTextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyTextStyle.swift; sourceTree = "<group>"; };
 		13471FBC26F28ED3007296E2 /* SynopsisCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynopsisCell.swift; sourceTree = "<group>"; };
 		224DBC8426F113B3002303F3 /* Coverless.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Coverless.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		224DBC8726F113B3002303F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		224DBC8926F113B3002303F3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		224DBC8B26F113B3002303F3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		224DBC8B26F113B3002303F3 /* DiscoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
 		224DBC9026F113B3002303F3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		224DBC9326F113B3002303F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		224DBC9526F113B4002303F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -58,6 +61,12 @@
 		5B47F64926F3B39C00FDF48D /* SynopsisCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynopsisCellDelegate.swift; sourceTree = "<group>"; };
 		5B47F64B26F3B65A00FDF48D /* CustomLabelDesignable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabelDesignable.swift; sourceTree = "<group>"; };
 		5B47F64D26F3B78000FDF48D /* NSLayoutAnchor+DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutAnchor+DesignSystem.swift"; sourceTree = "<group>"; };
+		5B47F65026F3DB9800FDF48D /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		5B47F65226F3DC3100FDF48D /* DiscoverCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCoordinator.swift; sourceTree = "<group>"; };
+		5B47F65426F3DCBF00FDF48D /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		5B47F65626F3E1B400FDF48D /* ShelfCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfCoordinator.swift; sourceTree = "<group>"; };
+		5B47F65826F3E2CB00FDF48D /* ShelfViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfViewController.swift; sourceTree = "<group>"; };
+		5B47F65A26F4079500FDF48D /* PropertyListDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PropertyListDecoder.swift; path = Coverless/Controllers/PropertyListDecoder.swift; sourceTree = SOURCE_ROOT; };
 		5BBAFA6026F21B6000A8DEF9 /* DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
 		5BBAFA6226F21B8100A8DEF9 /* DesignPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignPalette.swift; sourceTree = "<group>"; };
 		5BBAFA6426F21B9000A8DEF9 /* DesignSpacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSpacing.swift; sourceTree = "<group>"; };
@@ -89,7 +98,6 @@
 		13471FB726F26529007296E2 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				13471FB826F26540007296E2 /* DeprecatedSynopsisCell.swift */,
 				13471FBC26F28ED3007296E2 /* SynopsisCell.swift */,
 			);
 			path = Cell;
@@ -114,6 +122,7 @@
 		224DBC8626F113B3002303F3 /* Coverless */ = {
 			isa = PBXGroup;
 			children = (
+				5B47F64F26F3DB7300FDF48D /* Coordinators */,
 				5BE28DFA26F12D380043F19E /* DesignSystem */,
 				224DBC9D26F11452002303F3 /* Controllers */,
 				224DBC9E26F1145D002303F3 /* Views */,
@@ -149,7 +158,9 @@
 			isa = PBXGroup;
 			children = (
 				A7F3AF9626F3B88A00C5289E /* ManipulacaoArquivo.swift */,
-				224DBC8B26F113B3002303F3 /* ViewController.swift */,
+				224DBC8B26F113B3002303F3 /* DiscoverViewController.swift */,
+				5B47F65426F3DCBF00FDF48D /* MainTabBarController.swift */,
+				5B47F65826F3E2CB00FDF48D /* ShelfViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -172,8 +183,19 @@
 		224DBCA026F11470002303F3 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				5B47F65A26F4079500FDF48D /* PropertyListDecoder.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		5B47F64F26F3DB7300FDF48D /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				5B47F65026F3DB9800FDF48D /* Coordinator.swift */,
+				5B47F65226F3DC3100FDF48D /* DiscoverCoordinator.swift */,
+				5B47F65626F3E1B400FDF48D /* ShelfCoordinator.swift */,
+			);
+			path = Coordinators;
 			sourceTree = "<group>";
 		};
 		5BBAFA5E26F21AFD00A8DEF9 /* Protocols */ = {
@@ -332,16 +354,20 @@
 			files = (
 				5BBAFA6926F2258100A8DEF9 /* TextStyle.swift in Sources */,
 				5B47F64626F2CCA800FDF48D /* UIImageView+TraitCollection.swift in Sources */,
+				5B47F65526F3DCBF00FDF48D /* MainTabBarController.swift in Sources */,
 				5BE28E0826F138020043F19E /* SynopsisCellButton.swift in Sources */,
 				5B47F64826F3700500FDF48D /* UIImage+TraitCollection.swift in Sources */,
+				5B47F65926F3E2CB00FDF48D /* ShelfViewController.swift in Sources */,
 				5BE28E0C26F142E40043F19E /* Designable.swift in Sources */,
-				13471FB926F26540007296E2 /* DeprecatedSynopsisCell.swift in Sources */,
-				224DBC8C26F113B3002303F3 /* ViewController.swift in Sources */,
+				224DBC8C26F113B3002303F3 /* DiscoverViewController.swift in Sources */,
 				5BE28E0326F135A10043F19E /* DefaultDesignPalette.swift in Sources */,
 				5B47F64A26F3B39C00FDF48D /* SynopsisCellDelegate.swift in Sources */,
 				5BE28DFC26F12D940043F19E /* DefaultDesignSystem.swift in Sources */,
+				5B47F65B26F4079500FDF48D /* PropertyListDecoder.swift in Sources */,
 				224DBCA226F114DD002303F3 /* MenuView.swift in Sources */,
 				5BE28E0126F134EB0043F19E /* UIColor+Palette.swift in Sources */,
+				5B47F65326F3DC3100FDF48D /* DiscoverCoordinator.swift in Sources */,
+				5B47F65726F3E1B400FDF48D /* ShelfCoordinator.swift in Sources */,
 				5B47F64E26F3B78000FDF48D /* NSLayoutAnchor+DesignSystem.swift in Sources */,
 				13471FBD26F28ED3007296E2 /* SynopsisCell.swift in Sources */,
 				5BBAFA6326F21B8100A8DEF9 /* DesignPalette.swift in Sources */,
@@ -350,6 +376,7 @@
 				5B47F64C26F3B65A00FDF48D /* CustomLabelDesignable.swift in Sources */,
 				5BC4634E26F25E31007155C1 /* ButtonTextStyle.swift in Sources */,
 				13471FBB26F283C4007296E2 /* BodyTextStyle.swift in Sources */,
+				5B47F65126F3DB9800FDF48D /* Coordinator.swift in Sources */,
 				5BE28E0526F136E50043F19E /* DefaultDesignSpacing.swift in Sources */,
 				A7F3AF9726F3B88A00C5289E /* ManipulacaoArquivo.swift in Sources */,
 				224DBC8826F113B3002303F3 /* AppDelegate.swift in Sources */,
@@ -497,7 +524,6 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V8V28A4DX2;
-
 				INFOPLIST_FILE = Coverless/System/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -517,7 +543,6 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V8V28A4DX2;
-
 				INFOPLIST_FILE = Coverless/System/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

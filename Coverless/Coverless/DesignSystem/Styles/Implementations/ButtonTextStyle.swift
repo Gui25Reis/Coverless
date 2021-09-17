@@ -9,8 +9,6 @@ import UIKit
 
 struct ButtonTextStyle: TextStyle {
     var font: UIFont = .preferredFont(forTextStyle: .caption1)
-    
     var color: UIColor = .accent
-    
     var alignment: NSTextAlignment = .center
 }
