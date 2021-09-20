@@ -65,7 +65,7 @@ class BookRepository {
         if let path = Bundle.main.path(forResource: "Environment", ofType: "plist") {
             myDict = NSDictionary(contentsOfFile: path) as? [String:String]
         }
-        return myDict!["token"]!
+        return myDict!["GoogleKey"]!
     }
 
     
