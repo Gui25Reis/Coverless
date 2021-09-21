@@ -27,4 +27,14 @@ extension UIColor {
     static var backgroundCell: UIColor {
         UIColor(named: "BackgroundCell")!
     }
+    
+    static var readColor: UIColor {
+        UIColor(named: "ReadColor")!
+    }
+    static var readingColor: UIColor {
+        UIColor(named: "ReadingColor")!
+    }
+    static var abandonedColor: UIColor {
+        UIColor(named: "AbandonedColor")!
+    }
 }
