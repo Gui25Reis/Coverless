@@ -19,14 +19,13 @@ struct BookId: Decodable {
 }
 
 struct BookInformation: Decodable {
-    var title:String?
-    var description:String?
-    var language:String?
+    let title:String?
+    let description:String?
+    let language:String?
 }
 
-
 struct Book {
-    let id:String
+    let isbn10:String
     let title:String
     let description:String
 }

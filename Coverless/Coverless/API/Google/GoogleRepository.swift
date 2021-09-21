@@ -5,14 +5,13 @@
 //  Created by Gui Reis on 14/09/21.
 //
 
-import UIKit
 import Foundation
 
 
 /**
     Classe responsável pela comunicação direta com a API do Google Books
 */
-class BookRepository {
+class GoogleRepository {
     private var books:[Book] = []
     
     
@@ -77,7 +76,7 @@ class BookRepository {
             if b.volumeInfo.title != nil, b.volumeInfo.description != nil { //, b.volumeInfo.language != nil, b.volumeInfo.language == "pt" {
                 self.books.append (
                     Book(
-                        id: b.id,
+                        isbn10: b.id,
                         title: b.volumeInfo.title!,
                         description: b.volumeInfo.description!
                     )
