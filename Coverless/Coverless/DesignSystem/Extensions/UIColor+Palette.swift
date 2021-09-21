@@ -31,10 +31,21 @@ extension UIColor {
     static var readColor: UIColor {
         UIColor(named: "ReadColor")!
     }
+
     static var readingColor: UIColor {
         UIColor(named: "ReadingColor")!
     }
+
     static var abandonedColor: UIColor {
         UIColor(named: "AbandonedColor")!
     }
+
+    static var buttonTextPrimary: UIColor {
+        UIColor(named: "ButtonTextPrimary")!
+    }
+
+    static var buttonBackgroundPrimary: UIColor {
+        UIColor(named: "ButtonBackgroundPrimary")!
+    }
+    
 }

@@ -30,3 +30,18 @@ extension UILabel: LabelDesignable {
         self.adjustsFontForContentSizeCategory = true
     }
 }
+
+extension UITextView: LabelDesignable {
+    func stylize(with textStyle: TextStyle) {
+        font = textStyle.font
+        textColor = textStyle.color
+        textAlignment = textStyle.alignment
+        backgroundColor = .clear
+    }
+    
+    func setupAcessibility() {
+        adjustsFontForContentSizeCategory = true
+    }
+    
+    
+}

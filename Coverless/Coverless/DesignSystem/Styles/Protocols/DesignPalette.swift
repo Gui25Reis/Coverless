@@ -16,4 +16,6 @@ protocol DesignPalette {
     var readColor: UIColor { get }
     var readingColor: UIColor { get }
     var abandonedColor: UIColor { get }
+    var buttonTextPrimary: UIColor { get }
+    var buttonBackgroundPrimary: UIColor { get }
 }

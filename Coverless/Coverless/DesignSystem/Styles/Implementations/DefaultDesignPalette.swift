@@ -18,4 +18,6 @@ struct DefaultDesignPalette: DesignPalette {
     let readColor: UIColor = .readColor
     let readingColor: UIColor = .readingColor
     let abandonedColor: UIColor = .abandonedColor
+    let buttonTextPrimary: UIColor = .buttonTextPrimary
+    let buttonBackgroundPrimary: UIColor = .buttonBackgroundPrimary
 }
