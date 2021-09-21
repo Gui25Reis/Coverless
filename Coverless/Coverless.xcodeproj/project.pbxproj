@@ -53,7 +53,6 @@
 		5BE28E0826F138020043F19E /* SynopsisCellButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE28E0726F138020043F19E /* SynopsisCellButton.swift */; };
 		5BE28E0C26F142E40043F19E /* Designable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE28E0B26F142E40043F19E /* Designable.swift */; };
 		5BFEE41126FA006B00D3A6CC /* MoreInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFEE41026FA006B00D3A6CC /* MoreInfoViewModel.swift */; };
-		A7F3AF9726F3B88A00C5289E /* ManipulacaoArquivo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F3AF9626F3B88A00C5289E /* ManipulacaoArquivo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -105,7 +104,6 @@
 		5BE28E0726F138020043F19E /* SynopsisCellButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynopsisCellButton.swift; sourceTree = "<group>"; };
 		5BE28E0B26F142E40043F19E /* Designable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Designable.swift; sourceTree = "<group>"; };
 		5BFEE41026FA006B00D3A6CC /* MoreInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreInfoViewModel.swift; sourceTree = "<group>"; };
-		A7F3AF9626F3B88A00C5289E /* ManipulacaoArquivo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManipulacaoArquivo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -337,7 +335,6 @@
 		5BFEE41226FA4D5000D3A6CC /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
-				A7F3AF9626F3B88A00C5289E /* ManipulacaoArquivo.swift */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -448,7 +445,6 @@
 				5B47F65126F3DB9800FDF48D /* Coordinator.swift in Sources */,
 				136F845226F53208004AAFF2 /* ShelfCell.swift in Sources */,
 				5BE28E0526F136E50043F19E /* DefaultDesignSpacing.swift in Sources */,
-				A7F3AF9726F3B88A00C5289E /* ManipulacaoArquivo.swift in Sources */,
 				5B89273426F52ABD0002A3DA /* MoreInfoViewController.swift in Sources */,
 				224DBC8826F113B3002303F3 /* AppDelegate.swift in Sources */,
 				224DBC8A26F113B3002303F3 /* SceneDelegate.swift in Sources */,

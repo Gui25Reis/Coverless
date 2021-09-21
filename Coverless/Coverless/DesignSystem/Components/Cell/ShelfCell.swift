@@ -38,6 +38,7 @@ class ShelfCell: UICollectionViewCell, Designable{
         
         bookStatus.leadingAnchor.constraint(equalTo: imgView.trailingAnchor,constant: \.smallPositive),
         bookStatus.bottomAnchor.constraint(equalTo: stars.topAnchor, constant: \.mediumNegative),
+        bookStatus.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.4),
         
         stars.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: \.largeNegative),
         stars.leadingAnchor.constraint(equalTo: imgView.trailingAnchor,constant: \.smallPositive)

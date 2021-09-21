@@ -13,27 +13,11 @@ enum BookStatus: Int{
 
 
 final class StatusButton: UIButton, Designable {
-    
-    let label = UILabel(frame: .zero)
     public var status: BookStatus
     
     init(designSystem: DesignSystem = DefaultDesignSystem())  {
         self.status = .reading //inicia como reading por default
         super.init(frame: .zero)
-        
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.isUserInteractionEnabled = false
-        
-        addSubview(label)
-        
-        NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: centerYAnchor, constant: \.smallNegative),
-            label.leadingAnchor.constraint(equalTo: leadingAnchor,constant: \.mediumPositive),
-            label.trailingAnchor.constraint(equalTo: trailingAnchor,constant: \.mediumNegative)
-        ])
-        
-        //label.text = text
-        label.numberOfLines = 0
         stylize(with: designSystem)
         
     }
@@ -44,38 +28,33 @@ final class StatusButton: UIButton, Designable {
     
     public func setStatus(status: BookStatus,designSystem: DesignSystem = DefaultDesignSystem()){
         if status == .read{
-            self.tintColor = designSystem.palette.readColor
-            //self.setTitle("Lido", for: .normal)
-            label.text = "Lido"
-            label.textColor = designSystem.palette.readColor
-            //self.setTitleColor(designSystem.palette.readColor, for: .normal)
-            self.backgroundColor = designSystem.palette.backgroundPrimary
+            setButtonStyle(color: designSystem.palette.readColor, text: "Lido")
         }
         else if status  == .reading{
-            self.tintColor = designSystem.palette.readingColor
-            //self.setTitle("Estou lendo", for: .normal)
-            label.text = "Estou lendo"
-            label.textColor = designSystem.palette.readingColor
-            //self.setTitleColor(designSystem.palette.readingColor, for: .normal)
-            self.backgroundColor = designSystem.palette.backgroundPrimary
-            
+            setButtonStyle(color: designSystem.palette.readingColor, text: "Estou lendo")
         }
         else{
-            self.tintColor = designSystem.palette.abandonedColor
-            //self.setTitle("Abandonado", for: .normal)
-            label.text = "Abandonado"
-            label.textColor = designSystem.palette.abandonedColor
-            //self.setTitleColor(designSystem.palette.abandonedColor, for: .normal)
-            self.backgroundColor = designSystem.palette.backgroundPrimary
+            setButtonStyle(color: designSystem.palette.abandonedColor, text: "Abandonado")
         }
+        
+        let descriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: .body)
+        
+        titleLabel?.font = UIFont(descriptor: descriptor, size: 0)
     }
+    
+    private func setButtonStyle(color: UIColor, text: String) {
+        setTitle(text, for: .normal)
+        setTitleColor(color, for: .normal)
+        self.backgroundColor = color.withAlphaComponent(0.15)
+    }
+    
     func stylize(with designSystem: DesignSystem) {
         self.layer.cornerRadius = 15
         //label.textColor = .accent
 
         //acessibilidade
         adjustsImageSizeForAccessibilityContentSizeCategory = true
-        label.adjustsFontForContentSizeCategory = true
+        titleLabel?.adjustsFontForContentSizeCategory = true
     }
 }
 

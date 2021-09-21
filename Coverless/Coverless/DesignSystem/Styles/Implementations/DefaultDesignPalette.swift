@@ -19,5 +19,5 @@ struct DefaultDesignPalette: DesignPalette {
     let readingColor: UIColor = .readingColor
     let abandonedColor: UIColor = .abandonedColor
     let buttonTextPrimary: UIColor = .buttonTextPrimary
-    let buttonBackgroundPrimary: UIColor = .buttonBackgroundPrimary
+    let buttonBackgroundPrimary: UIColor = .accent
 }

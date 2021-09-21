@@ -93,7 +93,7 @@ extension ShelfViewController:UICollectionViewDataSource{
         else {
             preconditionFailure("Cell Register not configured correctily")
         }
-        cell.setup(title:"Harry Potter e a Câmara Secreta",status: .reading,rating: 3,delegate: self)
+        cell.setup(title:"Harry Potter e a Câmara Secreta",status: .abandoned ,rating: 3,delegate: self)
         return cell
     }
     
