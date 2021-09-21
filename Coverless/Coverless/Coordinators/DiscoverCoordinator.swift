@@ -27,6 +27,13 @@ class DiscoverCoordinator: Coordinator {
         
     }
     
+    func showMoreInfo(viewModel: MoreInfoViewModel) {
+        let vc = MoreInfoViewController(viewModel: viewModel)
+        vc.coordinator = self
+        vc.navigationItem.title = "More info"
+        navigationController.pushViewController(vc, animated: true)
+    }
+    
     private func setupBarAppearence() {
         let designSystem: DesignSystem = DefaultDesignSystem.shared
         

@@ -8,12 +8,16 @@
 import UIKit
 
 final class MoreInfoViewController: UIViewController {
-    weak var coordinator: ShelfCoordinator?
+    weak var coordinator: DiscoverCoordinator?
+    
     lazy var contentView: MoreInfoView = {
         MoreInfoView(designSystem: DefaultDesignSystem.shared, tabBarHeight: tabBarController?.tabBar.frame.height ?? 100)
     }()
     
-    init() {
+    let viewModel: MoreInfoViewModel
+    
+    init(viewModel: MoreInfoViewModel) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -26,6 +30,11 @@ final class MoreInfoViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        
+        contentView.setupContent(synopsis: viewModel.synopsis, rating: viewModel.rating)
+        contentView.setupButtonBinding(addToShelf)
+    }
+    
+    private func addToShelf() {
+        print("adding book to shelf")
     }
 }

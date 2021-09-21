@@ -12,7 +12,7 @@ final class MoreInfoView: UIView, Designable {
     let designSystem: DesignSystem
     
     //MARK: Views
-    lazy var synopsisHeader: UILabel = {
+    private lazy var synopsisHeader: UILabel = {
         let header = UILabel()
         header.translatesAutoresizingMaskIntoConstraints = false
         header.text = "Synopsis"
@@ -21,19 +21,19 @@ final class MoreInfoView: UIView, Designable {
         return header
     }()
     
-    lazy var synopsisField: UITextView = {
+    private lazy var synopsisField: UITextView = {
         let tv = UITextView()
         tv.translatesAutoresizingMaskIntoConstraints = false
         tv.isScrollEnabled = false
         tv.stylize(with: designSystem.text.body)
-        tv.text = "Harry Potter é um garoto órfão que vive infeliz com seus tios, os Dursleys. Ele recebe uma carta contendo um convite para ingressar em Hogwarts, uma famosa escola especializada em formar jovens… Harry Potter é um garoto órfão que vive infeliz com seus tios, os Dursleys. Ele recebe uma carta contendo um convite para ingressar em Hogwarts, uma famosa escola especializada em formar jovens… Harry Potter é um garoto órfão que vive infeliz com seus tios, os Dursleys. Ele recebe uma carta contendo um convite para ingressar em Hogwarts, uma famosa escola especializada em formar jovens… Harry Potter é um garoto órfão que vive infeliz com seus tios, os Dursleys. Ele recebe uma carta contendo um convite para ingressar em Hogwarts, uma famosa escola especializada em formar jovens… Harry Potter é um garoto órfão que vive infeliz com seus tios, os Dursleys. Ele recebe uma carta contendo um convite para ingressar em Hogwarts, uma famosa escola especializada em formar jovens… Harry Potter é um garoto órfão que vive infeliz com seus tios, os Dursleys. Ele recebe uma carta contendo um convite para ingressar em Hogwarts, uma famosa escola especializada em formar jovens… Harry Potter é um garoto órfão que vive infeliz com seus tios, os Dursleys. Ele recebe uma carta contendo um convite para ingressar em Hogwarts, uma famosa escola especializada em formar jovens… Harry Potter é um garoto órfão que vive infeliz com seus tios, os Dursleys. Ele recebe uma carta contendo um convite para ingressar em Hogwarts, uma famosa escola especializada em formar jovens… Harry Potter é um garoto órfão que vive infeliz com seus tios, os Dursleys. Ele recebe uma carta contendo um convite para ingressar em Hogwarts, uma famosa escola especializada em formar jovens… Harry Potter é um garoto órfão que vive infeliz com seus tios, os Dursleys. Ele recebe uma carta contendo um convite para ingressar em Hogwarts, uma famosa escola especializada em formar jovens…"
+        tv.text = "Harry Potter é um garoto órfão que vive infeliz com seus tios, os Dursleys. Ele recebe uma carta contendo um convite para ingressar em Hogwarts, uma famosa escola especializada em formar jovens… Harry Potter é um garoto órfão que vive infeliz com seus tios, os Dursleys. Ele recebe uma carta contendo um convite para ingressar em Hogwarts, uma famosa escola especializada em formar jovens…"
         let padding = -tv.textContainer.lineFragmentPadding
         tv.contentInset = .init(top: padding, left: padding, bottom: 0, right: padding)
         
         return tv
     }()
     
-    lazy var ratingHeader: UILabel = {
+    private lazy var ratingHeader: UILabel = {
         let l = UILabel()
         l.translatesAutoresizingMaskIntoConstraints = false
         l.stylize(with: designSystem.text.header)
@@ -42,7 +42,7 @@ final class MoreInfoView: UIView, Designable {
         return l
     }()
     
-    lazy var discoverButton: UIButton = {
+    private lazy var discoverButton: UIButton = {
         let b = UIButton()
         b.backgroundColor = designSystem.palette.buttonBackgroundPrimary
         b.setTitle("Discover Book", for: .normal)
@@ -52,19 +52,19 @@ final class MoreInfoView: UIView, Designable {
         return b
     }()
     
-    let scrollView: UIScrollView = {
+    private let scrollView: UIScrollView = {
         let sv = UIScrollView()
         sv.translatesAutoresizingMaskIntoConstraints = false
         return sv
     }()
     
-    let contentView: UIView = {
+    private let contentView: UIView = {
         let v = UIView()
         v.translatesAutoresizingMaskIntoConstraints = false
         return v
     }()
     
-    lazy var stackView: UIStackView = {
+    private lazy var stackView: UIStackView = {
         let stv = UIStackView()
         stv.axis = .vertical
         stv.translatesAutoresizingMaskIntoConstraints = false
@@ -111,7 +111,7 @@ final class MoreInfoView: UIView, Designable {
     private func setupScrollViewConstraints() {
         //scrollView.strechToBounds(of: layoutMarginsGuide)
         let constraints: [NSLayoutConstraint] = [
-            scrollView.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor, constant: \.mediumPositive),
+            scrollView.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor, constant: \.smallPositive),
             scrollView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: discoverButton.topAnchor, constant: \.mediumNegative)
@@ -138,6 +138,15 @@ final class MoreInfoView: UIView, Designable {
     }
     
     //MARK: Bindings
+    func setupContent(synopsis: String, rating: Int) {
+        synopsisField.text = synopsis
+        
+    }
+    
+    func setupButtonBinding(_ action: @escaping () -> Void) {
+        let uiAction: UIAction = UIAction { _ in action() }
+        discoverButton.addAction(uiAction, for: .touchUpInside)
+    }
     
     //MARK: Designable Protocol
 

@@ -44,6 +44,7 @@
 		5BE28E0526F136E50043F19E /* DefaultDesignSpacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE28E0426F136E50043F19E /* DefaultDesignSpacing.swift */; };
 		5BE28E0826F138020043F19E /* SynopsisCellButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE28E0726F138020043F19E /* SynopsisCellButton.swift */; };
 		5BE28E0C26F142E40043F19E /* Designable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE28E0B26F142E40043F19E /* Designable.swift */; };
+		5BFEE41126FA006B00D3A6CC /* MoreInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFEE41026FA006B00D3A6CC /* MoreInfoViewModel.swift */; };
 		A7F3AF9526F3B27300C5289E /* environment.plist in Resources */ = {isa = PBXBuildFile; fileRef = A7F3AF9426F3B27300C5289E /* environment.plist */; };
 		A7F3AF9726F3B88A00C5289E /* ManipulacaoArquivo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F3AF9626F3B88A00C5289E /* ManipulacaoArquivo.swift */; };
 /* End PBXBuildFile section */
@@ -88,6 +89,7 @@
 		5BE28E0426F136E50043F19E /* DefaultDesignSpacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDesignSpacing.swift; sourceTree = "<group>"; };
 		5BE28E0726F138020043F19E /* SynopsisCellButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynopsisCellButton.swift; sourceTree = "<group>"; };
 		5BE28E0B26F142E40043F19E /* Designable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Designable.swift; sourceTree = "<group>"; };
+		5BFEE41026FA006B00D3A6CC /* MoreInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreInfoViewModel.swift; sourceTree = "<group>"; };
 		A7F3AF9426F3B27300C5289E /* environment.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = environment.plist; sourceTree = "<group>"; };
 		A7F3AF9626F3B88A00C5289E /* ManipulacaoArquivo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManipulacaoArquivo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -186,6 +188,7 @@
 		224DBC9F26F1146B002303F3 /* Modals */ = {
 			isa = PBXGroup;
 			children = (
+				5BFEE41026FA006B00D3A6CC /* MoreInfoViewModel.swift */,
 			);
 			path = Modals;
 			sourceTree = "<group>";
@@ -378,6 +381,7 @@
 				5BE28DFC26F12D940043F19E /* DefaultDesignSystem.swift in Sources */,
 				5B47F65B26F4079500FDF48D /* PropertyListDecoder.swift in Sources */,
 				224DBCA226F114DD002303F3 /* MenuView.swift in Sources */,
+				5BFEE41126FA006B00D3A6CC /* MoreInfoViewModel.swift in Sources */,
 				5BE28E0126F134EB0043F19E /* UIColor+Palette.swift in Sources */,
 				5B47F65326F3DC3100FDF48D /* DiscoverCoordinator.swift in Sources */,
 				5B47F65726F3E1B400FDF48D /* ShelfCoordinator.swift in Sources */,
