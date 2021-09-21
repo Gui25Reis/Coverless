@@ -13,4 +13,6 @@ struct DefaultDesignPalette: DesignPalette {
     let textPrimary: UIColor = .textPrimary
     let titlePrimary: UIColor = .titlePrimary
     let backgroundCell: UIColor = .backgroundCell
+    let buttonTextPrimary: UIColor = .buttonTextPrimary
+    let buttonBackgroundPrimary: UIColor = .buttonBackgroundPrimary
 }

@@ -19,7 +19,7 @@ class ShelfCoordinator: Coordinator {
     }
     
     func start() {
-        let vc = ShelfViewController()
+        let vc = MoreInfoViewController()
         vc.coordinator = self
         vc.navigationItem.title = "Estante"
         vc.tabBarItem = UITabBarItem(title: "Estante", image: UIImage(systemName: "books.vertical"), tag: 1)

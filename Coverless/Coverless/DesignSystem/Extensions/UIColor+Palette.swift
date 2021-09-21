@@ -27,4 +27,13 @@ extension UIColor {
     static var backgroundCell: UIColor {
         UIColor(named: "BackgroundCell")!
     }
+    
+    static var buttonTextPrimary: UIColor {
+        UIColor(named: "ButtonTextPrimary")!
+    }
+    
+    static var buttonBackgroundPrimary: UIColor {
+        UIColor(named: "ButtonBackgroundPrimary")!
+    }
+    
 }
