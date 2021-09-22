@@ -29,8 +29,10 @@ class ShelfCell: UICollectionViewCell, Designable{
         imgView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,constant: \.mediumNegative),
         imgView.trailingAnchor.constraint(equalTo: bookTitle.leadingAnchor, constant: \.smallNegative),
         
-        favButton.topAnchor.constraint(equalTo: imgView.topAnchor,constant: \.smallPositive),
-        favButton.leadingAnchor.constraint(equalTo: imgView.leadingAnchor,constant: \.smallPositive),
+        favButton.topAnchor.constraint(equalTo: imgView.topAnchor,constant: \.smallNegative),
+        favButton.leadingAnchor.constraint(equalTo: imgView.leadingAnchor,constant: \.smallNegative),
+        favButton.widthAnchor.constraint(equalToConstant: 36),
+        favButton.heightAnchor.constraint(equalToConstant: 36),
         
         bookTitle.trailingAnchor.constraint(equalTo:contentView.trailingAnchor,constant: \.smallNegative),
         bookTitle.topAnchor.constraint(equalTo: contentView.topAnchor, constant: \.largePositive),
@@ -100,7 +102,6 @@ class ShelfCell: UICollectionViewCell, Designable{
         favButton.translatesAutoresizingMaskIntoConstraints = false
         stars.translatesAutoresizingMaskIntoConstraints = false
 
-        
         imgView.backgroundColor = colors[Int.random(in: 0..<colors.count)]
         NSLayoutConstraint.activate(normalLayout)
         activateConstraints()
@@ -142,9 +143,16 @@ class ShelfCell: UICollectionViewCell, Designable{
         
         //favButton
         //testando o botao de fav
-        favButton.setImage(UIImage(named: "heart.fill"), for: .normal)
+        favButton.setImage(UIImage(systemName: "heart"), for: .normal)
         favButton.tintColor = designSystem.palette.accent
         favButton.backgroundColor = designSystem.palette.backgroundCell
+        favButton.layer.cornerRadius = 18
+
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOffset = CGSize(width: 2, height: 2.0)
+        layer.shadowRadius = 4.0
+        layer.shadowOpacity = 0.2
+        layer.masksToBounds = false
     }
     
     /* MARK: - Setup da celula */
