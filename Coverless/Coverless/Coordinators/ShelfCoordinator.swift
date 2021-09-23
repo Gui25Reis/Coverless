@@ -6,7 +6,6 @@
 //
 
 import UIKit
-
 class ShelfCoordinator: Coordinator {
     
     var childCoordinators: [Coordinator]
@@ -26,14 +25,17 @@ class ShelfCoordinator: Coordinator {
         navigationController.pushViewController(vc, animated: true)
     }
     
-    func showBook(viewModel: MoreInfoViewModel) {
-        let vc = BookViewController(viewModel: viewModel)
+    //atualizar funcao para func showBook(book: MyBook)
+    func showBook() {
+        let vc = BookViewController()
+
         vc.coordinator = self
         vc.navigationItem.title = "Título do livro"
+        
+        //vc.book = book
+        
         navigationController.pushViewController(vc, animated: true)
     }
-    
-    
     private func setupBarAppearence() {
         let designSystem: DesignSystem = DefaultDesignSystem.shared
         

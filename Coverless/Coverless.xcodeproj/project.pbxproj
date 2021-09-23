@@ -10,6 +10,8 @@
 		1342816126FBA3350077259E /* BookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1342816026FBA3350077259E /* BookViewController.swift */; };
 		1342816626FBA5EE0077259E /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1342816526FBA5EE0077259E /* BookView.swift */; };
 		1342816926FCE8960077259E /* ShopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1342816826FCE8960077259E /* ShopView.swift */; };
+		1342816C26FD14380077259E /* CoverlessData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1342816A26FD14380077259E /* CoverlessData.xcdatamodeld */; };
+		1342816F26FD151E0077259E /* CoverlessDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1342816E26FD151E0077259E /* CoverlessDataRepository.swift */; };
 		13471FBB26F283C4007296E2 /* BodyTextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13471FBA26F283C4007296E2 /* BodyTextStyle.swift */; };
 		13471FBD26F28ED3007296E2 /* SynopsisCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13471FBC26F28ED3007296E2 /* SynopsisCell.swift */; };
 		136F845226F53208004AAFF2 /* ShelfCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136F845126F53208004AAFF2 /* ShelfCell.swift */; };
@@ -62,6 +64,8 @@
 		1342816026FBA3350077259E /* BookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookViewController.swift; sourceTree = "<group>"; };
 		1342816526FBA5EE0077259E /* BookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookView.swift; sourceTree = "<group>"; };
 		1342816826FCE8960077259E /* ShopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopView.swift; sourceTree = "<group>"; };
+		1342816B26FD14380077259E /* CoverlessData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoverlessData.xcdatamodel; sourceTree = "<group>"; };
+		1342816E26FD151E0077259E /* CoverlessDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverlessDataRepository.swift; sourceTree = "<group>"; };
 		13471FBA26F283C4007296E2 /* BodyTextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyTextStyle.swift; sourceTree = "<group>"; };
 		13471FBC26F28ED3007296E2 /* SynopsisCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynopsisCell.swift; sourceTree = "<group>"; };
 		136F845126F53208004AAFF2 /* ShelfCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfCell.swift; sourceTree = "<group>"; };
@@ -123,6 +127,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1342816D26FD15030077259E /* Coredata */ = {
+			isa = PBXGroup;
+			children = (
+				1342816E26FD151E0077259E /* CoverlessDataRepository.swift */,
+			);
+			path = Coredata;
+			sourceTree = "<group>";
+		};
 		13471FB726F26529007296E2 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -161,6 +173,7 @@
 		224DBC8626F113B3002303F3 /* Coverless */ = {
 			isa = PBXGroup;
 			children = (
+				1342816D26FD15030077259E /* Coredata */,
 				226F024826F8F4D3008E64BC /* API */,
 				5B47F64F26F3DB7300FDF48D /* Coordinators */,
 				5BE28DFA26F12D380043F19E /* DesignSystem */,
@@ -170,6 +183,7 @@
 				224DBCA026F11470002303F3 /* Extensions */,
 				224DBC9C26F113C7002303F3 /* System */,
 				224DBC9B26F113BD002303F3 /* Assets */,
+				1342816A26FD14380077259E /* CoverlessData.xcdatamodeld */,
 			);
 			path = Coverless;
 			sourceTree = "<group>";
@@ -417,8 +431,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1342816F26FD151E0077259E /* CoverlessDataRepository.swift in Sources */,
 				5BBAFA6926F2258100A8DEF9 /* TextStyle.swift in Sources */,
 				5B47F64626F2CCA800FDF48D /* UIImageView+TraitCollection.swift in Sources */,
+				1342816C26FD14380077259E /* CoverlessData.xcdatamodeld in Sources */,
 				5B47F65526F3DCBF00FDF48D /* MainTabBarController.swift in Sources */,
 				136F845626F53D78004AAFF2 /* TitleTextStyle.swift in Sources */,
 				5BE28E0826F138020043F19E /* SynopsisCellButton.swift in Sources */,
@@ -657,6 +673,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		1342816A26FD14380077259E /* CoverlessData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				1342816B26FD14380077259E /* CoverlessData.xcdatamodel */,
+			);
+			currentVersion = 1342816B26FD14380077259E /* CoverlessData.xcdatamodel */;
+			path = CoverlessData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 224DBC7C26F113B3002303F3 /* Project object */;
 }
