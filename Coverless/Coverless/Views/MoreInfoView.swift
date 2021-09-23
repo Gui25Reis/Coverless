@@ -43,6 +43,13 @@ final class MoreInfoView: UIView, Designable {
         return l
     }()
     
+    private lazy var rateOfStars: StarsRating = {
+        let stars = StarsRating()
+        stars.translatesAutoresizingMaskIntoConstraints = false
+        stars.setRating(rating: 4)
+        return stars
+    }()
+    
     private lazy var discoverButton: UIButton = {
         let b = UIButton()
         b.backgroundColor = designSystem.palette.buttonBackgroundPrimary
@@ -101,6 +108,7 @@ final class MoreInfoView: UIView, Designable {
         stackView.addArrangedSubview(synopsisHeader)
         stackView.addArrangedSubview(synopsisField)
         stackView.addArrangedSubview(ratingHeader)
+        stackView.addArrangedSubview(rateOfStars)
     }
     
     private func setupLayout() {
@@ -181,6 +189,10 @@ struct AnyViewRepresentable: UIViewRepresentable {
 struct MoreInfo_PreviewProvider: PreviewProvider {
     static var previews: some View {
         Group {
+            AnyViewRepresentable(MoreInfoView())
+                .preferredColorScheme(.dark)
+            AnyViewRepresentable(MoreInfoView())
+                .preferredColorScheme(.dark)
             AnyViewRepresentable(MoreInfoView())
                 .preferredColorScheme(.dark)
                 

@@ -32,13 +32,13 @@ final class StatusButton: UIButton, Designable {
         
         if isActive == false {
             if status == .read{
-                setButtonStyle(color: designSystem.palette.readColor, text: "Lido")
+                setButtonStyle(color: designSystem.palette.readColor, text: "Read")
             }
             else if status  == .reading{
-                setButtonStyle(color: designSystem.palette.readingColor, text: "Estou lendo")
+                setButtonStyle(color: designSystem.palette.readingColor, text: "Reading")
             }
             else{
-                setButtonStyle(color: designSystem.palette.abandonedColor, text: "Abandonado")
+                setButtonStyle(color: designSystem.palette.abandonedColor, text: "Abandoned")
             }
         }
         else{

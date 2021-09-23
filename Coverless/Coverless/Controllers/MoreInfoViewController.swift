@@ -35,6 +35,6 @@ final class MoreInfoViewController: UIViewController {
     }
     
     private func addToShelf() {
-        print("adding book to shelf")
+        print("Adding book to shelf")
     }
 }

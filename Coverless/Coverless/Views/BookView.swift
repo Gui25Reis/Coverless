@@ -195,7 +195,6 @@ final class BookView: UIView, Designable {
     //MARK: Bindings and actions
     func setupContent(synopsis: String, rating: Int) {
         synopsisField.text = synopsis
-        
     }
     
     private func setupActions() {
