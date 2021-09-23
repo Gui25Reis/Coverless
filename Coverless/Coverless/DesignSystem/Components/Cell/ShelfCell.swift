@@ -167,5 +167,28 @@ class ShelfCell: UICollectionViewCell, Designable{
         stars.setRating(rating: rating)
         
         self.delegate = delegate
+        
+        setAccessibility()
+    }
+    
+    
+    func setAccessibility(){
+        favButton.isAccessibilityElement = true
+        favButton.accessibilityHint = "To favorite"
+        favButton.accessibilityLabel = "Heart symbol"
+        
+        bookTitle.isAccessibilityElement = true
+        
+        bookStatus.isAccessibilityElement = true
+        bookStatus.accessibilityHint = "Book status"
+        bookStatus.accessibilityTraits = .none
+    
+        stars.isAccessibilityElement = true
+        stars.accessibilityHint = "Book review"
+        stars.accessibilityLabel = "Rating:\(stars.getRating()) stars out of five"
+        
+        self.accessibilityElements = [bookTitle,bookStatus, stars,favButton]
+
+    
     }
 }
