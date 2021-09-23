@@ -123,14 +123,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1342816726FCE87A0077259E /* View */ = {
-			isa = PBXGroup;
-			children = (
-				1342816826FCE8960077259E /* ShopView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		13471FB726F26529007296E2 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -216,6 +208,7 @@
 		224DBC9E26F1145D002303F3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1342816826FCE8960077259E /* ShopView.swift */,
 				224DBCA126F114DD002303F3 /* MenuView.swift */,
 				5B89273526F52ACA0002A3DA /* MoreInfoView.swift */,
 				1342816526FBA5EE0077259E /* BookView.swift */,
@@ -309,7 +302,6 @@
 		5BE28DFE26F12DA00043F19E /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				1342816726FCE87A0077259E /* View */,
 				136F845726F768F9004AAFF2 /* Image */,
 				13471FB726F26529007296E2 /* Cell */,
 				5BE28E0626F137C20043F19E /* Buttons */,
