@@ -80,7 +80,9 @@ final class ShelfViewController: UIViewController, ShelfCellDelegate {
     
 }
 extension ShelfViewController:UICollectionViewDelegate{
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        coordinator?.showBook(viewModel: MoreInfoViewModel(bookID: "123", synopsis: "Harry Potter é um garoto órfão que vive infeliz com seus tios, os Dursleys. Ele recebe uma carta contendo um convite para ingressar em Hogwarts, uma famosa escola especializada em formar jovens…", rating: 0))
+    }
 }
 
 extension ShelfViewController:UICollectionViewDataSource{

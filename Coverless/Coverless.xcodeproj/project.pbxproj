@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1342816126FBA3350077259E /* BookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1342816026FBA3350077259E /* BookViewController.swift */; };
+		1342816626FBA5EE0077259E /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1342816526FBA5EE0077259E /* BookView.swift */; };
+		1342816926FCE8960077259E /* ShopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1342816826FCE8960077259E /* ShopView.swift */; };
 		13471FBB26F283C4007296E2 /* BodyTextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13471FBA26F283C4007296E2 /* BodyTextStyle.swift */; };
 		13471FBD26F28ED3007296E2 /* SynopsisCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13471FBC26F28ED3007296E2 /* SynopsisCell.swift */; };
 		136F845226F53208004AAFF2 /* ShelfCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136F845126F53208004AAFF2 /* ShelfCell.swift */; };
@@ -56,6 +59,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1342816026FBA3350077259E /* BookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookViewController.swift; sourceTree = "<group>"; };
+		1342816526FBA5EE0077259E /* BookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookView.swift; sourceTree = "<group>"; };
+		1342816826FCE8960077259E /* ShopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopView.swift; sourceTree = "<group>"; };
 		13471FBA26F283C4007296E2 /* BodyTextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyTextStyle.swift; sourceTree = "<group>"; };
 		13471FBC26F28ED3007296E2 /* SynopsisCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynopsisCell.swift; sourceTree = "<group>"; };
 		136F845126F53208004AAFF2 /* ShelfCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfCell.swift; sourceTree = "<group>"; };
@@ -194,6 +200,7 @@
 				5B47F65426F3DCBF00FDF48D /* MainTabBarController.swift */,
 				5B47F65826F3E2CB00FDF48D /* ShelfViewController.swift */,
 				5B89273326F52ABD0002A3DA /* MoreInfoViewController.swift */,
+				1342816026FBA3350077259E /* BookViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -201,8 +208,10 @@
 		224DBC9E26F1145D002303F3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1342816826FCE8960077259E /* ShopView.swift */,
 				224DBCA126F114DD002303F3 /* MenuView.swift */,
 				5B89273526F52ACA0002A3DA /* MoreInfoView.swift */,
+				1342816526FBA5EE0077259E /* BookView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -421,6 +430,7 @@
 				5BE28E0326F135A10043F19E /* DefaultDesignPalette.swift in Sources */,
 				5B47F64A26F3B39C00FDF48D /* SynopsisCellDelegate.swift in Sources */,
 				136F845B26F76E90004AAFF2 /* StatusButton.swift in Sources */,
+				1342816626FBA5EE0077259E /* BookView.swift in Sources */,
 				226F024A26F8F4F5008E64BC /* ApiDatas.swift in Sources */,
 				5BE28DFC26F12D940043F19E /* DefaultDesignSystem.swift in Sources */,
 				5B47F65B26F4079500FDF48D /* PropertyListDecoder.swift in Sources */,
@@ -430,6 +440,7 @@
 				5B47F65326F3DC3100FDF48D /* DiscoverCoordinator.swift in Sources */,
 				226F024C26F8F504008E64BC /* BookRepository.swift in Sources */,
 				5B47F65726F3E1B400FDF48D /* ShelfCoordinator.swift in Sources */,
+				1342816926FCE8960077259E /* ShopView.swift in Sources */,
 				5B47F64E26F3B78000FDF48D /* NSLayoutAnchor+DesignSystem.swift in Sources */,
 				5B89273626F52ACA0002A3DA /* MoreInfoView.swift in Sources */,
 				13471FBD26F28ED3007296E2 /* SynopsisCell.swift in Sources */,
@@ -450,6 +461,7 @@
 				224DBC8A26F113B3002303F3 /* SceneDelegate.swift in Sources */,
 				5BC4634C26F25D43007155C1 /* LabelDesignable.swift in Sources */,
 				136F845426F53292004AAFF2 /* ShelfCellDelegate.swift in Sources */,
+				1342816126FBA3350077259E /* BookViewController.swift in Sources */,
 				5BBAFA6526F21B9000A8DEF9 /* DesignSpacing.swift in Sources */,
 				5B47F64426F2CB4200FDF48D /* SymbolAccesibilityConfiguration.swift in Sources */,
 			);
