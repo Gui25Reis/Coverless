@@ -15,6 +15,8 @@ class SynopsisCell: UICollectionViewCell, Designable{
     
     private weak var delegate: SynopsisCellDelegate? = nil
     
+    static let identifier: String = "SynopsisCell"
+    
     private lazy var normalLayout = [
         synopsisLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.70),
         synopsisLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: \.mediumPositive),

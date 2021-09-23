@@ -25,6 +25,7 @@ final class MoreInfoView: UIView, Designable {
         let tv = UITextView()
         tv.translatesAutoresizingMaskIntoConstraints = false
         tv.isScrollEnabled = false
+        tv.isEditable = false
         tv.stylize(with: designSystem.text.body)
         tv.adjustsFontForContentSizeCategory = true
         tv.text = "Harry Potter é um garoto órfão que vive infeliz com seus tios, os Dursleys. Ele recebe uma carta contendo um convite para ingressar em Hogwarts, uma famosa escola especializada em formar jovens… Harry Potter é um garoto órfão que vive infeliz com seus tios, os Dursleys. Ele recebe uma carta contendo um convite para ingressar em Hogwarts, uma famosa escola especializada em formar jovens…"
