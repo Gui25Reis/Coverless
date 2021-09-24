@@ -8,4 +8,6 @@
 struct DesignText {
     let button: TextStyle = ButtonTextStyle()
     let body: TextStyle = BodyTextStyle()
+    let title: TextStyle = TitleTextStyle()
+    let header: TextStyle = HeaderTextStyle()
 }

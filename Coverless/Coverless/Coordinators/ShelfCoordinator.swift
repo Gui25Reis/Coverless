@@ -26,6 +26,14 @@ class ShelfCoordinator: Coordinator {
         navigationController.pushViewController(vc, animated: true)
     }
     
+    func showBook(viewModel: MoreInfoViewModel) {
+        let vc = BookViewController(viewModel: viewModel)
+        vc.coordinator = self
+        vc.navigationItem.title = "Título do livro"
+        navigationController.pushViewController(vc, animated: true)
+    }
+    
+    
     private func setupBarAppearence() {
         let designSystem: DesignSystem = DefaultDesignSystem.shared
         
