@@ -47,6 +47,10 @@
 		5BC4634E26F25E31007155C1 /* ButtonTextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC4634D26F25E31007155C1 /* ButtonTextStyle.swift */; };
 		5BD290E126FD0E420082620D /* Subjects.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5BD290E026FD0E420082620D /* Subjects.plist */; };
 		5BD290E326FD1CCC0082620D /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD290E226FD1CCC0082620D /* Subject.swift */; };
+		5BD62AE726FE601B00EC924D /* NYTDatas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD62AE226FE601B00EC924D /* NYTDatas.swift */; };
+		5BD62AE826FE601B00EC924D /* NYTRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD62AE326FE601B00EC924D /* NYTRepository.swift */; };
+		5BD62AE926FE601B00EC924D /* GoogleDatas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD62AE526FE601B00EC924D /* GoogleDatas.swift */; };
+		5BD62AEA26FE601B00EC924D /* GoogleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD62AE626FE601B00EC924D /* GoogleRepository.swift */; };
 		5BE28DFC26F12D940043F19E /* DefaultDesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE28DFB26F12D940043F19E /* DefaultDesignSystem.swift */; };
 		5BE28E0126F134EB0043F19E /* UIColor+Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE28E0026F134EB0043F19E /* UIColor+Palette.swift */; };
 		5BE28E0326F135A10043F19E /* DefaultDesignPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE28E0226F135A10043F19E /* DefaultDesignPalette.swift */; };
@@ -102,6 +106,10 @@
 		5BC4634D26F25E31007155C1 /* ButtonTextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTextStyle.swift; sourceTree = "<group>"; };
 		5BD290E026FD0E420082620D /* Subjects.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Subjects.plist; sourceTree = "<group>"; };
 		5BD290E226FD1CCC0082620D /* Subject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subject.swift; sourceTree = "<group>"; };
+		5BD62AE226FE601B00EC924D /* NYTDatas.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NYTDatas.swift; sourceTree = "<group>"; };
+		5BD62AE326FE601B00EC924D /* NYTRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NYTRepository.swift; sourceTree = "<group>"; };
+		5BD62AE526FE601B00EC924D /* GoogleDatas.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleDatas.swift; sourceTree = "<group>"; };
+		5BD62AE626FE601B00EC924D /* GoogleRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleRepository.swift; sourceTree = "<group>"; };
 		5BE28DFB26F12D940043F19E /* DefaultDesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDesignSystem.swift; sourceTree = "<group>"; };
 		5BE28E0026F134EB0043F19E /* UIColor+Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Palette.swift"; sourceTree = "<group>"; };
 		5BE28E0226F135A10043F19E /* DefaultDesignPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDesignPalette.swift; sourceTree = "<group>"; };
@@ -164,9 +172,9 @@
 		224DBC8626F113B3002303F3 /* Coverless */ = {
 			isa = PBXGroup;
 			children = (
+				5BD62AE026FE5FF200EC924D /* API */,
 				5BD290DF26FD0E1C0082620D /* Data */,
 				5BE7CFC926FBB80100927439 /* DataSources */,
-				226F024826F8F4D3008E64BC /* API */,
 				5B47F64F26F3DB7300FDF48D /* Coordinators */,
 				5BE28DFA26F12D380043F19E /* DesignSystem */,
 				224DBC9D26F11452002303F3 /* Controllers */,
@@ -237,13 +245,6 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		226F024826F8F4D3008E64BC /* API */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = API;
-			sourceTree = "<group>";
-		};
 		5B0F188C26FE44F8008626F9 /* Header */ = {
 			isa = PBXGroup;
 			children = (
@@ -295,6 +296,33 @@
 				5BD290E026FD0E420082620D /* Subjects.plist */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		5BD62AE026FE5FF200EC924D /* API */ = {
+			isa = PBXGroup;
+			children = (
+				5BD62AE426FE601B00EC924D /* Google */,
+				5BD62AE126FE601B00EC924D /* NewYorkTIme */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		5BD62AE126FE601B00EC924D /* NewYorkTIme */ = {
+			isa = PBXGroup;
+			children = (
+				5BD62AE226FE601B00EC924D /* NYTDatas.swift */,
+				5BD62AE326FE601B00EC924D /* NYTRepository.swift */,
+			);
+			path = NewYorkTIme;
+			sourceTree = "<group>";
+		};
+		5BD62AE426FE601B00EC924D /* Google */ = {
+			isa = PBXGroup;
+			children = (
+				5BD62AE526FE601B00EC924D /* GoogleDatas.swift */,
+				5BD62AE626FE601B00EC924D /* GoogleRepository.swift */,
+			);
+			path = Google;
 			sourceTree = "<group>";
 		};
 		5BE28DFA26F12D380043F19E /* DesignSystem */ = {
@@ -445,6 +473,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BD62AE926FE601B00EC924D /* GoogleDatas.swift in Sources */,
 				5BBAFA6926F2258100A8DEF9 /* TextStyle.swift in Sources */,
 				5B47F64626F2CCA800FDF48D /* UIImageView+TraitCollection.swift in Sources */,
 				5B47F65526F3DCBF00FDF48D /* MainTabBarController.swift in Sources */,
@@ -454,6 +483,8 @@
 				5B47F65926F3E2CB00FDF48D /* ShelfViewController.swift in Sources */,
 				5BE28E0C26F142E40043F19E /* Designable.swift in Sources */,
 				5B5A8BE526F907D200914277 /* HeaderTextStyle.swift in Sources */,
+				5BD62AE826FE601B00EC924D /* NYTRepository.swift in Sources */,
+				5BD62AEA26FE601B00EC924D /* GoogleRepository.swift in Sources */,
 				224DBC8C26F113B3002303F3 /* DiscoverViewController.swift in Sources */,
 				5BE28E0326F135A10043F19E /* DefaultDesignPalette.swift in Sources */,
 				5B47F64A26F3B39C00FDF48D /* SynopsisCellDelegate.swift in Sources */,
@@ -462,6 +493,7 @@
 				5BE28DFC26F12D940043F19E /* DefaultDesignSystem.swift in Sources */,
 				5B47F65B26F4079500FDF48D /* PropertyListDecoder.swift in Sources */,
 				224DBCA226F114DD002303F3 /* MenuView.swift in Sources */,
+				5BD62AE726FE601B00EC924D /* NYTDatas.swift in Sources */,
 				5BFEE41126FA006B00D3A6CC /* MoreInfoViewModel.swift in Sources */,
 				5BE28E0126F134EB0043F19E /* UIColor+Palette.swift in Sources */,
 				5B47F65326F3DC3100FDF48D /* DiscoverCoordinator.swift in Sources */,
