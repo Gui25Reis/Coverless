@@ -9,6 +9,7 @@ import UIKit
 
 final class BookView: UIView, Designable {
     
+    //let book: MyBook
     let designSystem: DesignSystem
     var currentStatus: BookStatus
     
@@ -23,7 +24,7 @@ final class BookView: UIView, Designable {
         let tv = UITextView()
         tv.translatesAutoresizingMaskIntoConstraints = false
         tv.isScrollEnabled = false
-        tv.isUserInteractionEnabled = false
+        tv.isEditable = false
         tv.stylize(with: designSystem.text.body)
         tv.adjustsFontForContentSizeCategory = true
         tv.text = "Harry Potter é um garoto órfão que vive infeliz com seus tios, os Dursleys. Ele recebe uma carta contendo um convite para ingressar em Hogwarts, uma famosa escola especializada em formar jovens… Harry Potter é um garoto órfão que vive infeliz com seus tios, os Dursleys. Ele recebe uma carta contendo um convite para ingressar em Hogwarts, uma famosa escola especializada em formar jovens…"
@@ -193,8 +194,11 @@ final class BookView: UIView, Designable {
     }
     
     //MARK: Bindings and actions
-    func setupContent(synopsis: String, rating: Int) {
-        synopsisField.text = synopsis
+
+    //atualizar para setupContent(book: MyBook)
+    func setupContent() {
+        //self.book = book
+
     }
     
     private func setupActions() {
@@ -274,8 +278,8 @@ final class BookView: UIView, Designable {
     
     func setAccessibility(){
         scrollView.isAccessibilityElement = true
+        
         synopsisField.isAccessibilityElement = true
-        synopsisField.accessibilityHint = "Book Title"
         
         ratingStars.isAccessibilityElement = true
         ratingStars.accessibilityHint = "Book review"
