@@ -2,15 +2,14 @@ import UIKit
 
 class BookViewController: UIViewController {
     weak var coordinator: ShelfCoordinator?
+    //let book: MyBook
     
     lazy var contentView: BookView = {
         BookView(designSystem: DefaultDesignSystem.shared, tabBarHeight: tabBarController?.tabBar.frame.height ?? 100)
     }()
     
-    let viewModel: MoreInfoViewModel
     
-    init(viewModel: MoreInfoViewModel) {
-        self.viewModel = viewModel
+    init(){
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -22,8 +21,12 @@ class BookViewController: UIViewController {
         view = contentView
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+    }
+    
     override func viewDidLoad() {
-        contentView.setupContent(synopsis: viewModel.synopsis, rating: viewModel.rating)
+        //atualizar para contentView.setupContent(book: book)
+        contentView.setupContent()
         contentView.setupButtonRead(setRead)
         contentView.setupButtonReading(setReading)
         contentView.setupButtonAbandoned(setAbandoned)
@@ -31,12 +34,12 @@ class BookViewController: UIViewController {
     }
     
     private func setRead(){
-        print("status lido")
+        print("status Read")
     }
     private func setReading(){
-        print("status lendo")
+        print("status Reading")
     }
     private func setAbandoned(){
-        print("status abandonado")
+        print("status Abandoned")
     }
 }
