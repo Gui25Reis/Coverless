@@ -15,7 +15,12 @@ final class DiscoverView: UIView, Designable {
         let tagGroup = NSCollectionLayoutGroup.horizontal(layoutSize: tagItemSize, subitems: [tagItem])
         tagGroup.edgeSpacing = .init(leading: .fixed(8), top: .fixed(4), trailing: .fixed(0), bottom: .fixed(4))
         let tagSection = NSCollectionLayoutSection(group: tagGroup)
+        let header = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .absolute(5)),
+                       elementKind: UICollectionView.elementKindSectionHeader,
+                       alignment: .top)
         tagSection.orthogonalScrollingBehavior = .continuous
+        tagSection.boundarySupplementaryItems = [header]
         tagSection.contentInsets = NSDirectionalEdgeInsets(top: 0.0, leading: 20.0, bottom: 20.0, trailing: 20.0)
         
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(500.0))
@@ -24,6 +29,7 @@ final class DiscoverView: UIView, Designable {
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [ item ])
         group.edgeSpacing = .init(leading: .fixed(0), top: .fixed(4), trailing: .fixed(0), bottom: .fixed(4))
         let section = NSCollectionLayoutSection(group: group)
+        section.boundarySupplementaryItems = [header]
         section.contentInsets = NSDirectionalEdgeInsets(top: 0.0, leading: 20.0, bottom: 0.0, trailing: 20.0)
         let layout = UICollectionViewCompositionalLayout { (sectionNumber, env) -> NSCollectionLayoutSection? in
             switch sectionNumber {
@@ -38,8 +44,14 @@ final class DiscoverView: UIView, Designable {
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         
-        collectionView.register(SynopsisCell.self, forCellWithReuseIdentifier: SynopsisCell.identifier)
-        collectionView.register(SubjectCell.self, forCellWithReuseIdentifier: SubjectCell.identifier)
+        collectionView.register(SynopsisCell.self,
+                                forCellWithReuseIdentifier: SynopsisCell.identifier)
+        collectionView.register(SubjectCell.self,
+                                forCellWithReuseIdentifier: SubjectCell.identifier)
+        collectionView.register(CollectionViewAccessibilityHeader.self,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier: CollectionViewAccessibilityHeader.identifier)
+        
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
@@ -73,10 +85,13 @@ final class DiscoverView: UIView, Designable {
         collectionView.backgroundColor = .clear
         collectionView.isAccessibilityElement = false
         collectionView.shouldGroupAccessibilityChildren = true
+        collectionView.accessibilityNavigationStyle = .combined
     }
     
     func bindCollectionView(delegate: UICollectionViewDelegate, dataSource: UICollectionViewDataSource) {
         collectionView.delegate = delegate
         collectionView.dataSource = dataSource
     }
+    
+
 }

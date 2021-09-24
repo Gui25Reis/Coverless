@@ -23,6 +23,7 @@
 		224DBCA226F114DD002303F3 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224DBCA126F114DD002303F3 /* MenuView.swift */; };
 		226F024A26F8F4F5008E64BC /* ApiDatas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F024926F8F4F5008E64BC /* ApiDatas.swift */; };
 		226F024C26F8F504008E64BC /* BookRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F024B26F8F504008E64BC /* BookRepository.swift */; };
+		5B0F188E26FE4529008626F9 /* CollectionViewAccessibilityHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0F188D26FE4529008626F9 /* CollectionViewAccessibilityHeader.swift */; };
 		5B47F64426F2CB4200FDF48D /* SymbolAccesibilityConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B47F64326F2CB4200FDF48D /* SymbolAccesibilityConfiguration.swift */; };
 		5B47F64626F2CCA800FDF48D /* UIImageView+TraitCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B47F64526F2CCA800FDF48D /* UIImageView+TraitCollection.swift */; };
 		5B47F64826F3700500FDF48D /* UIImage+TraitCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B47F64726F3700500FDF48D /* UIImage+TraitCollection.swift */; };
@@ -79,6 +80,7 @@
 		224DBCA126F114DD002303F3 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		226F024926F8F4F5008E64BC /* ApiDatas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiDatas.swift; sourceTree = "<group>"; };
 		226F024B26F8F504008E64BC /* BookRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookRepository.swift; sourceTree = "<group>"; };
+		5B0F188D26FE4529008626F9 /* CollectionViewAccessibilityHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewAccessibilityHeader.swift; sourceTree = "<group>"; };
 		5B47F64326F2CB4200FDF48D /* SymbolAccesibilityConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolAccesibilityConfiguration.swift; sourceTree = "<group>"; };
 		5B47F64526F2CCA800FDF48D /* UIImageView+TraitCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+TraitCollection.swift"; sourceTree = "<group>"; };
 		5B47F64726F3700500FDF48D /* UIImage+TraitCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+TraitCollection.swift"; sourceTree = "<group>"; };
@@ -248,6 +250,14 @@
 			path = API;
 			sourceTree = "<group>";
 		};
+		5B0F188C26FE44F8008626F9 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				5B0F188D26FE4529008626F9 /* CollectionViewAccessibilityHeader.swift */,
+			);
+			path = Header;
+			sourceTree = "<group>";
+		};
 		5B47F64F26F3DB7300FDF48D /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
@@ -316,6 +326,7 @@
 		5BE28DFE26F12DA00043F19E /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				5B0F188C26FE44F8008626F9 /* Header */,
 				136F845726F768F9004AAFF2 /* Image */,
 				13471FB726F26529007296E2 /* Cell */,
 				5BE28E0626F137C20043F19E /* Buttons */,
@@ -454,6 +465,7 @@
 				5B47F64A26F3B39C00FDF48D /* SynopsisCellDelegate.swift in Sources */,
 				136F845B26F76E90004AAFF2 /* StatusButton.swift in Sources */,
 				226F024A26F8F4F5008E64BC /* ApiDatas.swift in Sources */,
+				5B0F188E26FE4529008626F9 /* CollectionViewAccessibilityHeader.swift in Sources */,
 				5BE28DFC26F12D940043F19E /* DefaultDesignSystem.swift in Sources */,
 				5B47F65B26F4079500FDF48D /* PropertyListDecoder.swift in Sources */,
 				224DBCA226F114DD002303F3 /* MenuView.swift in Sources */,

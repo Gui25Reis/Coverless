@@ -40,19 +40,26 @@ class DiscoverViewController: UIViewController {
 extension DiscoverViewController:UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == 0 {
-            updateSubjectCellAppearence(for: collectionView, at: indexPath, isSelected: true)
+            guard let cell = collectionView.cellForItem(at: indexPath) as? SubjectCell else {
+                return
+            }
+            updateSubjectCellAppearence(cell, isSelected: true)
             handleSubjectCellSelection(for: collectionView, at: indexPath)
         }
     }
     
     private func handleSubjectCellSelection(for collectionView: UICollectionView, at indexPath: IndexPath) {
-        print(dataSource.selectSubject(for: indexPath))
+        
+
     }
     
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if indexPath.section == 0 {
-            updateSubjectCellAppearence(for: collectionView, at: indexPath, isSelected: false)
+            guard let cell = collectionView.cellForItem(at: indexPath) as? SubjectCell else {
+                return
+            }
+            updateSubjectCellAppearence(cell, isSelected: false)
             handleSubjectCellDeselection(for: collectionView, at: indexPath)
         }
     }
@@ -61,10 +68,8 @@ extension DiscoverViewController:UICollectionViewDelegate {
         
     }
     
-    private func updateSubjectCellAppearence(for collectionView: UICollectionView, at indexPath: IndexPath, isSelected: Bool) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? SubjectCell else {
-            preconditionFailure("Cell Register not configured correctily")
-        }
+    private func updateSubjectCellAppearence(_ cell: SubjectCell, isSelected: Bool) {
+        
         
         if isSelected {
             cell.didSelectCell()

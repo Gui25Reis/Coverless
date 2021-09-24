@@ -45,7 +45,7 @@ final class SubjectCell: UICollectionViewCell, Designable {
     private func setupLayout() {
         NSLayoutConstraint.activate([
             descriptionLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: \.mediumPositive),
-            descriptionLabel.constraint(equalTo: contentView.leadingAnchor, constant: \.xLargePositive),
+            descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: \.xLargePositive),
             descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: \.xLargeNegative),
             descriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: \.mediumNegative)
         ])
@@ -63,7 +63,14 @@ final class SubjectCell: UICollectionViewCell, Designable {
     }
     
     
-    func setup(with subject: String) {
+    func setup(with subject: String, isSelected: Bool) {
+        
+        if isSelected {
+            didSelectCell()
+        } else {
+            didDeselectCell()
+        }
+        
         self.subject = subject
         descriptionLabel.text = subject
         accessibilityLabel = subject

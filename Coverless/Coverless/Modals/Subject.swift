@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Subject: Codable {
+struct Subject: Codable, Equatable {
     let name: String
     let value: String
 }
