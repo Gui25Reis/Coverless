@@ -21,10 +21,8 @@ class DiscoverCoordinator: Coordinator {
     func start() {
         let vc = DiscoverViewController()
         vc.coordinator = self
-        let tabBarItem = UITabBarItem(title: "Discover", image: UIImage(systemName: "lightbulb"), tag: 0)
-        tabBarItem.selectedImage = UIImage(systemName: "lightbulb.fill")
-        vc.tabBarItem = tabBarItem
-        vc.navigationItem.title = "Discover"
+        vc.tabBarItem = UITabBarItem(title: "Descubra", image: UIImage(systemName: "lightbulb"), tag: 0)
+        vc.navigationItem.title = "Descubra"
         navigationController.pushViewController(vc, animated: true)
         
     }
