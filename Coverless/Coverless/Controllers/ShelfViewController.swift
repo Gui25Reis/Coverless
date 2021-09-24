@@ -10,19 +10,12 @@ import UIKit
 final class ShelfViewController: UIViewController, ShelfCellDelegate {
     
     weak var coordinator: ShelfCoordinator?
-    private var books:[MyBook] = []
+    
     
     let designSystem: DesignSystem = DefaultDesignSystem()
     let cv: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: ShelfViewController.createCollectionViewLayout())
     
     /* MARK: - Ciclo de Vida */
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.books = DataBooks.shared.getBooks()
-        self.cv.reloadData()
-    }
-    
     
     public override func viewDidLoad() -> Void {
         super.viewDidLoad()
@@ -87,15 +80,11 @@ final class ShelfViewController: UIViewController, ShelfCellDelegate {
     
 }
 extension ShelfViewController:UICollectionViewDelegate{
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        coordinator?.showBook()
-        //coordinator?.showBook(bookSelected: book[indexPath])
-    }
+    
 }
 
 extension ShelfViewController:UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //return self.books.count
         return 10
     }
     
@@ -104,7 +93,6 @@ extension ShelfViewController:UICollectionViewDataSource{
         else {
             preconditionFailure("Cell Register not configured correctily")
         }
-        //cell.setup(books[indexPath])
         cell.setup(title:"Harry Potter e a Câmara Secreta",status: .abandoned ,rating: 3,delegate: self)
         return cell
     }
