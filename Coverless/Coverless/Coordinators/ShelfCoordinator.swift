@@ -20,8 +20,8 @@ class ShelfCoordinator: Coordinator {
     func start() {
         let vc = ShelfViewController()
         vc.coordinator = self
-        vc.navigationItem.title = "Estante"
-        vc.tabBarItem = UITabBarItem(title: "Estante", image: UIImage(systemName: "books.vertical"), tag: 1)
+        vc.navigationItem.title = "Shelf"
+        vc.tabBarItem = UITabBarItem(title: "Shelf", image: UIImage(systemName: "books.vertical"), tag: 1)
         navigationController.pushViewController(vc, animated: true)
     }
     
@@ -30,10 +30,7 @@ class ShelfCoordinator: Coordinator {
         let vc = BookViewController()
 
         vc.coordinator = self
-        vc.navigationItem.title = "Título do livro"
-        
-        //vc.book = book
-        
+        vc.navigationItem.title = "Book Title"
         navigationController.pushViewController(vc, animated: true)
     }
     private func setupBarAppearence() {

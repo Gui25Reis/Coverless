@@ -194,9 +194,11 @@ final class BookView: UIView, Designable {
     }
     
     //MARK: Bindings and actions
+
     //atualizar para setupContent(book: MyBook)
     func setupContent() {
         //self.book = book
+
     }
     
     private func setupActions() {

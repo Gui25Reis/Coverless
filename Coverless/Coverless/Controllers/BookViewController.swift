@@ -34,12 +34,12 @@ class BookViewController: UIViewController {
     }
     
     private func setRead(){
-        print("status lido")
+        print("status Read")
     }
     private func setReading(){
-        print("status lendo")
+        print("status Reading")
     }
     private func setAbandoned(){
-        print("status abandonado")
+        print("status Abandoned")
     }
 }
