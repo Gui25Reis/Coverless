@@ -7,25 +7,44 @@
 
 import Foundation
 
-/* MARK: - Structs para receber dados da API */
+/* MARK: - Dados da API */
 
 struct Items: Decodable {
+    let totalItems:Int
     let items:[BookId]
 }
 
 struct BookId: Decodable {
     let id:String
     let volumeInfo:BookInformation
+    let saleInfo:BookShop?
 }
 
 struct BookInformation: Decodable {
     let title:String?
     let description:String?
-    let language:String?
+    let imageLinks:BookImages?
 }
 
-struct Book {
-    let isbn10:String
-    let title:String
-    let description:String
+
+struct BookImages:Decodable {
+    let smallThumbnail:String?
+    let thumbnail:String?
 }
+
+
+struct BookShop:Decodable {
+    let buyLink:String?
+}
+
+
+/* MARK: - Outros */
+
+/**
+    Salva as informaçòes da última cateogira usada na APi do Google Books
+*/
+struct UsedCategory {
+    var maxBooks:Int
+    var timesUsed:Int
+}
+

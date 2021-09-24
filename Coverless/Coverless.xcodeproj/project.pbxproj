@@ -18,6 +18,7 @@
 		226F024A26F8F4F5008E64BC /* GoogleDatas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F024926F8F4F5008E64BC /* GoogleDatas.swift */; };
 		226F024C26F8F504008E64BC /* GoogleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F024B26F8F504008E64BC /* GoogleRepository.swift */; };
 		226F024E26F8F51D008E64BC /* Environment.plist in Resources */ = {isa = PBXBuildFile; fileRef = 226F024D26F8F51D008E64BC /* Environment.plist */; };
+		228A6EF926FDD62E00BEA70A /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228A6EF826FDD62E00BEA70A /* Book.swift */; };
 		22EEF34D26FA4CCF0003E17D /* NYTDatas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EEF34C26FA4CCF0003E17D /* NYTDatas.swift */; };
 		22EEF35026FA4D200003E17D /* NYTRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EEF34F26FA4D200003E17D /* NYTRepository.swift */; };
 		22EEF35226FA54220003E17D /* TesteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EEF35126FA54220003E17D /* TesteViewController.swift */; };
@@ -62,6 +63,7 @@
 		226F024926F8F4F5008E64BC /* GoogleDatas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleDatas.swift; sourceTree = "<group>"; };
 		226F024B26F8F504008E64BC /* GoogleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleRepository.swift; sourceTree = "<group>"; };
 		226F024D26F8F51D008E64BC /* Environment.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Environment.plist; sourceTree = "<group>"; };
+		228A6EF826FDD62E00BEA70A /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		22EEF34C26FA4CCF0003E17D /* NYTDatas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYTDatas.swift; sourceTree = "<group>"; };
 		22EEF34F26FA4D200003E17D /* NYTRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYTRepository.swift; sourceTree = "<group>"; };
 		22EEF35126FA54220003E17D /* TesteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TesteViewController.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 		224DBC9F26F1146B002303F3 /* Modals */ = {
 			isa = PBXGroup;
 			children = (
+				228A6EF826FDD62E00BEA70A /* Book.swift */,
 			);
 			path = Modals;
 			sourceTree = "<group>";
@@ -411,6 +414,7 @@
 				22EEF35226FA54220003E17D /* TesteViewController.swift in Sources */,
 				5BBAFA6326F21B8100A8DEF9 /* DesignPalette.swift in Sources */,
 				5BBAFA6726F2256C00A8DEF9 /* DesignText.swift in Sources */,
+				228A6EF926FDD62E00BEA70A /* Book.swift in Sources */,
 				5BBAFA6126F21B6000A8DEF9 /* DesignSystem.swift in Sources */,
 				5B47F64C26F3B65A00FDF48D /* CustomLabelDesignable.swift in Sources */,
 				5BC4634E26F25E31007155C1 /* ButtonTextStyle.swift in Sources */,

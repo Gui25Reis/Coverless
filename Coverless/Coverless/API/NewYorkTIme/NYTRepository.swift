@@ -12,7 +12,7 @@ import Foundation
 */
 class NYTRepository {
     private var books:[Book] = []
-    private var categories:[NYTCategory] = []
+    private var categories:[String:NYTCategory] = [:]
     
     
     /**
@@ -28,13 +28,13 @@ class NYTRepository {
     public func getBooks(text:String, _ completionHandler: @escaping (Result<[Book], Error>) -> Void) -> Void {
         self.books = []
         
-        let session = URLSession.shared
+        let session:URLSession = URLSession.shared
+                
+        var apiUrl:String = "https://api.nytimes.com/svc/books/v3/lists/"       // Chamada padrão
+        apiUrl += "\(self.getDate(category: self.categories[text]!))"           // Data randomica
+        apiUrl += "/\(self.fixStringSpaces(text)).json?"                        // Filtragem pela categoria
         
-        let randomNumber:Int = Int.random(in: 0...200)
-        
-        let apiUrl = "https://www.googleapis.com/books/v1/volumes?q=\(text)+subject:&startIndex=\(randomNumber)&maxResults=40&printType=books"
-        
-        session.dataTask(with: URL(string: apiUrl+"&key=\(self.getToken())")!) { data, response, error in
+        session.dataTask(with: URL(string: apiUrl+"api-key=\(self.getToken())")!) { data, response, error in
             if let error = error {
                 completionHandler(.failure(error))
                 return
@@ -55,62 +55,11 @@ class NYTRepository {
     
     
     /**
-        Pega a chave para acessa a API
-     
-        - Return: chave da API
-    */
-    private func getToken() -> String {
-        var myDict: [String:String]?
-        if let path = Bundle.main.path(forResource: "Environment", ofType: "plist") {
-            myDict = NSDictionary(contentsOfFile: path) as? [String:String]
-        }
-        return myDict!["NewYorkKey"]!
-    }
-
-    
-    /**
-        Faz a filtragem dos dados recebido e retorna os parâmetros necessários e escolhidos
-    */
-    private func compactBookInfo(items:NYTAllBooks) -> Void {
-        for c in items.results {
-            if c.title != nil, c.description != nil, c.isbns[0].isbn10 != nil {
-                self.books.append(
-                    Book(
-                        isbn10: c.isbns[0].isbn10!,
-                        title: c.title!,
-                        description: c.description!)
-                )
-            }
-        }
-    }
-    
-    
-    
-    /**
-        Faz a filtragem dos dados recebido e retorna os parâmetros necessários e escolhidos
-    */
-    private func compactCategoryInfo(items:NYTCategories) -> Void {
-        for c in items.results {
-            self.categories.append (
-                NYTCategory(
-                    list_name: c.list_name,
-                    display_name: c.display_name,
-                    list_name_encoded: c.list_name_encoded,
-                    oldest_published_date: c.oldest_published_date,
-                    newest_published_date: c.newest_published_date,
-                    updated: c.updated
-                )
-            )
-        }
-    }
-    
-    
-    /**
          Pega todas as categorias disponiveis pela API
       
-         - Return: uma lista com todoas as categorias que a API disponibiliza
+         - Return: um dicionário com as chaves sendo as categorias e pos valores as informações delas.`
     */
-    public func getCategories(_ completionHandler: @escaping (Result<[NYTCategory], Error>) -> Void) -> Void {
+    public func getCategories(_ completionHandler: @escaping (Result<[String:NYTCategory], Error>) -> Void) -> Void {
         let session = URLSession.shared
         
         let apiUrl = "https://api.nytimes.com/svc/books/v3/lists/names.json?"
@@ -126,11 +75,142 @@ class NYTRepository {
                     let decoder = JSONDecoder()
                     let categories = try! decoder.decode(NYTCategories.self, from: data)
                     
-                    self.compactCategoryInfo(items: categories)
-                    
-                    completionHandler(.success(self.categories))
+                    completionHandler(.success(self.compactCategoryInfo(items: categories)))
                 }
             }
         }.resume()
+    }
+    
+    
+    /**
+        Escolhe uma data aleatória a partir da data mais antiga
+     
+        - Parametros:
+            - category: categoria onde a data vai ser escolhida
+ 
+        - Return: data escolhida entre o perido de livros públicados a partir da cateogira escolhida
+    */
+    private func getDate(category:NYTCategory) -> String {
+        let calendar = Calendar.current
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        let start:Date = dateFormatter.date(from: category.oldest_published_date)!
+        let end:Date = dateFormatter.date(from: category.newest_published_date)!
+        
+        var randomNumber:Int?
+        var finalDate:String?
+        
+        switch category.updated {
+            
+            case "MONTHLY":
+                let diference = calendar.dateComponents([.month], from: start, to: end).month!
+                randomNumber = Int.random(in: 0...diference)
+                
+                let randomDate = calendar.date(byAdding: .month, value: randomNumber!, to: start)
+                finalDate = dateFormatter.string(from: randomDate!)
+                
+            case "WEEKLY":
+                let diference = calendar.dateComponents([.weekOfMonth], from: start, to: end).weekOfMonth!
+                randomNumber = Int.random(in: 0...diference)
+                
+                let randomDate = calendar.date(byAdding: .weekOfYear, value: randomNumber!, to: start)
+                finalDate = dateFormatter.string(from: randomDate!)
+                            
+            default:
+                print("Novo tipo de atualização!")
+        }
+        
+        if (randomNumber != nil && finalDate != nil) {
+            return finalDate!
+        }
+        
+        print("Deu algum erro na hora de pegar uma data.")
+        return ""
+    }
+    
+    /**
+        Pega a chave para acessa a API
+     
+        - Return: chave da API
+    */
+    private func getToken() -> String {
+        var myDict: [String:String]?
+        if let path = Bundle.main.path(forResource: "Environment", ofType: "plist") {
+            myDict = NSDictionary(contentsOfFile: path) as? [String:String]
+        }
+        return myDict!["NewYorkKey"]!
+    }
+
+    
+    /**
+        Converte os espaços da String para %20 para fazer a chamda na API
+     
+        - Parametros:
+            - str: String que vai ser manipulada
+ 
+        - Return: nova string
+    */
+    private func fixStringSpaces(_ str:String) -> String {
+        return str.replacingOccurrences(of: " ", with: "%20")
+    }
+    
+    
+    /**
+        Faz a filtragem dos dados recebido para os livros
+     
+        - Parâmetros:
+            - items: Struct com as informações recebidas da API
+    */
+    private func compactBookInfo(items:NYTAllBooks) -> Void {
+        for c in items.results.books {
+            if ( // Condições para pegar um livro
+                c.title != nil &&
+                c.title != "None" &&
+                c.description != nil &&
+                c.description?.isEmpty == false &&
+                c.primary_isbn10 != nil &&
+                c.primary_isbn10 != "None" &&
+                c.book_image != nil &&
+                c.buy_links != nil
+            ){
+                var salesDict:[String:String] = [:]
+                for sales in c.buy_links! {salesDict[sales.name] = sales.url}
+                
+                self.books.append(
+                    Book(
+                        id: nil,
+                        isbn10: c.primary_isbn10!,
+                        title: c.title!.capitalized,
+                        description: c.description!,
+                        image: c.book_image!,
+                        buyLinks: salesDict
+                    )
+                )
+            }
+        }
+    }
+    
+    
+    /**
+        Faz a filtragem dos dados recebido para as categorias
+     
+        - Parâmetros:
+            - items: Struct com as informações recebidas da API
+    */
+    private func compactCategoryInfo(items:NYTCategories) -> [String:NYTCategory] {
+        var dict:[String:NYTCategory] = [:]
+        for c in items.results {
+            dict[c.list_name] = NYTCategory(
+                list_name: c.list_name,
+                // display_name: c.display_name,
+                // list_name_encoded: c.list_name_encoded,
+                oldest_published_date: c.oldest_published_date,
+                newest_published_date: c.newest_published_date,
+                updated: c.updated
+            )
+        }
+        self.categories = dict
+        return dict
     }
 }

@@ -13,6 +13,7 @@ import Foundation
 */
 class GoogleRepository {
     private var books:[Book] = []
+    private lazy var lastCategory:[String:UsedCategory] = [:]
     
     
     /**
@@ -26,17 +27,35 @@ class GoogleRepository {
             - Error: erro caso tenha algum
     */
     public func getBooks(text:String, _ completionHandler: @escaping (Result<[Book], Error>) -> Void) -> Void {
-        self.books = []
         
+        // Verifica se essa categoria ja foi usada
+        var used:Bool = false
+        if (self.lastCategory[text] != nil) {used = true}
+        else {self.lastCategory = [:]}
+        
+        // Se essa categoria já foi escolhida pega novos livros
+        var startIndex:Int = 0
+        if (used) {
+            startIndex = self.lastCategory[text]!.timesUsed * 40
+            if (startIndex > self.lastCategory[text]!.maxBooks) {return}
+        }
+        
+        
+        
+
+        self.books = []
+
+        // API:
         let session = URLSession.shared
         
-        let randomNumber:Int = Int.random(in: 0...200)
-        
-        let apiUrl = "https://www.googleapis.com/books/v1/volumes?q=\(text)+subject:&startIndex=\(randomNumber)&maxResults=40&printType=books"
+        var apiUrl = "https://www.googleapis.com/books/v1/volumes?"             // Chamada normal
+        apiUrl += "q=\(text)+subject:"                                          // Palavra chave + filtro
+        apiUrl += "&startIndex=\(startIndex)&maxResults=40&printType=books"     // Parte da lista
         
         session.dataTask(with: URL(string: apiUrl+"&key=\(self.getToken())")!) { data, response, error in
-            if let error = error {
-                completionHandler(.failure(error))
+            // if let error = error {
+            if (error != nil) {// || (self.lastCategory[text] != nil && startIndex > self.lastCategory[text]!.maxBooks) {
+                completionHandler(.failure(error!))
                 return
             }
             
@@ -46,6 +65,9 @@ class GoogleRepository {
                     let books = try! decoder.decode(Items.self, from: data)
                     
                     self.compactInfo(items: books)
+                    
+                    if (used) {self.lastCategory[text]?.timesUsed = self.lastCategory[text]!.timesUsed + 1}
+                    else {self.lastCategory[text] = UsedCategory(maxBooks: books.totalItems, timesUsed: 1)}
                     
                     completionHandler(.success(self.books))
                 }
@@ -69,48 +91,35 @@ class GoogleRepository {
 
     
     /**
-        Faz a filtragem dos dados recebido e retorna os parâmetros necessários e escolhidos
+        Faz a filtragem dos dados recebido para os livros
+     
+        - Parâmetros:
+            - items: Struct com as informações recebidas da API
     */
     private func compactInfo(items:Items) -> Void {
         for b in items.items {
-            if b.volumeInfo.title != nil, b.volumeInfo.description != nil { //, b.volumeInfo.language != nil, b.volumeInfo.language == "pt" {
-                self.books.append (
+            //print(b.volumeInfo)
+            //print("\n\n")
+            if ( // Condições para pegar um livro
+                b.volumeInfo.title != nil &&
+                b.volumeInfo.description != nil &&
+                b.saleInfo != nil &&
+                b.saleInfo!.buyLink != nil &&
+                b.volumeInfo.imageLinks != nil &&
+                b.volumeInfo.imageLinks!.thumbnail != nil &&
+                b.volumeInfo.imageLinks!.smallThumbnail != nil
+            ){
+                self.books.append(
                     Book(
-                        isbn10: b.id,
-                        title: b.volumeInfo.title!,
-                        description: b.volumeInfo.description!
+                        id: b.id,
+                        isbn10: nil,
+                        title: b.volumeInfo.title!.capitalized,
+                        description: b.volumeInfo.description!,
+                        image:b.volumeInfo.imageLinks!.thumbnail!,
+                        buyLinks:["Google Books":"\(b.saleInfo!.buyLink!)"]
                     )
                 )
             }
         }
     }
 }
-
-
-/* Como usar a função:
- 
-@objc func buttonAction() -> Void {
-    
-    api.getBooks(text: "adventure") { result in
-        
-        switch result {
-            case .success(let book):
-                self.success(book)
-                break
-                
-            case .failure(let error):
-                print("Erro API: \(error)")
-                break
-        }
-    }
-}
- 
-private func success(_ books:[Book]) -> Void {
-    for b in books {
-        print("Id: \(b.id)")
-        print("Title: \(b.title)")
-        print("Sinopse: \(b.description)\n\n")
-    }
-    print("===== Total de livros: \(books.count) =====\n")
-}
-*/
