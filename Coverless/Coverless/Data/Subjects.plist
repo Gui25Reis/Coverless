@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>name</key>
+		<string>Young Adult</string>
+		<key>value</key>
+		<string>young-adult</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Crime</string>
+		<key>value</key>
+		<string>crime-and-punishment</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Espionage</string>
+		<key>value</key>
+		<string>espionage</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Religion</string>
+		<key>value</key>
+		<string>religion-spirituality-and-faith</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Adventure</string>
+		<key>value</key>
+		<string>expeditions-disasters-and-adventures</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Science</string>
+		<key>value</key>
+		<string>science</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Fiction</string>
+		<key>value</key>
+		<string>combined-print-and-e-book-fiction</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Nonfiction</string>
+		<key>value</key>
+		<string>combined-print-and-e-book-nonfiction</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Love</string>
+		<key>value</key>
+		<string>relationships</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Series</string>
+		<key>value</key>
+		<string>series-books</string>
+	</dict>
+</array>
+</plist>

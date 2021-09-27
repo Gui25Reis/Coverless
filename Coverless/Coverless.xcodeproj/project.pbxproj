@@ -7,11 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1342816126FBA3350077259E /* BookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1342816026FBA3350077259E /* BookViewController.swift */; };
-		1342816626FBA5EE0077259E /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1342816526FBA5EE0077259E /* BookView.swift */; };
-		1342816926FCE8960077259E /* ShopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1342816826FCE8960077259E /* ShopView.swift */; };
-		1342816C26FD14380077259E /* CoverlessData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1342816A26FD14380077259E /* CoverlessData.xcdatamodeld */; };
-		1342816F26FD151E0077259E /* CoverlessDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1342816E26FD151E0077259E /* CoverlessDataRepository.swift */; };
 		13471FBB26F283C4007296E2 /* BodyTextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13471FBA26F283C4007296E2 /* BodyTextStyle.swift */; };
 		13471FBD26F28ED3007296E2 /* SynopsisCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13471FBC26F28ED3007296E2 /* SynopsisCell.swift */; };
 		136F845226F53208004AAFF2 /* ShelfCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136F845126F53208004AAFF2 /* ShelfCell.swift */; };
@@ -20,6 +15,7 @@
 		136F845926F7690A004AAFF2 /* ImageBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136F845826F7690A004AAFF2 /* ImageBook.swift */; };
 		136F845B26F76E90004AAFF2 /* StatusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136F845A26F76E90004AAFF2 /* StatusButton.swift */; };
 		136F845D26F906C1004AAFF2 /* StarsRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136F845C26F906C1004AAFF2 /* StarsRating.swift */; };
+		223B720526FE616200B9822E /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223B720426FE616200B9822E /* Book.swift */; };
 		224DBC8826F113B3002303F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224DBC8726F113B3002303F3 /* AppDelegate.swift */; };
 		224DBC8A26F113B3002303F3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224DBC8926F113B3002303F3 /* SceneDelegate.swift */; };
 		224DBC8C26F113B3002303F3 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224DBC8B26F113B3002303F3 /* DiscoverViewController.swift */; };
@@ -53,21 +49,25 @@
 		5BBAFA6926F2258100A8DEF9 /* TextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BBAFA6826F2258100A8DEF9 /* TextStyle.swift */; };
 		5BC4634C26F25D43007155C1 /* LabelDesignable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC4634B26F25D43007155C1 /* LabelDesignable.swift */; };
 		5BC4634E26F25E31007155C1 /* ButtonTextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC4634D26F25E31007155C1 /* ButtonTextStyle.swift */; };
+		5BD290E126FD0E420082620D /* Subjects.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5BD290E026FD0E420082620D /* Subjects.plist */; };
+		5BD290E326FD1CCC0082620D /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD290E226FD1CCC0082620D /* Subject.swift */; };
+		5BD62AE726FE601B00EC924D /* NYTDatas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD62AE226FE601B00EC924D /* NYTDatas.swift */; };
+		5BD62AE826FE601B00EC924D /* NYTRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD62AE326FE601B00EC924D /* NYTRepository.swift */; };
+		5BD62AE926FE601B00EC924D /* GoogleDatas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD62AE526FE601B00EC924D /* GoogleDatas.swift */; };
+		5BD62AEA26FE601B00EC924D /* GoogleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD62AE626FE601B00EC924D /* GoogleRepository.swift */; };
 		5BE28DFC26F12D940043F19E /* DefaultDesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE28DFB26F12D940043F19E /* DefaultDesignSystem.swift */; };
 		5BE28E0126F134EB0043F19E /* UIColor+Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE28E0026F134EB0043F19E /* UIColor+Palette.swift */; };
 		5BE28E0326F135A10043F19E /* DefaultDesignPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE28E0226F135A10043F19E /* DefaultDesignPalette.swift */; };
 		5BE28E0526F136E50043F19E /* DefaultDesignSpacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE28E0426F136E50043F19E /* DefaultDesignSpacing.swift */; };
 		5BE28E0826F138020043F19E /* SynopsisCellButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE28E0726F138020043F19E /* SynopsisCellButton.swift */; };
 		5BE28E0C26F142E40043F19E /* Designable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE28E0B26F142E40043F19E /* Designable.swift */; };
+		5BE7CFC826FBA6EB00927439 /* DiscoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE7CFC726FBA6EB00927439 /* DiscoverView.swift */; };
+		5BE7CFCB26FBB82500927439 /* DiscoverCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE7CFCA26FBB82500927439 /* DiscoverCollectionViewDataSource.swift */; };
+		5BE7CFCD26FBBA4F00927439 /* SubjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE7CFCC26FBBA4F00927439 /* SubjectCell.swift */; };
 		5BFEE41126FA006B00D3A6CC /* MoreInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFEE41026FA006B00D3A6CC /* MoreInfoViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1342816026FBA3350077259E /* BookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookViewController.swift; sourceTree = "<group>"; };
-		1342816526FBA5EE0077259E /* BookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookView.swift; sourceTree = "<group>"; };
-		1342816826FCE8960077259E /* ShopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopView.swift; sourceTree = "<group>"; };
-		1342816B26FD14380077259E /* CoverlessData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoverlessData.xcdatamodel; sourceTree = "<group>"; };
-		1342816E26FD151E0077259E /* CoverlessDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverlessDataRepository.swift; sourceTree = "<group>"; };
 		13471FBA26F283C4007296E2 /* BodyTextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyTextStyle.swift; sourceTree = "<group>"; };
 		13471FBC26F28ED3007296E2 /* SynopsisCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynopsisCell.swift; sourceTree = "<group>"; };
 		136F845126F53208004AAFF2 /* ShelfCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfCell.swift; sourceTree = "<group>"; };
@@ -76,6 +76,7 @@
 		136F845826F7690A004AAFF2 /* ImageBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBook.swift; sourceTree = "<group>"; };
 		136F845A26F76E90004AAFF2 /* StatusButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusButton.swift; sourceTree = "<group>"; };
 		136F845C26F906C1004AAFF2 /* StarsRating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarsRating.swift; sourceTree = "<group>"; };
+		223B720426FE616200B9822E /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		224DBC8426F113B3002303F3 /* Coverless.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Coverless.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		224DBC8726F113B3002303F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		224DBC8926F113B3002303F3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -111,12 +112,21 @@
 		5BBAFA6826F2258100A8DEF9 /* TextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyle.swift; sourceTree = "<group>"; };
 		5BC4634B26F25D43007155C1 /* LabelDesignable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelDesignable.swift; sourceTree = "<group>"; };
 		5BC4634D26F25E31007155C1 /* ButtonTextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTextStyle.swift; sourceTree = "<group>"; };
+		5BD290E026FD0E420082620D /* Subjects.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Subjects.plist; sourceTree = "<group>"; };
+		5BD290E226FD1CCC0082620D /* Subject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subject.swift; sourceTree = "<group>"; };
+		5BD62AE226FE601B00EC924D /* NYTDatas.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NYTDatas.swift; sourceTree = "<group>"; };
+		5BD62AE326FE601B00EC924D /* NYTRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NYTRepository.swift; sourceTree = "<group>"; };
+		5BD62AE526FE601B00EC924D /* GoogleDatas.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleDatas.swift; sourceTree = "<group>"; };
+		5BD62AE626FE601B00EC924D /* GoogleRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleRepository.swift; sourceTree = "<group>"; };
 		5BE28DFB26F12D940043F19E /* DefaultDesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDesignSystem.swift; sourceTree = "<group>"; };
 		5BE28E0026F134EB0043F19E /* UIColor+Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Palette.swift"; sourceTree = "<group>"; };
 		5BE28E0226F135A10043F19E /* DefaultDesignPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDesignPalette.swift; sourceTree = "<group>"; };
 		5BE28E0426F136E50043F19E /* DefaultDesignSpacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDesignSpacing.swift; sourceTree = "<group>"; };
 		5BE28E0726F138020043F19E /* SynopsisCellButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynopsisCellButton.swift; sourceTree = "<group>"; };
 		5BE28E0B26F142E40043F19E /* Designable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Designable.swift; sourceTree = "<group>"; };
+		5BE7CFC726FBA6EB00927439 /* DiscoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverView.swift; sourceTree = "<group>"; };
+		5BE7CFCA26FBB82500927439 /* DiscoverCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionViewDataSource.swift; sourceTree = "<group>"; };
+		5BE7CFCC26FBBA4F00927439 /* SubjectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectCell.swift; sourceTree = "<group>"; };
 		5BFEE41026FA006B00D3A6CC /* MoreInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreInfoViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -131,19 +141,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1342816D26FD15030077259E /* Coredata */ = {
-			isa = PBXGroup;
-			children = (
-				1342816E26FD151E0077259E /* CoverlessDataRepository.swift */,
-			);
-			path = Coredata;
-			sourceTree = "<group>";
-		};
 		13471FB726F26529007296E2 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
 				13471FBC26F28ED3007296E2 /* SynopsisCell.swift */,
 				136F845126F53208004AAFF2 /* ShelfCell.swift */,
+				5BE7CFCC26FBBA4F00927439 /* SubjectCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -181,7 +184,6 @@
 				5BD62AE026FE5FF200EC924D /* API */,
 				5BD290DF26FD0E1C0082620D /* Data */,
 				5BE7CFC926FBB80100927439 /* DataSources */,
-				1342816D26FD15030077259E /* Coredata */,
 				5B47F64F26F3DB7300FDF48D /* Coordinators */,
 				5BE28DFA26F12D380043F19E /* DesignSystem */,
 				224DBC9D26F11452002303F3 /* Controllers */,
@@ -190,7 +192,6 @@
 				224DBCA026F11470002303F3 /* Extensions */,
 				224DBC9C26F113C7002303F3 /* System */,
 				224DBC9B26F113BD002303F3 /* Assets */,
-				1342816A26FD14380077259E /* CoverlessData.xcdatamodeld */,
 			);
 			path = Coverless;
 			sourceTree = "<group>";
@@ -221,7 +222,6 @@
 				5B47F65426F3DCBF00FDF48D /* MainTabBarController.swift */,
 				5B47F65826F3E2CB00FDF48D /* ShelfViewController.swift */,
 				5B89273326F52ABD0002A3DA /* MoreInfoViewController.swift */,
-				1342816026FBA3350077259E /* BookViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -229,10 +229,9 @@
 		224DBC9E26F1145D002303F3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				1342816826FCE8960077259E /* ShopView.swift */,
 				224DBCA126F114DD002303F3 /* MenuView.swift */,
 				5B89273526F52ACA0002A3DA /* MoreInfoView.swift */,
-				1342816526FBA5EE0077259E /* BookView.swift */,
+				5BE7CFC726FBA6EB00927439 /* DiscoverView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -241,6 +240,8 @@
 			isa = PBXGroup;
 			children = (
 				5BFEE41026FA006B00D3A6CC /* MoreInfoViewModel.swift */,
+				5BD290E226FD1CCC0082620D /* Subject.swift */,
+				223B720426FE616200B9822E /* Book.swift */,
 			);
 			path = Modals;
 			sourceTree = "<group>";
@@ -254,13 +255,13 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		226F024826F8F4D3008E64BC /* API */ = {
+		5B0F188C26FE44F8008626F9 /* Header */ = {
 			isa = PBXGroup;
 			children = (
 				5B0F188D26FE4529008626F9 /* CollectionViewAccessibilityHeader.swift */,
 				5B2EF3202702377C00351EBA /* DiscoverTagsHeader.swift */,
 			);
-			path = API;
+			path = Header;
 			sourceTree = "<group>";
 		};
 		5B2EF322270238A000351EBA /* Accessibility */ = {
@@ -308,6 +309,41 @@
 			path = Implementations;
 			sourceTree = "<group>";
 		};
+		5BD290DF26FD0E1C0082620D /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				5BD290E026FD0E420082620D /* Subjects.plist */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		5BD62AE026FE5FF200EC924D /* API */ = {
+			isa = PBXGroup;
+			children = (
+				5BD62AE426FE601B00EC924D /* Google */,
+				5BD62AE126FE601B00EC924D /* NewYorkTIme */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		5BD62AE126FE601B00EC924D /* NewYorkTIme */ = {
+			isa = PBXGroup;
+			children = (
+				5BD62AE226FE601B00EC924D /* NYTDatas.swift */,
+				5BD62AE326FE601B00EC924D /* NYTRepository.swift */,
+			);
+			path = NewYorkTIme;
+			sourceTree = "<group>";
+		};
+		5BD62AE426FE601B00EC924D /* Google */ = {
+			isa = PBXGroup;
+			children = (
+				5BD62AE526FE601B00EC924D /* GoogleDatas.swift */,
+				5BD62AE626FE601B00EC924D /* GoogleRepository.swift */,
+			);
+			path = Google;
+			sourceTree = "<group>";
+		};
 		5BE28DFA26F12D380043F19E /* DesignSystem */ = {
 			isa = PBXGroup;
 			children = (
@@ -331,6 +367,7 @@
 		5BE28DFE26F12DA00043F19E /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				5B0F188C26FE44F8008626F9 /* Header */,
 				136F845726F768F9004AAFF2 /* Image */,
 				13471FB726F26529007296E2 /* Cell */,
 				5BE28E0626F137C20043F19E /* Buttons */,
@@ -445,6 +482,7 @@
 			files = (
 				224DBC9426F113B3002303F3 /* LaunchScreen.storyboard in Resources */,
 				224DBC9126F113B3002303F3 /* Assets.xcassets in Resources */,
+				5BD290E126FD0E420082620D /* Subjects.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,10 +493,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1342816F26FD151E0077259E /* CoverlessDataRepository.swift in Sources */,
+				5BD62AE926FE601B00EC924D /* GoogleDatas.swift in Sources */,
 				5BBAFA6926F2258100A8DEF9 /* TextStyle.swift in Sources */,
 				5B47F64626F2CCA800FDF48D /* UIImageView+TraitCollection.swift in Sources */,
-				1342816C26FD14380077259E /* CoverlessData.xcdatamodeld in Sources */,
 				5B47F65526F3DCBF00FDF48D /* MainTabBarController.swift in Sources */,
 				136F845626F53D78004AAFF2 /* TitleTextStyle.swift in Sources */,
 				5BE28E0826F138020043F19E /* SynopsisCellButton.swift in Sources */,
@@ -466,45 +503,49 @@
 				5B47F65926F3E2CB00FDF48D /* ShelfViewController.swift in Sources */,
 				5BE28E0C26F142E40043F19E /* Designable.swift in Sources */,
 				5B5A8BE526F907D200914277 /* HeaderTextStyle.swift in Sources */,
+				5BD62AE826FE601B00EC924D /* NYTRepository.swift in Sources */,
+				5BD62AEA26FE601B00EC924D /* GoogleRepository.swift in Sources */,
 				224DBC8C26F113B3002303F3 /* DiscoverViewController.swift in Sources */,
 				5BE28E0326F135A10043F19E /* DefaultDesignPalette.swift in Sources */,
 				5B47F64A26F3B39C00FDF48D /* SynopsisCellDelegate.swift in Sources */,
 				136F845B26F76E90004AAFF2 /* StatusButton.swift in Sources */,
-				1342816626FBA5EE0077259E /* BookView.swift in Sources */,
-				226F024A26F8F4F5008E64BC /* ApiDatas.swift in Sources */,
+				5B0F188E26FE4529008626F9 /* CollectionViewAccessibilityHeader.swift in Sources */,
 				5BE28DFC26F12D940043F19E /* DefaultDesignSystem.swift in Sources */,
 				5B47F65B26F4079500FDF48D /* PropertyListDecoder.swift in Sources */,
 				224DBCA226F114DD002303F3 /* MenuView.swift in Sources */,
+				5BD62AE726FE601B00EC924D /* NYTDatas.swift in Sources */,
 				5BFEE41126FA006B00D3A6CC /* MoreInfoViewModel.swift in Sources */,
 				5BE28E0126F134EB0043F19E /* UIColor+Palette.swift in Sources */,
 				5B47F65326F3DC3100FDF48D /* DiscoverCoordinator.swift in Sources */,
-				226F024C26F8F504008E64BC /* BookRepository.swift in Sources */,
+				223B720526FE616200B9822E /* Book.swift in Sources */,
 				5B47F65726F3E1B400FDF48D /* ShelfCoordinator.swift in Sources */,
-				1342816926FCE8960077259E /* ShopView.swift in Sources */,
 				5B47F64E26F3B78000FDF48D /* NSLayoutAnchor+DesignSystem.swift in Sources */,
 				5B89273626F52ACA0002A3DA /* MoreInfoView.swift in Sources */,
 				5B2EF3212702377C00351EBA /* DiscoverTagsHeader.swift in Sources */,
 				13471FBD26F28ED3007296E2 /* SynopsisCell.swift in Sources */,
+				5BE7CFCD26FBBA4F00927439 /* SubjectCell.swift in Sources */,
 				5BBAFA6326F21B8100A8DEF9 /* DesignPalette.swift in Sources */,
 				136F845926F7690A004AAFF2 /* ImageBook.swift in Sources */,
 				5B79A4B927023AFD00CFDFD6 /* DiscoverTagsCollectionViewDataSource.swift in Sources */,
 				5B5A8BE326F8FD4F00914277 /* UIView+NSLayoutConstraint.swift in Sources */,
 				5BBAFA6726F2256C00A8DEF9 /* DesignText.swift in Sources */,
 				5BBAFA6126F21B6000A8DEF9 /* DesignSystem.swift in Sources */,
+				5BE7CFCB26FBB82500927439 /* DiscoverCollectionViewDataSource.swift in Sources */,
 				136F845D26F906C1004AAFF2 /* StarsRating.swift in Sources */,
 				5B47F64C26F3B65A00FDF48D /* CustomLabelDesignable.swift in Sources */,
+				5BE7CFC826FBA6EB00927439 /* DiscoverView.swift in Sources */,
 				5BC4634E26F25E31007155C1 /* ButtonTextStyle.swift in Sources */,
 				13471FBB26F283C4007296E2 /* BodyTextStyle.swift in Sources */,
 				5B47F65126F3DB9800FDF48D /* Coordinator.swift in Sources */,
 				5B2EF324270238BE00351EBA /* CarouselAccessibilityElement.swift in Sources */,
 				136F845226F53208004AAFF2 /* ShelfCell.swift in Sources */,
 				5BE28E0526F136E50043F19E /* DefaultDesignSpacing.swift in Sources */,
+				5BD290E326FD1CCC0082620D /* Subject.swift in Sources */,
 				5B89273426F52ABD0002A3DA /* MoreInfoViewController.swift in Sources */,
 				224DBC8826F113B3002303F3 /* AppDelegate.swift in Sources */,
 				224DBC8A26F113B3002303F3 /* SceneDelegate.swift in Sources */,
 				5BC4634C26F25D43007155C1 /* LabelDesignable.swift in Sources */,
 				136F845426F53292004AAFF2 /* ShelfCellDelegate.swift in Sources */,
-				1342816126FBA3350077259E /* BookViewController.swift in Sources */,
 				5BBAFA6526F21B9000A8DEF9 /* DesignSpacing.swift in Sources */,
 				5B47F64426F2CB4200FDF48D /* SymbolAccesibilityConfiguration.swift in Sources */,
 			);
@@ -646,7 +687,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = N96WZRA7LD;
+				DEVELOPMENT_TEAM = WK7599VNDW;
 				INFOPLIST_FILE = Coverless/System/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -665,7 +706,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = N96WZRA7LD;
+				DEVELOPMENT_TEAM = WK7599VNDW;
 				INFOPLIST_FILE = Coverless/System/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -700,19 +741,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		1342816A26FD14380077259E /* CoverlessData.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				1342816B26FD14380077259E /* CoverlessData.xcdatamodel */,
-			);
-			currentVersion = 1342816B26FD14380077259E /* CoverlessData.xcdatamodel */;
-			path = CoverlessData.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 224DBC7C26F113B3002303F3 /* Project object */;
 }
