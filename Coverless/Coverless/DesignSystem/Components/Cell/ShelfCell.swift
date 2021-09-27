@@ -159,7 +159,6 @@ class ShelfCell: UICollectionViewCell, Designable{
     
     /* MARK: - Setup da celula */
     ///funcao acessada pela celula na collection
-    //autalizar para func setup(book: MyBook){}
     func setup(title: String,status: BookStatus, rating: Int,delegate: ShelfCellDelegate?){
         ///botao de status
         bookStatus.setStatus(status:status)
@@ -171,7 +170,6 @@ class ShelfCell: UICollectionViewCell, Designable{
         stylize(with: DefaultDesignSystem.shared)
         self.delegate = delegate
     }
-    
     
     func setAccessibility(){
         self.accessibilityElements = [bookTitle, bookStatus, stars, favButton]

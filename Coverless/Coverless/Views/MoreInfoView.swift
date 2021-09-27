@@ -25,6 +25,7 @@ final class MoreInfoView: UIView, Designable {
         let tv = UITextView()
         tv.translatesAutoresizingMaskIntoConstraints = false
         tv.isScrollEnabled = false
+        tv.isEditable = false
         tv.stylize(with: designSystem.text.body)
         tv.adjustsFontForContentSizeCategory = true
         tv.text = "Harry Potter é um garoto órfão que vive infeliz com seus tios, os Dursleys. Ele recebe uma carta contendo um convite para ingressar em Hogwarts, uma famosa escola especializada em formar jovens… Harry Potter é um garoto órfão que vive infeliz com seus tios, os Dursleys. Ele recebe uma carta contendo um convite para ingressar em Hogwarts, uma famosa escola especializada em formar jovens…"
@@ -41,13 +42,6 @@ final class MoreInfoView: UIView, Designable {
         l.numberOfLines = 0
         l.text = "Rating"
         return l
-    }()
-    
-    private lazy var rateOfStars: StarsRating = {
-        let stars = StarsRating()
-        stars.translatesAutoresizingMaskIntoConstraints = false
-        stars.setRating(rating: 4)
-        return stars
     }()
     
     private lazy var discoverButton: UIButton = {
@@ -108,7 +102,6 @@ final class MoreInfoView: UIView, Designable {
         stackView.addArrangedSubview(synopsisHeader)
         stackView.addArrangedSubview(synopsisField)
         stackView.addArrangedSubview(ratingHeader)
-        stackView.addArrangedSubview(rateOfStars)
     }
     
     private func setupLayout() {
@@ -189,10 +182,6 @@ struct AnyViewRepresentable: UIViewRepresentable {
 struct MoreInfo_PreviewProvider: PreviewProvider {
     static var previews: some View {
         Group {
-            AnyViewRepresentable(MoreInfoView())
-                .preferredColorScheme(.dark)
-            AnyViewRepresentable(MoreInfoView())
-                .preferredColorScheme(.dark)
             AnyViewRepresentable(MoreInfoView())
                 .preferredColorScheme(.dark)
                 

@@ -54,6 +54,7 @@ class StarsRating: UIView{
             star4.heightAnchor.constraint(equalTo: heightAnchor),
             
             star5.leadingAnchor.constraint(equalTo: star4.trailingAnchor,constant: 2),
+            star5.trailingAnchor.constraint(equalTo: trailingAnchor),
             star5.bottomAnchor.constraint(equalTo: bottomAnchor),
             star5.heightAnchor.constraint(equalTo: heightAnchor),
 
