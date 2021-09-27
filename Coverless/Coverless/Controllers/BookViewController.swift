@@ -22,6 +22,7 @@ class BookViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        isAccessibilityElement = true
     }
     
     override func viewDidLoad() {
@@ -42,4 +43,5 @@ class BookViewController: UIViewController {
     private func setAbandoned(){
         print("status Abandoned")
     }
+    
 }

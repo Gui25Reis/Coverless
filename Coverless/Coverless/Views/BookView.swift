@@ -135,11 +135,12 @@ final class BookView: UIView, Designable {
         self.tabBarHeight = tabBarHeight
         currentStatus = .reading
         super.init(frame: .zero)
-        stylize(with: designSystem)
         checkCurrentStatus()
         setupHierarchy()
         setupLayout()
         setupActions()
+        stylize(with: designSystem)
+
     }
     
     required init?(coder: NSCoder) {
@@ -286,6 +287,7 @@ final class BookView: UIView, Designable {
         ratingStars.accessibilityLabel = "Rating:\(ratingStars.getRating()) stars out of five"
         
         statusHeader.isAccessibilityElement = true
+        statusHeader.accessibilityLabel = "Actual status is \(currentStatus)"
         statusHeader.accessibilityHint = "Set book status"
         
         statusButtonRead.isAccessibilityElement = true
@@ -299,8 +301,26 @@ final class BookView: UIView, Designable {
     
         shopHeader.isAccessibilityElement = true
         shopView.isAccessibilityElement = true
+        shopView.accessibilityHint = "Options to shop"
+        shopView.shopTitle.isAccessibilityElement = true
+        shopView.shopTitle.accessibilityLabel = shopView.shopTitle.text
+        shopView.priceValue.isAccessibilityElement = true
+        shopView.priceValue.accessibilityLabel = shopView.priceValue.text
+        shopView.shopButton.isAccessibilityElement = true
+        shopView.shopButton.accessibilityHint = "click to be redirected"
         
-        self.accessibilityElements = [synopsisField,ratingHeader, ratingStars,statusHeader,statusButtonRead,statusButtonReading,statusButtonAbandoned,shopHeader,shopView]
+        self.accessibilityElements = [synopsisField,ratingHeader, ratingStars,statusHeader,statusButtonRead,statusButtonReading,statusButtonAbandoned,shopHeader,shopView, shopView.shopTitle,shopView.priceValue,shopView.shopButton]
         
     }
+    //MARK: Accessibility on ScrollView
+    
+//    override func accessibilityElementDidBecomeFocused() {
+//        guard let sv = superview as? UIScrollView else {
+//            return
+//        }
+//        sv.accessibilityScroll(.down)
+//        UIAccessibility.post(notification: .layoutChanged, argument: nil)
+//
+//    }
+//
 }
