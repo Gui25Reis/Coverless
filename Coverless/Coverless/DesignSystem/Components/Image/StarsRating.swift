@@ -60,7 +60,7 @@ class StarsRating: UIView{
 
         ])
         
-        setAccessibility()
+        
     }
     
     required init?(coder: NSCoder) {
@@ -85,13 +85,5 @@ class StarsRating: UIView{
                         .applyingSymbolConfiguration(symbol.getSymbolConfiguration(for: traitCollection))
             }
         }
-    }
-    func setAccessibility(){
-        self.isAccessibilityElement = true
-        star1.isAccessibilityElement = false
-        star2.isAccessibilityElement = false
-        star3.isAccessibilityElement = false
-        star4.isAccessibilityElement = false
-        star5.isAccessibilityElement = false
     }
 }

@@ -12,9 +12,9 @@ class ShopView: UIView{
     let designSystem: DesignSystem
 
     private let imageLogo: UIImageView
-    public let shopTitle: UILabel
-    public let priceValue: UILabel
-    public let shopButton: UIButton
+    private let shopTitle: UILabel
+    private let priceValue: UILabel
+    private let shopButton: UIButton
     
     private lazy var constraintsDefault = [
         imageLogo.topAnchor.constraint(equalTo: self.topAnchor),

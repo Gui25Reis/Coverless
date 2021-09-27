@@ -43,8 +43,7 @@ class ShelfCell: UICollectionViewCell, Designable{
         bookStatus.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.4),
         
         stars.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: \.largeNegative),
-        stars.leadingAnchor.constraint(equalTo: imgView.trailingAnchor,constant: \.smallPositive),
-        stars.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: \.mediumNegative)
+        stars.leadingAnchor.constraint(equalTo: imgView.trailingAnchor,constant: \.smallPositive)
 
     ]
     
@@ -85,6 +84,7 @@ class ShelfCell: UICollectionViewCell, Designable{
         contentView.addSubview(favButton)
         contentView.addSubview(stars)
         setupLayout()
+
     }
     
     required init?(coder: NSCoder) {
@@ -103,6 +103,7 @@ class ShelfCell: UICollectionViewCell, Designable{
         stars.translatesAutoresizingMaskIntoConstraints = false
 
         imgView.backgroundColor = colors[Int.random(in: 0..<colors.count)]
+        NSLayoutConstraint.activate(normalLayout)
         activateConstraints()
     }
     
@@ -152,14 +153,12 @@ class ShelfCell: UICollectionViewCell, Designable{
         layer.shadowRadius = 4.0
         layer.shadowOpacity = 0.2
         layer.masksToBounds = false
-        
-        setAccessibility()
-
     }
     
     /* MARK: - Setup da celula */
     ///funcao acessada pela celula na collection
     func setup(title: String,status: BookStatus, rating: Int,delegate: ShelfCellDelegate?){
+        stylize(with: DefaultDesignSystem.shared)
         ///botao de status
         bookStatus.setStatus(status:status)
         ///titulo do livro
@@ -167,14 +166,12 @@ class ShelfCell: UICollectionViewCell, Designable{
         ///rating do livro
         stars.setRating(rating: rating)
         
-        stylize(with: DefaultDesignSystem.shared)
         self.delegate = delegate
+        
+        setAccessibility()
     }
     
     func setAccessibility(){
-        self.accessibilityElements = [bookTitle, bookStatus, stars, favButton]
-        
-        
         favButton.isAccessibilityElement = true
         favButton.accessibilityHint = "To favorite"
         favButton.accessibilityLabel = "Heart symbol"
@@ -188,9 +185,9 @@ class ShelfCell: UICollectionViewCell, Designable{
         stars.isAccessibilityElement = true
         stars.accessibilityHint = "Book review"
         stars.accessibilityLabel = "Rating:\(stars.getRating()) stars out of five"
-        stars.accessibilityHint = .none
-        //stars.shouldGroupAccessibilityChildren = true
         
+        self.accessibilityElements = [bookTitle,bookStatus, stars,favButton]
 
+    
     }
 }
