@@ -145,6 +145,5 @@ class SynopsisCell: UICollectionViewCell, Designable{
         layer.shadowOpacity = 0.2
         layer.masksToBounds = false
 
-        
     }
 }
