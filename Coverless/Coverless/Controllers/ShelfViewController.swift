@@ -129,8 +129,14 @@ extension ShelfViewController:UICollectionViewDelegate{
 
 extension ShelfViewController:UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //return self.books.count
-        return 10
+        if (self.books.count == 0) {
+            setEmptyMessage("Nothing to show :(")
+        } else {
+            restore()
+            return 10
+
+        }
+        return self.books.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -143,6 +149,13 @@ extension ShelfViewController:UICollectionViewDataSource{
         return cell
     }
     
+    func setEmptyMessage(_ message: String) {
+        //self.backgroundView = EmptyView;
+        let messageLabel = EmptyView()
+        cv.backgroundView = messageLabel;
+    }
     
+    func restore() {
+        cv.backgroundView = nil
+    }
 }
-
