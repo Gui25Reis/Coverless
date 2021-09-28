@@ -21,7 +21,9 @@ class ShelfCoordinator: Coordinator {
         let vc = ShelfViewController()
         vc.coordinator = self
         vc.navigationItem.title = "Shelf"
-        vc.tabBarItem = UITabBarItem(title: "Shelf", image: UIImage(systemName: "books.vertical"), tag: 1)
+        let tabBarItem2 = UITabBarItem(title: "Shelf", image: UIImage(systemName: "books.vertical"), tag: 1)
+        tabBarItem2.selectedImage = UIImage(systemName: "books.vertical.fill")
+        vc.tabBarItem = tabBarItem2
         navigationController.pushViewController(vc, animated: true)
     }
     

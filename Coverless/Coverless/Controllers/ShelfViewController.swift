@@ -28,7 +28,7 @@ final class ShelfViewController: UIViewController, ShelfCellDelegate {
     
     public override func viewDidLoad() -> Void {
         super.viewDidLoad()
-        //let button = SynopsisCellButton(text: "Descubra", systemName: "trash", designSystem: designSystem)
+        //let button = SynopsisCellButton(text: "Discover", systemName: "trash", designSystem: designSystem)
         view.backgroundColor = designSystem.palette.backgroundPrimary
         ///collection view
         cv.translatesAutoresizingMaskIntoConstraints = false
@@ -106,9 +106,9 @@ final class ShelfViewController: UIViewController, ShelfCellDelegate {
             switch segmentedControl.selectedSegmentIndex
             {
             case 0:
-                print("favorito selecionado")
+                print("Favorites Selected")
             case 1:
-                print("descobertas selecionado")
+                print("Discover Selected")
             default:
                 break;
             }
@@ -136,10 +136,10 @@ extension ShelfViewController:UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? ShelfCell
         else {
-            preconditionFailure("Cell Register not configured correctily")
+            preconditionFailure("Cell Register not configured correctly")
         }
         //cell.setup(books[indexPath])
-        cell.setup(title:"Harry Potter e a Câmara Secreta",status: .abandoned ,rating: 3,delegate: self)
+        cell.setup(title:"Harry Potter and the Secret Chamber",status: .abandoned ,rating: 3,delegate: self)
         return cell
     }
     

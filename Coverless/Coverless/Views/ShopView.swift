@@ -56,7 +56,7 @@ class ShopView: UIView{
         
     }
     /// passa as informacoes de compra para a view
-    init(image: UIImage, titulo: String, price: String,designSystem: DesignSystem = DefaultDesignSystem()){
+    init(image: UIImage, titulo: String, price: String, designSystem: DesignSystem = DefaultDesignSystem()){
         
         self.designSystem = designSystem
         
