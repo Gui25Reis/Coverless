@@ -146,5 +146,11 @@ class SynopsisCell: UICollectionViewCell, Designable{
         discoverButton.accessibilityHint = "Adicione na Estante"
         
         self.accessibilityElements = [synopsisLabel, infoButton, discoverButton]
+        
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOffset = CGSize(width: 2, height: 2.0)
+        layer.shadowRadius = 4.0
+        layer.shadowOpacity = 0.2
+        layer.masksToBounds = false
     }
 }

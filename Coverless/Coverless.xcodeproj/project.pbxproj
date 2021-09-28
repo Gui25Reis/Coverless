@@ -22,6 +22,13 @@
 		224DBC9126F113B3002303F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 224DBC9026F113B3002303F3 /* Assets.xcassets */; };
 		224DBC9426F113B3002303F3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 224DBC9226F113B3002303F3 /* LaunchScreen.storyboard */; };
 		224DBCA226F114DD002303F3 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224DBCA126F114DD002303F3 /* MenuView.swift */; };
+		22F62BD327038ADD0076CA34 /* BookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F62BD227038ADD0076CA34 /* BookViewController.swift */; };
+		22F62BD627038AEC0076CA34 /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F62BD427038AEC0076CA34 /* BookView.swift */; };
+		22F62BD727038AEC0076CA34 /* ShopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F62BD527038AEC0076CA34 /* ShopView.swift */; };
+		22F62BDE27038C9A0076CA34 /* CoverlessData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 22F62BDC27038C9A0076CA34 /* CoverlessData.xcdatamodeld */; };
+		22F62BE327038F6D0076CA34 /* UIView+NSLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F62BE127038F6D0076CA34 /* UIView+NSLayoutConstraint.swift */; };
+		22F62BE427038F6D0076CA34 /* PropertyListDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F62BE227038F6D0076CA34 /* PropertyListDecoder.swift */; };
+		22F62BE627038F780076CA34 /* CoverlessDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F62BE527038F780076CA34 /* CoverlessDataRepository.swift */; };
 		5B0F188E26FE4529008626F9 /* CollectionViewAccessibilityHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0F188D26FE4529008626F9 /* CollectionViewAccessibilityHeader.swift */; };
 		5B47F64426F2CB4200FDF48D /* SymbolAccesibilityConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B47F64326F2CB4200FDF48D /* SymbolAccesibilityConfiguration.swift */; };
 		5B47F64626F2CCA800FDF48D /* UIImageView+TraitCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B47F64526F2CCA800FDF48D /* UIImageView+TraitCollection.swift */; };
@@ -34,8 +41,6 @@
 		5B47F65526F3DCBF00FDF48D /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B47F65426F3DCBF00FDF48D /* MainTabBarController.swift */; };
 		5B47F65726F3E1B400FDF48D /* ShelfCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B47F65626F3E1B400FDF48D /* ShelfCoordinator.swift */; };
 		5B47F65926F3E2CB00FDF48D /* ShelfViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B47F65826F3E2CB00FDF48D /* ShelfViewController.swift */; };
-		5B47F65B26F4079500FDF48D /* PropertyListDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B47F65A26F4079500FDF48D /* PropertyListDecoder.swift */; };
-		5B5A8BE326F8FD4F00914277 /* UIView+NSLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5A8BE226F8FD4F00914277 /* UIView+NSLayoutConstraint.swift */; };
 		5B5A8BE526F907D200914277 /* HeaderTextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5A8BE426F907D200914277 /* HeaderTextStyle.swift */; };
 		5B79A4C22702666700CFDFD6 /* SubjectCollectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B79A4C12702666700CFDFD6 /* SubjectCollectionHeader.swift */; };
 		5B7AB18427037BA3009380B4 /* CarouselAccessibilityElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7AB18327037BA3009380B4 /* CarouselAccessibilityElement.swift */; };
@@ -84,6 +89,13 @@
 		224DBC9326F113B3002303F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		224DBC9526F113B4002303F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		224DBCA126F114DD002303F3 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		22F62BD227038ADD0076CA34 /* BookViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookViewController.swift; sourceTree = "<group>"; };
+		22F62BD427038AEC0076CA34 /* BookView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookView.swift; sourceTree = "<group>"; };
+		22F62BD527038AEC0076CA34 /* ShopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopView.swift; sourceTree = "<group>"; };
+		22F62BDD27038C9A0076CA34 /* CoverlessData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoverlessData.xcdatamodel; sourceTree = "<group>"; };
+		22F62BE127038F6D0076CA34 /* UIView+NSLayoutConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+NSLayoutConstraint.swift"; sourceTree = "<group>"; };
+		22F62BE227038F6D0076CA34 /* PropertyListDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyListDecoder.swift; sourceTree = "<group>"; };
+		22F62BE527038F780076CA34 /* CoverlessDataRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverlessDataRepository.swift; sourceTree = "<group>"; };
 		5B0F188D26FE4529008626F9 /* CollectionViewAccessibilityHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewAccessibilityHeader.swift; sourceTree = "<group>"; };
 		5B47F64326F2CB4200FDF48D /* SymbolAccesibilityConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolAccesibilityConfiguration.swift; sourceTree = "<group>"; };
 		5B47F64526F2CCA800FDF48D /* UIImageView+TraitCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+TraitCollection.swift"; sourceTree = "<group>"; };
@@ -96,8 +108,6 @@
 		5B47F65426F3DCBF00FDF48D /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		5B47F65626F3E1B400FDF48D /* ShelfCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfCoordinator.swift; sourceTree = "<group>"; };
 		5B47F65826F3E2CB00FDF48D /* ShelfViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfViewController.swift; sourceTree = "<group>"; };
-		5B47F65A26F4079500FDF48D /* PropertyListDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PropertyListDecoder.swift; path = Coverless/Controllers/PropertyListDecoder.swift; sourceTree = SOURCE_ROOT; };
-		5B5A8BE226F8FD4F00914277 /* UIView+NSLayoutConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIView+NSLayoutConstraint.swift"; path = "Coverless/Views/UIView+NSLayoutConstraint.swift"; sourceTree = SOURCE_ROOT; };
 		5B5A8BE426F907D200914277 /* HeaderTextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderTextStyle.swift; sourceTree = "<group>"; };
 		5B79A4C12702666700CFDFD6 /* SubjectCollectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectCollectionHeader.swift; sourceTree = "<group>"; };
 		5B7AB18327037BA3009380B4 /* CarouselAccessibilityElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselAccessibilityElement.swift; sourceTree = "<group>"; };
@@ -179,6 +189,9 @@
 			isa = PBXGroup;
 			children = (
 				5B79A4BD270265C900CFDFD6 /* Accessibility */,
+				22F62BE027038F2C0076CA34 /* Extensions */,
+				22F62BDF27038EE80076CA34 /* CoreData */,
+				22F62BDC27038C9A0076CA34 /* CoverlessData.xcdatamodeld */,
 				5BD62AE026FE5FF200EC924D /* API */,
 				5BD290DF26FD0E1C0082620D /* Data */,
 				5BE7CFC926FBB80100927439 /* DataSources */,
@@ -187,7 +200,6 @@
 				224DBC9D26F11452002303F3 /* Controllers */,
 				224DBC9E26F1145D002303F3 /* Views */,
 				224DBC9F26F1146B002303F3 /* Modals */,
-				224DBCA026F11470002303F3 /* Extensions */,
 				224DBC9C26F113C7002303F3 /* System */,
 				224DBC9B26F113BD002303F3 /* Assets */,
 			);
@@ -216,6 +228,7 @@
 		224DBC9D26F11452002303F3 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				22F62BD227038ADD0076CA34 /* BookViewController.swift */,
 				224DBC8B26F113B3002303F3 /* DiscoverViewController.swift */,
 				5B47F65426F3DCBF00FDF48D /* MainTabBarController.swift */,
 				5B47F65826F3E2CB00FDF48D /* ShelfViewController.swift */,
@@ -228,6 +241,8 @@
 			isa = PBXGroup;
 			children = (
 				5B79A4C12702666700CFDFD6 /* SubjectCollectionHeader.swift */,
+				22F62BD427038AEC0076CA34 /* BookView.swift */,
+				22F62BD527038AEC0076CA34 /* ShopView.swift */,
 				224DBCA126F114DD002303F3 /* MenuView.swift */,
 				5B89273526F52ACA0002A3DA /* MoreInfoView.swift */,
 				5BE7CFC726FBA6EB00927439 /* DiscoverView.swift */,
@@ -245,11 +260,19 @@
 			path = Modals;
 			sourceTree = "<group>";
 		};
-		224DBCA026F11470002303F3 /* Extensions */ = {
+		22F62BDF27038EE80076CA34 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				5B47F65A26F4079500FDF48D /* PropertyListDecoder.swift */,
-				5B5A8BE226F8FD4F00914277 /* UIView+NSLayoutConstraint.swift */,
+				22F62BE527038F780076CA34 /* CoverlessDataRepository.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		22F62BE027038F2C0076CA34 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				22F62BE227038F6D0076CA34 /* PropertyListDecoder.swift */,
+				22F62BE127038F6D0076CA34 /* UIView+NSLayoutConstraint.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -492,13 +515,16 @@
 			files = (
 				5BD62AE926FE601B00EC924D /* GoogleDatas.swift in Sources */,
 				5BBAFA6926F2258100A8DEF9 /* TextStyle.swift in Sources */,
+				22F62BDE27038C9A0076CA34 /* CoverlessData.xcdatamodeld in Sources */,
 				5B47F64626F2CCA800FDF48D /* UIImageView+TraitCollection.swift in Sources */,
 				5B47F65526F3DCBF00FDF48D /* MainTabBarController.swift in Sources */,
 				136F845626F53D78004AAFF2 /* TitleTextStyle.swift in Sources */,
+				22F62BE627038F780076CA34 /* CoverlessDataRepository.swift in Sources */,
 				5BE28E0826F138020043F19E /* SynopsisCellButton.swift in Sources */,
 				5B47F64826F3700500FDF48D /* UIImage+TraitCollection.swift in Sources */,
 				5B47F65926F3E2CB00FDF48D /* ShelfViewController.swift in Sources */,
 				5BE28E0C26F142E40043F19E /* Designable.swift in Sources */,
+				22F62BD627038AEC0076CA34 /* BookView.swift in Sources */,
 				5B5A8BE526F907D200914277 /* HeaderTextStyle.swift in Sources */,
 				5BD62AE826FE601B00EC924D /* NYTRepository.swift in Sources */,
 				5BD62AEA26FE601B00EC924D /* GoogleRepository.swift in Sources */,
@@ -508,7 +534,6 @@
 				136F845B26F76E90004AAFF2 /* StatusButton.swift in Sources */,
 				5B0F188E26FE4529008626F9 /* CollectionViewAccessibilityHeader.swift in Sources */,
 				5BE28DFC26F12D940043F19E /* DefaultDesignSystem.swift in Sources */,
-				5B47F65B26F4079500FDF48D /* PropertyListDecoder.swift in Sources */,
 				224DBCA226F114DD002303F3 /* MenuView.swift in Sources */,
 				5BD62AE726FE601B00EC924D /* NYTDatas.swift in Sources */,
 				5BFEE41126FA006B00D3A6CC /* MoreInfoViewModel.swift in Sources */,
@@ -522,9 +547,9 @@
 				5BE7CFCD26FBBA4F00927439 /* SubjectCell.swift in Sources */,
 				5BBAFA6326F21B8100A8DEF9 /* DesignPalette.swift in Sources */,
 				136F845926F7690A004AAFF2 /* ImageBook.swift in Sources */,
-				5B5A8BE326F8FD4F00914277 /* UIView+NSLayoutConstraint.swift in Sources */,
 				5BBAFA6726F2256C00A8DEF9 /* DesignText.swift in Sources */,
 				5BBAFA6126F21B6000A8DEF9 /* DesignSystem.swift in Sources */,
+				22F62BD327038ADD0076CA34 /* BookViewController.swift in Sources */,
 				5BE7CFCB26FBB82500927439 /* DiscoverCollectionViewDataSource.swift in Sources */,
 				136F845D26F906C1004AAFF2 /* StarsRating.swift in Sources */,
 				5B47F64C26F3B65A00FDF48D /* CustomLabelDesignable.swift in Sources */,
@@ -535,14 +560,17 @@
 				136F845226F53208004AAFF2 /* ShelfCell.swift in Sources */,
 				5B7AB18427037BA3009380B4 /* CarouselAccessibilityElement.swift in Sources */,
 				5BE28E0526F136E50043F19E /* DefaultDesignSpacing.swift in Sources */,
+				22F62BE327038F6D0076CA34 /* UIView+NSLayoutConstraint.swift in Sources */,
 				5BD290E326FD1CCC0082620D /* Subject.swift in Sources */,
 				5B89273426F52ABD0002A3DA /* MoreInfoViewController.swift in Sources */,
 				224DBC8826F113B3002303F3 /* AppDelegate.swift in Sources */,
 				224DBC8A26F113B3002303F3 /* SceneDelegate.swift in Sources */,
 				5B79A4C22702666700CFDFD6 /* SubjectCollectionHeader.swift in Sources */,
 				5BC4634C26F25D43007155C1 /* LabelDesignable.swift in Sources */,
+				22F62BE427038F6D0076CA34 /* PropertyListDecoder.swift in Sources */,
 				136F845426F53292004AAFF2 /* ShelfCellDelegate.swift in Sources */,
 				5BBAFA6526F21B9000A8DEF9 /* DesignSpacing.swift in Sources */,
+				22F62BD727038AEC0076CA34 /* ShopView.swift in Sources */,
 				5B47F64426F2CB4200FDF48D /* SymbolAccesibilityConfiguration.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -683,7 +711,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = WK7599VNDW;
+				DEVELOPMENT_TEAM = 534V229RMK;
 				INFOPLIST_FILE = Coverless/System/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -702,7 +730,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = WK7599VNDW;
+				DEVELOPMENT_TEAM = 534V229RMK;
 				INFOPLIST_FILE = Coverless/System/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -737,6 +765,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		22F62BDC27038C9A0076CA34 /* CoverlessData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				22F62BDD27038C9A0076CA34 /* CoverlessData.xcdatamodel */,
+			);
+			currentVersion = 22F62BDD27038C9A0076CA34 /* CoverlessData.xcdatamodel */;
+			path = CoverlessData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 224DBC7C26F113B3002303F3 /* Project object */;
 }
