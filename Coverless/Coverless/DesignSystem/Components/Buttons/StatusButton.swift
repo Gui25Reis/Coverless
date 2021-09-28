@@ -14,9 +14,11 @@ enum BookStatus: Int{
 
 final class StatusButton: UIButton, Designable {
     public var status: BookStatus
+    public var isActive: Bool
     
     init(designSystem: DesignSystem = DefaultDesignSystem())  {
         self.status = .reading //inicia como reading por default
+        self.isActive = false
         super.init(frame: .zero)
         stylize(with: designSystem)
         
@@ -27,25 +29,48 @@ final class StatusButton: UIButton, Designable {
     }
     
     public func setStatus(status: BookStatus,designSystem: DesignSystem = DefaultDesignSystem()){
-        if status == .read{
-            setButtonStyle(color: designSystem.palette.readColor, text: "Lido")
-        }
-        else if status  == .reading{
-            setButtonStyle(color: designSystem.palette.readingColor, text: "Estou lendo")
+        
+        if isActive == false {
+            if status == .read{
+                setButtonStyle(color: designSystem.palette.readColor, text: "Read")
+            }
+            else if status  == .reading{
+                setButtonStyle(color: designSystem.palette.readingColor, text: "Reading")
+            }
+            else{
+                setButtonStyle(color: designSystem.palette.abandonedColor, text: "Abandoned")
+            }
         }
         else{
-            setButtonStyle(color: designSystem.palette.abandonedColor, text: "Abandonado")
+            if status == .read{
+                setButtonStyleInative(color: designSystem.palette.readColor)
+            }
+            else if status  == .reading{
+                setButtonStyleInative(color: designSystem.palette.readingColor)
+            }
+            else{
+                setButtonStyleInative(color: designSystem.palette.abandonedColor)
+            }
+            
         }
-        
+
         let descriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: .body)
         
         titleLabel?.font = UIFont(descriptor: descriptor, size: 0)
+    }
+    
+    public func setState(isActive: Bool){
+        self.isActive = isActive
     }
     
     private func setButtonStyle(color: UIColor, text: String) {
         setTitle(text, for: .normal)
         setTitleColor(color, for: .normal)
         self.backgroundColor = color.withAlphaComponent(0.15)
+    }
+    private func setButtonStyleInative(color: UIColor){
+        setTitleColor(.white, for: .normal)
+        self.backgroundColor = color
     }
     
     func stylize(with designSystem: DesignSystem) {

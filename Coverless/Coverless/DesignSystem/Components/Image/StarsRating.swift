@@ -54,13 +54,12 @@ class StarsRating: UIView{
             star4.heightAnchor.constraint(equalTo: heightAnchor),
             
             star5.leadingAnchor.constraint(equalTo: star4.trailingAnchor,constant: 2),
-            star5.trailingAnchor.constraint(equalTo: trailingAnchor),
             star5.bottomAnchor.constraint(equalTo: bottomAnchor),
             star5.heightAnchor.constraint(equalTo: heightAnchor),
 
         ])
         
-        
+        setAccessibility()
     }
     
     required init?(coder: NSCoder) {
@@ -85,5 +84,13 @@ class StarsRating: UIView{
                         .applyingSymbolConfiguration(symbol.getSymbolConfiguration(for: traitCollection))
             }
         }
+    }
+    func setAccessibility(){
+        self.isAccessibilityElement = true
+        star1.isAccessibilityElement = false
+        star2.isAccessibilityElement = false
+        star3.isAccessibilityElement = false
+        star4.isAccessibilityElement = false
+        star5.isAccessibilityElement = false
     }
 }
