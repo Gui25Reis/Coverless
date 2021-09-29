@@ -90,7 +90,7 @@ final class BookView: UIView, Designable {
     }()
     
     private lazy var shopView: ShopView = {
-        let shopView = ShopView(image: UIImage(named: "ImageBookDefault")!, titulo: "Amazon Prime", price: "30,00")
+        let shopView = ShopView(image: UIImage(named: "ImageBookDefault")!, titulo: "Amazon Prime", price: "XX,00"/*"R$\(price)"*/)
         shopView.translatesAutoresizingMaskIntoConstraints = false
         return shopView
     }()

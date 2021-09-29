@@ -86,7 +86,7 @@ extension DiscoverViewController: SynopsisCellDelegate {
     }
     
     func discoverBook() {
-        print("discorver pressed")
+        print("discover pressed")
     }
     
     
