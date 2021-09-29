@@ -36,7 +36,10 @@ final class DiscoverView: UIView, Designable {
         return collectionView
     }()
     
+    private let loadingView: LoadingView
+    
     init(designSystem: DesignSystem = DefaultDesignSystem()) {
+        loadingView = LoadingView(designSystem: designSystem)
         super.init(frame: .zero)
         setupHierarchy()
         setupLayout()
@@ -51,13 +54,23 @@ final class DiscoverView: UIView, Designable {
         addSubview(collectionView)
     }
     
-    func setupLayout() {
+    private func setupLayout() {
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
             collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
+    }
+    
+    func setupLoadingState() {
+        collectionView.backgroundView = loadingView
+        loadingView.start()
+    }
+    
+    func setupPresentationState() {
+        collectionView.backgroundView = nil
+        loadingView.stop()
     }
     
     func stylize(with designSystem: DesignSystem) {

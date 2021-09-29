@@ -21,7 +21,7 @@ class DiscoverCollectionViewDataSource: NSObject, UICollectionViewDataSource {
         repository.getBooks(text: subject?.value ?? "") {[weak self] result in
             switch result {
             case .failure(let error):
-                fatalError(error.localizedDescription)
+                print(error)
             case .success(let books):
                 self?.data = books
                 completionHandler()
@@ -37,7 +37,7 @@ class DiscoverCollectionViewDataSource: NSObject, UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SynopsisCell.identifier, for: indexPath) as? SynopsisCell else {
             preconditionFailure("Cell Register not configured correctily")
         }
-        cell.setup(synopsis: data[indexPath.row].description, delegate: cellDelegate)
+        cell.setup(book: data[indexPath.row], delegate: cellDelegate)
         return cell
     }
     

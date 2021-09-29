@@ -14,6 +14,7 @@ class SynopsisCell: UICollectionViewCell, Designable{
     private let discoverButton: SynopsisCellButton
     
     private weak var delegate: SynopsisCellDelegate? = nil
+    private var book: Book? = nil
     
     static let identifier: String = "SynopsisCell"
     
@@ -24,12 +25,13 @@ class SynopsisCell: UICollectionViewCell, Designable{
         synopsisLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: \.mediumNegative),
         synopsisLabel.trailingAnchor.constraint(equalTo: infoButton.leadingAnchor, constant: \.smallNegative),
         infoButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: \.mediumNegative),
-        infoButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: \.mediumPositive),
-        infoButton.bottomAnchor.constraint(equalTo: contentView.centerYAnchor, constant: \.mediumNegative),
-        discoverButton.topAnchor.constraint(equalTo: contentView.centerYAnchor, constant: \.smallPositive),
+        infoButton.bottomAnchor.constraint(equalTo: contentView.centerYAnchor, constant: \.xSmallNegative),
+        infoButton.heightAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.2, constant: -20),
+        discoverButton.heightAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.2, constant: -20),
         discoverButton.leadingAnchor.constraint(equalTo: infoButton.leadingAnchor),
         discoverButton.trailingAnchor.constraint(equalTo: infoButton.trailingAnchor),
-        discoverButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: \.mediumNegative)
+        discoverButton.topAnchor.constraint(equalTo: contentView.centerYAnchor, constant: \.xSmallPositive),
+        contentView.heightAnchor.constraint(greaterThanOrEqualTo: contentView.widthAnchor, multiplier: 0.4)
     ]
     
     private lazy var accessibilityLayout = [
@@ -68,6 +70,23 @@ class SynopsisCell: UICollectionViewCell, Designable{
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        book = nil
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        setupShadow()
+    }
+    
+    private func setupShadow() {
+        layer.shadowPath = UIBezierPath(rect: contentView.bounds).cgPath
+        layer.shadowOffset = CGSize(width: 2, height: 2.0)
+        layer.shadowRadius = 4.0
+        layer.shadowOpacity = 0.1
+    }
+    
     private func setupLayout(){
         /* MARK: - Constraints da Label de sinopse */
         synopsisLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -104,23 +123,30 @@ class SynopsisCell: UICollectionViewCell, Designable{
     }
     
     //MARK: Adicionar estrutura de dados
-    func setup(synopsis: String, delegate: SynopsisCellDelegate?) {
-        synopsisLabel.text = synopsis
-        synopsisLabel.accessibilityLabel = "Card de sinopse:\(synopsis)"
+    func setup(book: Book, delegate: SynopsisCellDelegate?) {
+        self.book = book
+        synopsisLabel.text = book.description
+        synopsisLabel.accessibilityLabel = "Card de sinopse:\(book.description)"
         stylize(with: DefaultDesignSystem.shared)
         self.delegate = delegate
     }
     
     @objc
     private func showInfo() {
-        guard let delegate = delegate else { return }
-        delegate.showInfo()
+        guard
+            let delegate = delegate,
+            let book = book
+        else { return }
+        delegate.showInfo(for: book)
     }
     
     @objc
     private func discoverBook() {
-        guard let delegate = delegate else { return }
-        delegate.discoverBook()
+        guard
+            let delegate = delegate,
+            let book = book
+        else { return }
+        delegate.discoverBook(book)
     }
     
     //MARK: Stylize + VoiceOver
@@ -128,12 +154,6 @@ class SynopsisCell: UICollectionViewCell, Designable{
         backgroundColor = designSystem.palette.backgroundCell
         layer.cornerRadius = 12
         synopsisLabel.stylize(with: designSystem.text.body)
-        
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOffset = CGSize(width: 2, height: 2.0)
-        layer.shadowRadius = 4.0
-        layer.shadowOpacity = 0.2
-        layer.masksToBounds = false
     }
     
     func setupAccessibility() {
@@ -148,10 +168,6 @@ class SynopsisCell: UICollectionViewCell, Designable{
         
         self.accessibilityElements = [synopsisLabel, infoButton, discoverButton]
         
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOffset = CGSize(width: 2, height: 2.0)
-        layer.shadowRadius = 4.0
-        layer.shadowOpacity = 0.2
-        layer.masksToBounds = false
+        
     }
 }

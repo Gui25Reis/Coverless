@@ -85,7 +85,7 @@ class StarsRating: UIView{
             }
         }
     }
-    func setAccessibility(){
+    private func setAccessibility(){
         self.isAccessibilityElement = true
         star1.isAccessibilityElement = false
         star2.isAccessibilityElement = false
