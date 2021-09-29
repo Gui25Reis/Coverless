@@ -174,6 +174,7 @@ final class BookView: UIView, Designable {
     private func setupLayout() {
         setupScrollViewConstraints()
         setupScrollViewContentConstraints()
+        activateConstraints()
     }
     
     private func setupScrollViewConstraints() {
@@ -312,6 +313,26 @@ final class BookView: UIView, Designable {
         self.accessibilityElements = [synopsisField,ratingHeader, ratingStars,statusHeader,statusButtonRead,statusButtonReading,statusButtonAbandoned,shopHeader,shopView, shopView.shopTitle,shopView.priceValue,shopView.shopButton]
         
     }
+    
+    //MARK: Accessibility on ScrollView
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+       activateConstraints()
+    }
+    
+    func activateConstraints(){
+        if (traitCollection.preferredContentSizeCategory)
+            < .accessibilityMedium{
+            //stack view normal
+            stackViewButtons.axis = .horizontal
+            stackViewButtons.alignment = .center
+            
+        }else{
+            //stack view para acessibilidade
+            stackViewButtons.axis = .vertical
+            stackViewButtons.alignment = .leading
+        }
+    }
+
     //MARK: Accessibility on ScrollView
     
 //    override func accessibilityElementDidBecomeFocused() {
@@ -322,5 +343,5 @@ final class BookView: UIView, Designable {
 //        UIAccessibility.post(notification: .layoutChanged, argument: nil)
 //
 //    }
-//
+    
 }

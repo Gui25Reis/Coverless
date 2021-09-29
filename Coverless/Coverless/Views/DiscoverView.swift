@@ -10,47 +10,27 @@ import UIKit
 final class DiscoverView: UIView, Designable {
 
     let collectionView: UICollectionView = {
-        let tagItemSize = NSCollectionLayoutSize(widthDimension: .estimated(80), heightDimension: .estimated(30))
-        let tagItem = NSCollectionLayoutItem(layoutSize: tagItemSize)
-        let tagGroup = NSCollectionLayoutGroup.horizontal(layoutSize: tagItemSize, subitems: [tagItem])
-        tagGroup.edgeSpacing = .init(leading: .fixed(8), top: .fixed(4), trailing: .fixed(0), bottom: .fixed(4))
-        let tagSection = NSCollectionLayoutSection(group: tagGroup)
-        let header = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .absolute(5)),
-                       elementKind: UICollectionView.elementKindSectionHeader,
-                       alignment: .top)
-        tagSection.orthogonalScrollingBehavior = .continuous
-        tagSection.boundarySupplementaryItems = [header]
-        tagSection.contentInsets = NSDirectionalEdgeInsets(top: 0.0, leading: 20.0, bottom: 20.0, trailing: 20.0)
-        
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(500.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(500.0))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [ item ])
         group.edgeSpacing = .init(leading: .fixed(0), top: .fixed(4), trailing: .fixed(0), bottom: .fixed(4))
         let section = NSCollectionLayoutSection(group: group)
+        let header = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .estimated(80)),
+            elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
         section.boundarySupplementaryItems = [header]
         section.contentInsets = NSDirectionalEdgeInsets(top: 0.0, leading: 20.0, bottom: 0.0, trailing: 20.0)
-        let layout = UICollectionViewCompositionalLayout { (sectionNumber, env) -> NSCollectionLayoutSection? in
-            switch sectionNumber {
-            case 0:
-                return tagSection
-            case 1:
-                return section
-            default:
-                return section
-            }
-        }
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         
         collectionView.register(SynopsisCell.self,
                                 forCellWithReuseIdentifier: SynopsisCell.identifier)
-        collectionView.register(SubjectCell.self,
-                                forCellWithReuseIdentifier: SubjectCell.identifier)
-        collectionView.register(CollectionViewAccessibilityHeader.self,
+        collectionView.register(SubjectCollectionHeader.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-                                withReuseIdentifier: CollectionViewAccessibilityHeader.identifier)
+                                withReuseIdentifier: SubjectCollectionHeader.identifier)
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
@@ -83,9 +63,8 @@ final class DiscoverView: UIView, Designable {
     func stylize(with designSystem: DesignSystem) {
         backgroundColor = designSystem.palette.backgroundPrimary
         collectionView.backgroundColor = .clear
-        collectionView.isAccessibilityElement = false
+        collectionView.accessibilityContainerType = .list
         collectionView.shouldGroupAccessibilityChildren = true
-        collectionView.accessibilityNavigationStyle = .combined
     }
     
     func bindCollectionView(delegate: UICollectionViewDelegate, dataSource: UICollectionViewDataSource) {

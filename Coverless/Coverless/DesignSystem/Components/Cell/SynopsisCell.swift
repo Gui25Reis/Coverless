@@ -61,7 +61,7 @@ class SynopsisCell: UICollectionViewCell, Designable{
         contentView.addSubview(discoverButton)
         setupLayout()
         setupActions()
-
+        setupAccessibility()
     }
     
     required init?(coder: NSCoder) {
@@ -106,6 +106,7 @@ class SynopsisCell: UICollectionViewCell, Designable{
     //MARK: Adicionar estrutura de dados
     func setup(synopsis: String, delegate: SynopsisCellDelegate?) {
         synopsisLabel.text = synopsis
+        synopsisLabel.accessibilityLabel = "Card de sinopse:\(synopsis)"
         stylize(with: DefaultDesignSystem.shared)
         self.delegate = delegate
     }
@@ -127,9 +128,17 @@ class SynopsisCell: UICollectionViewCell, Designable{
         backgroundColor = designSystem.palette.backgroundCell
         layer.cornerRadius = 12
         synopsisLabel.stylize(with: designSystem.text.body)
+        
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOffset = CGSize(width: 2, height: 2.0)
+        layer.shadowRadius = 4.0
+        layer.shadowOpacity = 0.2
+        layer.masksToBounds = false
+    }
+    
+    func setupAccessibility() {
         synopsisLabel.isAccessibilityElement = true
         synopsisLabel.accessibilityLabel = "Synopsis Card:\(synopsisLabel.text ?? "")"
-        //synopsisLabel.accessibilityHint = "Card da sinopse"
         infoButton.isAccessibilityElement = true
         infoButton.accessibilityLabel = "More Info"
         
@@ -144,6 +153,5 @@ class SynopsisCell: UICollectionViewCell, Designable{
         layer.shadowRadius = 4.0
         layer.shadowOpacity = 0.2
         layer.masksToBounds = false
-
     }
 }
