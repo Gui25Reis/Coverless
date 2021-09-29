@@ -9,40 +9,48 @@ import UIKit
 
 class EmptyView: UIView{
     let designSystem: DesignSystem
-    private let imageBook:UIImageView
-    public let emptyText: UILabel
-    public let discoverButton: UIButton
+    private let imageBook: ImageBook
+    private let emptyText: UILabel
+    private let discoverButton: UIButton
+    private let scrollView: UIScrollView
     
-    weak var coordinator: DiscoverCoordinator?
+    private weak var delegate: EmptyViewDelegate? = nil
 
-    
+    /* MARK: - Configurando constraints */
     private lazy var constraintsDefault = [
-        imageBook.topAnchor.constraint(equalTo: self.topAnchor,constant: \.largePositive),
-        imageBook.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.6),
-        imageBook.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.4),
-        imageBook.bottomAnchor.constraint(equalTo: emptyText.topAnchor,constant: \.largeNegative),
-        imageBook.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+        scrollView.leftAnchor.constraint(equalTo: self.leftAnchor),
+        scrollView.topAnchor.constraint(equalTo: self.topAnchor),
+        scrollView.rightAnchor.constraint(equalTo: self.rightAnchor),
+        scrollView.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor, constant: -100),
         
-        emptyText.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: \.largePositive),
+        imageBook.topAnchor.constraint(equalTo: scrollView.topAnchor,constant: \.largePositive),
+        imageBook.heightAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 0.6),
+        imageBook.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 0.4),
+        imageBook.bottomAnchor.constraint(equalTo: emptyText.topAnchor,constant: \.largeNegative),
+        imageBook.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+        
+        emptyText.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: \.largePositive),
         emptyText.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: \.largeNegative),
         emptyText.bottomAnchor.constraint(equalTo: discoverButton.topAnchor, constant: \.xLargeNegative),
         
-        discoverButton.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+        discoverButton.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
         discoverButton.heightAnchor.constraint(equalToConstant: 40),
-        discoverButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.4)
+        discoverButton.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 0.4),
+        discoverButton.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: \.smallNegative)
     ]
     
     
     init() {
-        imageBook = UIImageView()
+        imageBook = ImageBook(image: UIImage(named: "ImageBookDefault")!)
+        scrollView = UIScrollView()
         emptyText = UILabel()
         discoverButton = UIButton()
         designSystem = DefaultDesignSystem()
         super.init(frame: .zero)
-        
-        addSubview(imageBook)
-        addSubview(emptyText)
-        addSubview(discoverButton)
+        addSubview(scrollView)
+        scrollView.addSubview(imageBook)
+        scrollView.addSubview(emptyText)
+        scrollView.addSubview(discoverButton)
 
         
         setupLayout()
@@ -56,11 +64,12 @@ class EmptyView: UIView{
     
     func setupLayout(){
         ///imagem
-        imageBook.image = UIImage(named: "ImageBookDefault")!
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
         imageBook.translatesAutoresizingMaskIntoConstraints = false
         emptyText.translatesAutoresizingMaskIntoConstraints = false
         discoverButton.translatesAutoresizingMaskIntoConstraints = false
-
+        
+        scrollView.isScrollEnabled = true
         ///botao
         discoverButton.backgroundColor = designSystem.palette.buttonBackgroundPrimary
         discoverButton.setTitle("Discover Book", for: .normal)
@@ -82,7 +91,9 @@ class EmptyView: UIView{
     }
     
     func setAccessibility(){
-        
+        emptyText.isAccessibilityElement = true
+        discoverButton.isAccessibilityElement = true
+        discoverButton.accessibilityHint = "Click to open Discover screen"
     }
     
     private func setupActions() {
@@ -91,7 +102,9 @@ class EmptyView: UIView{
     
     @objc
     private func discoverButtonSelected() {
-        print("Discover book pressioned")
-        //coordinator?.start()
+        guard let delegate = delegate else { return }
+        delegate.toDiscover()
     }
 }
+
+
