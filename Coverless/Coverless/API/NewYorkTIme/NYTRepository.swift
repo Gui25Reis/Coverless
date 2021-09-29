@@ -13,6 +13,7 @@ import Foundation
 class NYTRepository {
     private var books:[Book] = []
     private var categories:[String:NYTCategory] = [:]
+    private var currentRunningTask: URLSessionDataTask? = nil
     
     /**
         Faz a chamada da API com base na palavra chave.
@@ -29,12 +30,16 @@ class NYTRepository {
         
         let session:URLSession = URLSession.shared
 
+        if let currentRunningTask = currentRunningTask {
+            currentRunningTask.cancel()
+            self.currentRunningTask = nil
+        }
                 
         var apiUrl:String = "https://api.nytimes.com/svc/books/v3/lists/"       // Chamada padrão
         //apiUrl += "\(self.getDate(category: self.categories[text]!))"           // Data randomica
         apiUrl += "/\(text).json?"                        // Filtragem pela categoria
         
-        session.dataTask(with: URL(string: apiUrl+"api-key=\(self.getToken())")!) { data, response, error in
+        let task = session.dataTask(with: URL(string: apiUrl+"api-key=\(self.getToken())")!) { data, response, error in
             if let error = error {
                 completionHandler(.failure(error))
                 return
@@ -50,7 +55,10 @@ class NYTRepository {
                     completionHandler(.success(self.books))
                 }
             }
-        }.resume()
+        }
+        
+        currentRunningTask = task
+        task.resume()
     }
     
     

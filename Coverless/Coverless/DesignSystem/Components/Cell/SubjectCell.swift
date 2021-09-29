@@ -53,11 +53,13 @@ final class SubjectCell: UICollectionViewCell, Designable {
     }
     
     func didSelectCell(with designSystem: DesignSystem = DefaultDesignSystem()) {
+        isSelected = true
         contentView.backgroundColor = designSystem.palette.accent
         descriptionLabel.textColor = .white
     }
     
     func didDeselectCell(with designSystem: DesignSystem = DefaultDesignSystem()) {
+        isSelected = false
         contentView.backgroundColor = designSystem.palette.backgroundCell
         descriptionLabel.textColor = designSystem.palette.accent
 
