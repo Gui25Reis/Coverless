@@ -13,7 +13,7 @@ import Foundation
 class NYTRepository {
     private var books:[Book] = []
     private var categories:[String:NYTCategory] = [:]
-    private var currentRunningTask: URLSessionDataTask? = nil
+    private var currentRunningTask:URLSessionDataTask? = nil
     
     /**
         Faz a chamada da API com base na palavra chave.
@@ -28,39 +28,39 @@ class NYTRepository {
     public func getBooks(text:String, _ completionHandler: @escaping (Result<[Book], Error>) -> Void) -> Void {
         self.books = []
         
-        let session:URLSession = URLSession.shared
-
-        if let currentRunningTask = currentRunningTask {
-            currentRunningTask.cancel()
-            self.currentRunningTask = nil
-        }
-                
-        var apiUrl:String = "https://api.nytimes.com/svc/books/v3/lists/"       // Chamada padrão
-        //apiUrl += "\(self.getDate(category: self.categories[text]!))"           // Data randomica
-        apiUrl += "/\(text).json?"                        // Filtragem pela categoria
+        // while (self.categories.isEmpty) {}
         
-        let task = session.dataTask(with: URL(string: apiUrl+"api-key=\(self.getToken())")!) { data, response, error in
-            if let error = error {
-                completionHandler(.failure(error))
-                return
+        if (self.categories.isEmpty) {
+            self.getCategories() {result in
+                switch result {
+                    case .success(_):
+                        self.apiCallBooks(text: text) { books in
+                            switch books {
+                                case .success(let book):
+                                    completionHandler(.success(book))
+                                    
+                                case .failure(let error):
+                                    completionHandler(.failure(error))
+                            }
+                        }
+
+                    case .failure(let error):
+                        completionHandler(.failure(error))
+                }
             }
-            
-            if let response = response as? HTTPURLResponse, response.statusCode == 200 {
-                if let data = data {
-                    let decoder = JSONDecoder()
-                    let books = try! decoder.decode(NYTAllBooks.self, from: data)
+        } else {
+            self.apiCallBooks(text: text) { books in
+                switch books {
+                    case .success(let book):
+                        completionHandler(.success(book))
                     
-                    self.compactBookInfo(items: books)
-                    
-                    completionHandler(.success(self.books))
+                    case .failure(let error):
+                        completionHandler(.failure(error))
                 }
             }
         }
-        
-        currentRunningTask = task
-        task.resume()
     }
-    
+        
     
     /**
          Pega todas as categorias disponiveis pela API
@@ -87,6 +87,61 @@ class NYTRepository {
                 }
             }
         }.resume()
+    }
+    
+    
+    
+    private func apiCallBooks(text:String, _ completionHandler: @escaping (Result<[Book], Error>) -> Void) -> Void {
+        let session:URLSession = URLSession.shared
+        
+        if let currentRunningTask = self.currentRunningTask {
+            currentRunningTask.cancel()
+            self.currentRunningTask = nil
+        }
+                
+        var apiUrl:String = "https://api.nytimes.com/svc/books/v3/lists/"       // Chamada padrão
+        apiUrl += "\(self.getDate(category: self.categories[text]!))"           // Data randomica
+        apiUrl += "/\(text).json?"                                              // Filtragem pela categoria
+        
+        
+        let task = session.dataTask(with: URL(string: apiUrl+"api-key=\(self.getToken())")!) { data, response, error in
+            if let error = error {
+                completionHandler(.failure(error))
+                return
+            }
+            
+            if let response = response as? HTTPURLResponse, response.statusCode == 200 {
+                if let data = data {
+                    let decoder = JSONDecoder()
+                    let books = try! decoder.decode(NYTAllBooks.self, from: data)
+                    
+                    self.compactBookInfo(items: books)
+                    
+                    completionHandler(.success(self.books))
+                }
+            }
+        }
+        
+        self.currentRunningTask = task
+        task.resume()
+    }
+    
+    
+    
+    private func apiSuccessCall(text: String) -> [Book] {
+        var bookList:[Book]!
+        self.apiCallBooks(text: text) { books in
+            switch books {
+                case .success(let book):
+                    bookList = book
+                    break
+                case .failure(let error):
+                    bookList = []
+                    print("Erro nos Livros: \(error)")
+                    break
+            }
+        }
+        return bookList
     }
     
     
@@ -209,10 +264,10 @@ class NYTRepository {
     private func compactCategoryInfo(items:NYTCategories) -> [String:NYTCategory] {
         var dict:[String:NYTCategory] = [:]
         for c in items.results {
-            dict[c.list_name] = NYTCategory(
+            dict[c.list_name_encoded] = NYTCategory(
                 list_name: c.list_name,
                 // display_name: c.display_name,
-                // list_name_encoded: c.list_name_encoded,
+                list_name_encoded: c.list_name_encoded,
                 oldest_published_date: c.oldest_published_date,
                 newest_published_date: c.newest_published_date,
                 updated: c.updated
