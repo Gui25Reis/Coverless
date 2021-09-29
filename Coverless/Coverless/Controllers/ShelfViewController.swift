@@ -28,8 +28,9 @@ final class ShelfViewController: UIViewController, ShelfCellDelegate {
     
     public override func viewDidLoad() -> Void {
         super.viewDidLoad()
-        //let button = SynopsisCellButton(text: "Descubra", systemName: "trash", designSystem: designSystem)
+        //let button = SynopsisCellButton(text: "Discover", systemName: "trash", designSystem: designSystem)
         view.backgroundColor = designSystem.palette.backgroundPrimary
+        
         ///collection view
         cv.translatesAutoresizingMaskIntoConstraints = false
         cv.delegate = self
@@ -46,6 +47,7 @@ final class ShelfViewController: UIViewController, ShelfCellDelegate {
         view.addSubview(segmentedControl)
         view.addSubview(cv)
         
+        ///configurando constraints
         NSLayoutConstraint.activate([
             segmentedControl.topAnchor.constraint(equalTo: view.topAnchor, constant: 150),
             segmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: \.mediumNegative),
@@ -106,9 +108,9 @@ final class ShelfViewController: UIViewController, ShelfCellDelegate {
             switch segmentedControl.selectedSegmentIndex
             {
             case 0:
-                print("favorito selecionado")
+                print("Favorites Selected")
             case 1:
-                print("descobertas selecionado")
+                print("Discover Selected")
             default:
                 break;
             }
@@ -118,8 +120,10 @@ final class ShelfViewController: UIViewController, ShelfCellDelegate {
         segmentedControl.isAccessibilityElement = true
         segmentedControl.accessibilityHint = "Select your preferences"
     }
-    
 }
+
+/* MARK: - Collection View */
+
 extension ShelfViewController:UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         coordinator?.showBook()
@@ -129,20 +133,41 @@ extension ShelfViewController:UICollectionViewDelegate{
 
 extension ShelfViewController:UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //return self.books.count
-        return 10
+        if (self.books.count == 0) {
+            setEmptyMessage()
+        } else {
+            restore()
+            return 10
+
+        }
+        return self.books.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? ShelfCell
         else {
-            preconditionFailure("Cell Register not configured correctily")
+            preconditionFailure("Cell Register not configured correctly")
         }
         //cell.setup(books[indexPath])
-        cell.setup(title:"Harry Potter e a Câmara Secreta",status: .abandoned ,rating: 3,delegate: self)
+        cell.setup(title:"Harry Potter and the Secret Chamber",status: .abandoned ,rating: 3,delegate: self)
         return cell
     }
     
+    func setEmptyMessage() {
+        let messageLabel = EmptyView()
+        cv.backgroundView = messageLabel
+        messageLabel.delegate = self
+        segmentedControl.isHidden = true
+    }
     
+    func restore() {
+        cv.backgroundView = nil
+    }
 }
 
+extension ShelfViewController: EmptyViewDelegate {
+    func toDiscover() {
+        tabBarController!.selectedIndex = 0
+    }
+    
+}

@@ -52,8 +52,8 @@ class SynopsisCell: UICollectionViewCell, Designable{
     
     override init(frame: CGRect) {
         synopsisLabel = UILabel()
-        infoButton = SynopsisCellButton(text: "Saiba mais", systemName: "info.circle")
-        discoverButton = SynopsisCellButton(text: "Descubra", systemName: "plus")
+        infoButton = SynopsisCellButton(text: "More Info", systemName: "info.circle")
+        discoverButton = SynopsisCellButton(text: "Discover", systemName: "plus")
         
         super.init(frame: frame)
         contentView.addSubview(synopsisLabel)
@@ -138,12 +138,13 @@ class SynopsisCell: UICollectionViewCell, Designable{
     
     func setupAccessibility() {
         synopsisLabel.isAccessibilityElement = true
+        synopsisLabel.accessibilityLabel = "Synopsis Card:\(synopsisLabel.text ?? "")"
         infoButton.isAccessibilityElement = true
-        infoButton.accessibilityLabel = "Saiba mais"
+        infoButton.accessibilityLabel = "More Info"
         
         discoverButton.isAccessibilityElement = true
-        discoverButton.accessibilityLabel = "Descubra"
-        discoverButton.accessibilityHint = "Adicione na Estante"
+        discoverButton.accessibilityLabel = "Discover"
+        discoverButton.accessibilityHint = "Add to shelf"
         
         self.accessibilityElements = [synopsisLabel, infoButton, discoverButton]
         

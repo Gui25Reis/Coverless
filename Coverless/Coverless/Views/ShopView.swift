@@ -16,7 +16,7 @@ class ShopView: UIView{
     public let priceValue: UILabel
     public let shopButton: UIButton
     
-    private lazy var constraintsDefault = [
+    private lazy var normalLayout = [
         imageLogo.topAnchor.constraint(equalTo: self.topAnchor),
         imageLogo.heightAnchor.constraint(equalToConstant: 80),
         imageLogo.widthAnchor.constraint(equalToConstant: 80),
@@ -32,6 +32,27 @@ class ShopView: UIView{
 
         shopButton.trailingAnchor.constraint(equalTo: self.trailingAnchor,constant: \.smallNegative),
         shopButton.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+        shopButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.2)
+    ]
+    
+    private lazy var accessibilityLayout = [
+        imageLogo.topAnchor.constraint(equalTo: self.topAnchor),
+        imageLogo.heightAnchor.constraint(equalToConstant: 100),
+        imageLogo.widthAnchor.constraint(equalToConstant: 100),
+        imageLogo.bottomAnchor.constraint(equalTo: shopTitle.topAnchor),
+        imageLogo.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+        
+        shopTitle.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: \.smallPositive),
+        shopTitle.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: \.smallNegative),
+        shopTitle.bottomAnchor.constraint(equalTo: priceValue.topAnchor,constant: \.smallNegative),
+        
+        priceValue.leadingAnchor.constraint(equalTo: self.leadingAnchor,constant: \.smallPositive),
+        priceValue.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+        priceValue.bottomAnchor.constraint(equalTo: shopButton.topAnchor,constant: \.smallNegative),
+
+        shopButton.trailingAnchor.constraint(equalTo: self.trailingAnchor,constant: \.smallNegative),
+        shopButton.leadingAnchor.constraint(equalTo: self.leadingAnchor,constant: \.smallPositive),
+        shopButton.bottomAnchor.constraint(equalTo: self.bottomAnchor,constant: \.smallNegative),
         shopButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.2)
     ]
     
@@ -56,7 +77,7 @@ class ShopView: UIView{
         
     }
     /// passa as informacoes de compra para a view
-    init(image: UIImage, titulo: String, price: String,designSystem: DesignSystem = DefaultDesignSystem()){
+    init(image: UIImage, titulo: String, price: String, designSystem: DesignSystem = DefaultDesignSystem()){
         
         self.designSystem = designSystem
         
@@ -113,8 +134,22 @@ class ShopView: UIView{
         priceValue.stylize(with: designSystem.text.header)
         setAccessibility()
     }
+    
     func activateConstraints(){
-        NSLayoutConstraint.activate(constraintsDefault)
+        if (traitCollection.preferredContentSizeCategory
+                < .accessibilityMedium) { // Default font sizes
+            accessibilityLayout.forEach{
+                $0.isActive = false
+            }
+            NSLayoutConstraint.activate(normalLayout)
+            
+        } else { // Accessibility font sizes
+            normalLayout.forEach{
+                $0.isActive = false
+            }
+            NSLayoutConstraint.activate(accessibilityLayout)
+        }
+        
     }
     
     func setAccessibility(){
@@ -128,5 +163,7 @@ class ShopView: UIView{
         
     }
     
-    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        activateConstraints()
+    }
 }
