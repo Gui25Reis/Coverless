@@ -14,7 +14,7 @@ class EmptyView: UIView{
     private let discoverButton: UIButton
     private let scrollView: UIScrollView
     
-    private weak var delegate: EmptyViewDelegate? = nil
+    public weak var delegate: EmptyViewDelegate? = nil
 
     /* MARK: - Configurando constraints */
     private lazy var constraintsDefault = [

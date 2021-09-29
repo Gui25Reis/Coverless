@@ -133,8 +133,8 @@ extension ShelfViewController:UICollectionViewDelegate{
 
 extension ShelfViewController:UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if (self.books.count == 1) {
-            setEmptyMessage("Nothing to show :(")
+        if (self.books.count == 0) {
+            setEmptyMessage()
         } else {
             restore()
             return 10
@@ -153,9 +153,10 @@ extension ShelfViewController:UICollectionViewDataSource{
         return cell
     }
     
-    func setEmptyMessage(_ message: String) {
+    func setEmptyMessage() {
         let messageLabel = EmptyView()
         cv.backgroundView = messageLabel
+        messageLabel.delegate = self
         segmentedControl.isHidden = true
     }
     
@@ -166,6 +167,7 @@ extension ShelfViewController:UICollectionViewDataSource{
 
 extension ShelfViewController: EmptyViewDelegate {
     func toDiscover() {
+        tabBarController!.selectedIndex = 0
     }
     
 }
