@@ -26,6 +26,7 @@ final class SubjectCell: UICollectionViewCell, Designable {
         super.init(frame: frame)
         setupHierarchy()
         setupLayout()
+        setupAccesibility()
         stylize(with: DefaultDesignSystem())
     }
     
@@ -79,7 +80,6 @@ final class SubjectCell: UICollectionViewCell, Designable {
     func stylize(with designSystem: DesignSystem) {
         descriptionLabel.stylize(with: designSystem.text.button)
         contentView.backgroundColor = designSystem.palette.backgroundCell
-        accessibilityTraits = .button
         contentView.layer.cornerRadius = 18
         descriptionLabel.isUserInteractionEnabled = false
         
@@ -89,7 +89,7 @@ final class SubjectCell: UICollectionViewCell, Designable {
         layer.shadowOpacity = 0.2
         layer.masksToBounds = false
         
-        setupAccesibility()
+        
     }
     
     private func setupAccesibility() {
