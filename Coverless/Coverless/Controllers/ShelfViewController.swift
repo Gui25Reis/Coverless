@@ -7,7 +7,13 @@
 
 import UIKit
 
-final class ShelfViewController: UIViewController, ShelfCellDelegate {
+final class ShelfViewController: UIViewController, ShelfCellDelegate{
+    
+    func turnFav() {
+        ///atualizada o vetor que esta sendo carregado na collection
+        switchSegmented()
+    }
+    
     
     weak var coordinator: ShelfCoordinator?
     private var books:[MyBook] = []
@@ -21,10 +27,12 @@ final class ShelfViewController: UIViewController, ShelfCellDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.books = DataBooks.shared.getBooks()
+        switchSegmented()
         self.cv.reloadData()
+        //adicao no core data para testes
+        //let _ = DataBooks.shared.addBook(id: "1234", title: "Meu livro", status: Int32(0), rating: Int32(3), isFavorite: true)
+        //let _ = DataBooks.shared.addBook(id: "1234", title: "Meu livro 2", status: Int32(0), rating: Int32(3), isFavorite: false)
     }
-    
     
     public override func viewDidLoad() -> Void {
         super.viewDidLoad()
@@ -61,7 +69,6 @@ final class ShelfViewController: UIViewController, ShelfCellDelegate {
         cv.register(ShelfCell.self, forCellWithReuseIdentifier: "cell")
         cv.isAccessibilityElement = false
         cv.shouldGroupAccessibilityChildren = true
-        
         
     }
     
@@ -100,47 +107,50 @@ final class ShelfViewController: UIViewController, ShelfCellDelegate {
         return UICollectionViewCompositionalLayout(section: section)
     }
     
-    func turnFav() {
-        //
+    @objc func indexChanged(_ sender: UISegmentedControl) {
+        switchSegmented()
+        cv.reloadData()
     }
     
-    @objc func indexChanged(_ sender: UISegmentedControl) {
-            switch segmentedControl.selectedSegmentIndex
-            {
-            case 0:
-                print("Favorites Selected")
-            case 1:
-                print("Discover Selected")
-            default:
-                break;
-            }
+    
+    func switchSegmented(){
+        switch segmentedControl.selectedSegmentIndex
+        {
+        case 0:
+            books = DataBooks.shared.getBooks().filter { $0.isFavorite == true}
+            //cv.reloadData()
+        case 1:
+            books = DataBooks.shared.getBooks().filter { $0.isFavorite == false}
+            //cv.reloadData()
+        default:
+            break;
+        }
     }
+    
     
     func setAccessibility(){
         segmentedControl.isAccessibilityElement = true
         segmentedControl.accessibilityHint = "Select your preferences"
     }
+    
 }
 
 /* MARK: - Collection View */
 
 extension ShelfViewController:UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        coordinator?.showBook()
-        //coordinator?.showBook(bookSelected: book[indexPath])
+        coordinator?.showBook(book: books[indexPath.row])
     }
 }
 
 extension ShelfViewController:UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if (self.books.count == 0) {
-            setEmptyMessage()
+        if (DataBooks.shared.getBooks().count == 0) {
+            setEmptyMessage() //emptyState
         } else {
-            restore()
-            return 10
-
+            restore() //collectionview com dados do coreData
         }
-        return self.books.count
+        return books.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -148,15 +158,16 @@ extension ShelfViewController:UICollectionViewDataSource{
         else {
             preconditionFailure("Cell Register not configured correctly")
         }
-        //cell.setup(books[indexPath])
-        cell.setup(title:"Harry Potter and the Secret Chamber",status: .abandoned ,rating: 3,delegate: self)
+        cell.setup(book: books[indexPath.row])
+        cell.setFavorite(status: books[indexPath.row].isFavorite)
+        cell.delegate = self
         return cell
     }
     
     func setEmptyMessage() {
-        let messageLabel = EmptyView()
-        cv.backgroundView = messageLabel
-        messageLabel.delegate = self
+        let empty = EmptyView()
+        cv.backgroundView = empty
+        empty.delegate = self
         segmentedControl.isHidden = true
     }
     
@@ -165,9 +176,12 @@ extension ShelfViewController:UICollectionViewDataSource{
     }
 }
 
+/* MARK: - Extensions */
+
 extension ShelfViewController: EmptyViewDelegate {
     func toDiscover() {
         tabBarController!.selectedIndex = 0
     }
     
 }
+

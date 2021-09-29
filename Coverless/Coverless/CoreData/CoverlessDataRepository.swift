@@ -51,13 +51,14 @@ class DataBooks{
         return []
     }
     
-    func addBook(id: String,title:String, status: Int32,rating: Int32) -> MyBook {
+    func addBook(id: String,title:String, status: Int32,rating: Int32,isFavorite: Bool) -> MyBook {
         let livro = MyBook(context: self.persistentContainer.viewContext)
         
         livro.id = id
         livro.status = status
         livro.title = title
         livro.rating = rating
+        livro.isFavorite = isFavorite
         
         self.saveContext()
         return livro

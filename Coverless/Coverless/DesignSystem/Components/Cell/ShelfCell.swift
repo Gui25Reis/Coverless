@@ -12,14 +12,15 @@ let colors: [UIColor] = [.accent,.textPrimary,.titlePrimary,.backgroundPrimary]
 
 class ShelfCell: UICollectionViewCell, Designable{
 
-    private weak var delegate: ShelfCellDelegate? = nil
+    public weak var delegate: ShelfCellDelegate? = nil
 
-    
     private let bookTitle: UILabel
     private let bookStatus: StatusButton
     private let favButton: UIButton
     private let imgView: ImageBook
+    private var isFavorite: Bool
     private var stars: StarsRating
+    private var book: MyBook
     
     /* MARK: - Constraints da normais e de acessibilidade */
     private lazy var normalLayout = [
@@ -77,6 +78,8 @@ class ShelfCell: UICollectionViewCell, Designable{
         favButton = UIButton()
         imgView = ImageBook()
         stars = StarsRating()
+        isFavorite = false
+        book = MyBook()
         
         super.init(frame: frame)
         contentView.addSubview(imgView)
@@ -167,25 +170,58 @@ class ShelfCell: UICollectionViewCell, Designable{
     
     /* MARK: - Setup da celula */
     ///funcao acessada pela celula na collection
-    //autalizar para func setup(book: MyBook){}
-    func setup(title: String,status: BookStatus, rating: Int, delegate: ShelfCellDelegate?){
+    //autalizar para func setup(){}
+    func setup(book: MyBook){
+        self.book = book
         ///botao de status
-        bookStatus.setStatus(status:status)
+        bookStatus.setStatus(status: BookStatus(rawValue: Int(book.status)) ?? .reading)
         ///titulo do livro
-        bookTitle.text = title
+        bookTitle.text = book.title
         ///rating do livro
-        stars.setRating(rating: rating)
-        
-        stylize(with: DefaultDesignSystem.shared)
-        self.delegate = delegate
-        
+        stars.setRating(rating: Int(book.rating))
+        ///fav Button
+        stylize(with: DefaultDesignSystem.shared)        
     }
+   
+    ///funcao que eh recebe informacao do coreData
+    
+    func setFavorite(status: Bool){
+        ///se for favoritado
+        if status == true {
+            favButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            book.isFavorite = true
+        }
+        else{
+            favButton.setImage(UIImage(systemName: "heart"), for: .normal)
+            book.isFavorite = false
+        }
+        DataBooks.shared.saveContext()
+    }
+    
     
     @objc
     private func favorited() {
+        guard let delegate = delegate else { return }
+        //inverte os valores do botao
+        if (book.isFavorite == true){
+            favButton.setImage(UIImage(systemName: "heart"), for: .normal)
+            book.isFavorite = false
+        }
+        else{
             favButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            book.isFavorite = true
+        }
+        ///chama essa funcao apenas para mostrar o botao mudando de estado no momento do clique
+        setFavorite(status: book.isFavorite)
+        
+        DataBooks.shared.saveContext()
+        ///reload da segmented control
+        delegate.turnFav()
     }
     
+    func setTagButton(index: Int){
+        favButton.tag = index
+    }
     
     func setAccessibility(){
         self.accessibilityElements = [bookTitle, bookStatus, stars, favButton]
