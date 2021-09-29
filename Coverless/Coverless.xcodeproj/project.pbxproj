@@ -46,6 +46,7 @@
 		5B5A8BE526F907D200914277 /* HeaderTextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5A8BE426F907D200914277 /* HeaderTextStyle.swift */; };
 		5B79504F2703B13A007C1973 /* SubjectCollectionHeaderDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B79504E2703B13A007C1973 /* SubjectCollectionHeaderDataSource.swift */; };
 		5B7950512703B823007C1973 /* Environment.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B7950502703B823007C1973 /* Environment.plist */; };
+		5B7950532704EEAC007C1973 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7950522704EEAC007C1973 /* LoadingView.swift */; };
 		5B79A4C22702666700CFDFD6 /* SubjectCollectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B79A4C12702666700CFDFD6 /* SubjectCollectionHeader.swift */; };
 		5B7AB18427037BA3009380B4 /* CarouselAccessibilityElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7AB18327037BA3009380B4 /* CarouselAccessibilityElement.swift */; };
 		5B89273426F52ABD0002A3DA /* MoreInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B89273326F52ABD0002A3DA /* MoreInfoViewController.swift */; };
@@ -117,6 +118,7 @@
 		5B5A8BE426F907D200914277 /* HeaderTextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderTextStyle.swift; sourceTree = "<group>"; };
 		5B79504E2703B13A007C1973 /* SubjectCollectionHeaderDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectCollectionHeaderDataSource.swift; sourceTree = "<group>"; };
 		5B7950502703B823007C1973 /* Environment.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Environment.plist; sourceTree = "<group>"; };
+		5B7950522704EEAC007C1973 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		5B79A4C12702666700CFDFD6 /* SubjectCollectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectCollectionHeader.swift; sourceTree = "<group>"; };
 		5B7AB18327037BA3009380B4 /* CarouselAccessibilityElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselAccessibilityElement.swift; sourceTree = "<group>"; };
 		5B89273326F52ABD0002A3DA /* MoreInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreInfoViewController.swift; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 				224DBCA126F114DD002303F3 /* MenuView.swift */,
 				5B89273526F52ACA0002A3DA /* MoreInfoView.swift */,
 				5BE7CFC726FBA6EB00927439 /* DiscoverView.swift */,
+				5B7950522704EEAC007C1973 /* LoadingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -552,6 +555,7 @@
 				5BD62AE726FE601B00EC924D /* NYTDatas.swift in Sources */,
 				5BFEE41126FA006B00D3A6CC /* MoreInfoViewModel.swift in Sources */,
 				5BE28E0126F134EB0043F19E /* UIColor+Palette.swift in Sources */,
+				5B7950532704EEAC007C1973 /* LoadingView.swift in Sources */,
 				5B47F65326F3DC3100FDF48D /* DiscoverCoordinator.swift in Sources */,
 				223B720526FE616200B9822E /* Book.swift in Sources */,
 				5B47F65726F3E1B400FDF48D /* ShelfCoordinator.swift in Sources */,
