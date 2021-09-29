@@ -77,6 +77,7 @@ extension DiscoverViewController:UICollectionViewDelegate {
             cell.didDeselectCell()
         }
     }
+    
 }
 
 extension DiscoverViewController: SynopsisCellDelegate {
