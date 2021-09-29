@@ -34,6 +34,11 @@ class DiscoverViewController: UIViewController {
         super.viewDidLoad()
         dataSource.cellDelegate = self
         contentView.bindCollectionView(delegate: self, dataSource: dataSource)
+        dataSource.fetchBooks { [weak self] in
+            DispatchQueue.main.async {
+                self?.contentView.collectionView.reloadData()
+            }
+        }
     }
 
 }

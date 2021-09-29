@@ -14,7 +14,6 @@ class NYTRepository {
     private var books:[Book] = []
     private var categories:[String:NYTCategory] = [:]
     
-    
     /**
         Faz a chamada da API com base na palavra chave.
      
@@ -29,10 +28,11 @@ class NYTRepository {
         self.books = []
         
         let session:URLSession = URLSession.shared
+
                 
         var apiUrl:String = "https://api.nytimes.com/svc/books/v3/lists/"       // Chamada padrão
-        apiUrl += "\(self.getDate(category: self.categories[text]!))"           // Data randomica
-        apiUrl += "/\(self.fixStringSpaces(text)).json?"                        // Filtragem pela categoria
+        //apiUrl += "\(self.getDate(category: self.categories[text]!))"           // Data randomica
+        apiUrl += "/\(text).json?"                        // Filtragem pela categoria
         
         session.dataTask(with: URL(string: apiUrl+"api-key=\(self.getToken())")!) { data, response, error in
             if let error = error {

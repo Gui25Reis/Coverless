@@ -30,33 +30,7 @@ final class SubjectCollectionHeader: UICollectionReusableView {
     
     var carouselAccessibilityElement: CarouselAccessibilityElement?
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        backgroundColor = .clear
-        addSubview(subjectCollection)
-        subjectCollection.strechToBounds(of: self)
-        subjectCollection.delegate = self
-        subjectCollection.dataSource = self
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    
-    let subjects = PropertyListDecoder.decode("Subjects", to: [Subject].self) ?? []
-    
-    lazy var selectedSubject: Subject? = {
-        if subjects.isEmpty {
-            return nil
-        } else {
-            return subjects[0]
-        }
-    }() {
-        didSet {
-            carouselAccessibilityElement?.currentSubject = selectedSubject
-        }
-    }
+    weak var dataSource: SubjectCollectionHeaderDataSource?
     
     private var _accessibilityElements: [Any]?
     
@@ -66,7 +40,7 @@ final class SubjectCollectionHeader: UICollectionReusableView {
         } get {
             guard
                 _accessibilityElements == nil,
-                let selectedSubject = self.selectedSubject
+                let selectedSubject = self.dataSource?.selectedSubject
             else { return _accessibilityElements }
             
             let carouselAccessibilityElement: CarouselAccessibilityElement
@@ -84,48 +58,31 @@ final class SubjectCollectionHeader: UICollectionReusableView {
             return _accessibilityElements
         }
     }
-}
-extension SubjectCollectionHeader: UICollectionViewDelegate {
-        
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedSubject = subjects[indexPath.row]
-        
-        guard let cell = collectionView.cellForItem(at: indexPath) as? SubjectCell else {
-            return
-        }
-        updateSubjectCellAppearence(cell, isSelected: true)
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        backgroundColor = .clear
+        addSubview(subjectCollection)
+        subjectCollection.strechToBounds(of: self)
+        NotificationCenter.default.addObserver(self, selector: #selector(subjectIsChanged), name: .didSelectSubject, object: nil)
     }
     
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? SubjectCell else {
-            return
-        }
-        updateSubjectCellAppearence(cell, isSelected: false)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
-    private func updateSubjectCellAppearence(_ cell: SubjectCell, isSelected: Bool) {
-        if isSelected {
-            cell.didSelectCell()
-        } else {
-            cell.didDeselectCell()
-        }
-    }
-
-}
-
-extension SubjectCollectionHeader: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return subjects.count
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SubjectCell.identifier, for: indexPath) as? SubjectCell else {
-            preconditionFailure("Cell COnfigured in a incorrect manner")
-        }
-        
-        let isSelected = selectedSubject == subjects[indexPath.row]
-        cell.setup(with: subjects[indexPath.row].name, isSelected: isSelected)
-        
-        return cell
+    @objc
+    private func subjectIsChanged(_ notification: Notification) {
+        carouselAccessibilityElement?.currentSubject = dataSource?.selectedSubject
+    }
+    
+    func setup(dataSource: SubjectCollectionHeaderDataSource) {
+        self.dataSource = dataSource
+        subjectCollection.dataSource = dataSource
+        subjectCollection.delegate = dataSource
     }
 }

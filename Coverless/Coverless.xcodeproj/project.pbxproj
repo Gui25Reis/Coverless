@@ -42,6 +42,8 @@
 		5B47F65726F3E1B400FDF48D /* ShelfCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B47F65626F3E1B400FDF48D /* ShelfCoordinator.swift */; };
 		5B47F65926F3E2CB00FDF48D /* ShelfViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B47F65826F3E2CB00FDF48D /* ShelfViewController.swift */; };
 		5B5A8BE526F907D200914277 /* HeaderTextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5A8BE426F907D200914277 /* HeaderTextStyle.swift */; };
+		5B79504F2703B13A007C1973 /* SubjectCollectionHeaderDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B79504E2703B13A007C1973 /* SubjectCollectionHeaderDataSource.swift */; };
+		5B7950512703B823007C1973 /* Environment.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B7950502703B823007C1973 /* Environment.plist */; };
 		5B79A4C22702666700CFDFD6 /* SubjectCollectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B79A4C12702666700CFDFD6 /* SubjectCollectionHeader.swift */; };
 		5B7AB18427037BA3009380B4 /* CarouselAccessibilityElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7AB18327037BA3009380B4 /* CarouselAccessibilityElement.swift */; };
 		5B89273426F52ABD0002A3DA /* MoreInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B89273326F52ABD0002A3DA /* MoreInfoViewController.swift */; };
@@ -109,6 +111,8 @@
 		5B47F65626F3E1B400FDF48D /* ShelfCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfCoordinator.swift; sourceTree = "<group>"; };
 		5B47F65826F3E2CB00FDF48D /* ShelfViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfViewController.swift; sourceTree = "<group>"; };
 		5B5A8BE426F907D200914277 /* HeaderTextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderTextStyle.swift; sourceTree = "<group>"; };
+		5B79504E2703B13A007C1973 /* SubjectCollectionHeaderDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectCollectionHeaderDataSource.swift; sourceTree = "<group>"; };
+		5B7950502703B823007C1973 /* Environment.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Environment.plist; sourceTree = "<group>"; };
 		5B79A4C12702666700CFDFD6 /* SubjectCollectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectCollectionHeader.swift; sourceTree = "<group>"; };
 		5B7AB18327037BA3009380B4 /* CarouselAccessibilityElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselAccessibilityElement.swift; sourceTree = "<group>"; };
 		5B89273326F52ABD0002A3DA /* MoreInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreInfoViewController.swift; sourceTree = "<group>"; };
@@ -343,6 +347,7 @@
 			children = (
 				5BD62AE426FE601B00EC924D /* Google */,
 				5BD62AE126FE601B00EC924D /* NewYorkTIme */,
+				5B7950502703B823007C1973 /* Environment.plist */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -432,6 +437,7 @@
 			isa = PBXGroup;
 			children = (
 				5BE7CFCA26FBB82500927439 /* DiscoverCollectionViewDataSource.swift */,
+				5B79504E2703B13A007C1973 /* SubjectCollectionHeaderDataSource.swift */,
 			);
 			path = DataSources;
 			sourceTree = "<group>";
@@ -500,6 +506,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B7950512703B823007C1973 /* Environment.plist in Resources */,
 				224DBC9426F113B3002303F3 /* LaunchScreen.storyboard in Resources */,
 				224DBC9126F113B3002303F3 /* Assets.xcassets in Resources */,
 				5BD290E126FD0E420082620D /* Subjects.plist in Resources */,
@@ -565,6 +572,7 @@
 				5B89273426F52ABD0002A3DA /* MoreInfoViewController.swift in Sources */,
 				224DBC8826F113B3002303F3 /* AppDelegate.swift in Sources */,
 				224DBC8A26F113B3002303F3 /* SceneDelegate.swift in Sources */,
+				5B79504F2703B13A007C1973 /* SubjectCollectionHeaderDataSource.swift in Sources */,
 				5B79A4C22702666700CFDFD6 /* SubjectCollectionHeader.swift in Sources */,
 				5BC4634C26F25D43007155C1 /* LabelDesignable.swift in Sources */,
 				22F62BE427038F6D0076CA34 /* PropertyListDecoder.swift in Sources */,
@@ -711,7 +719,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 534V229RMK;
+				DEVELOPMENT_TEAM = WK7599VNDW;
 				INFOPLIST_FILE = Coverless/System/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -730,7 +738,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 534V229RMK;
+				DEVELOPMENT_TEAM = WK7599VNDW;
 				INFOPLIST_FILE = Coverless/System/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
