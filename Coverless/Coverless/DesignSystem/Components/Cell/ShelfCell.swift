@@ -183,10 +183,7 @@ class ShelfCell: UICollectionViewCell, Designable{
     
     @objc
     private func favorited() {
-        if favButton.isSelected {
             favButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-        } else {
-            favButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)}
     }
     
     
