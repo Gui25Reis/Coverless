@@ -36,6 +36,11 @@ class DiscoverCoordinator: Coordinator {
         navigationController.pushViewController(vc, animated: true)
     }
     
+    func discoverBook(book: Book) {
+        let vc = DiscoveredBookViewController(book: book)
+        navigationController.present(vc, animated: true, completion: nil)
+    }
+    
     private func setupBarAppearence() {
         let designSystem: DesignSystem = DefaultDesignSystem.shared
         
