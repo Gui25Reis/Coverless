@@ -70,10 +70,10 @@ class NYTRepository {
     */
     public func getCategories(_ completionHandler: @escaping (Result<[String:NYTCategory], Error>) -> Void) -> Void {
         let session = URLSession.shared
-        
+        let key = self.getToken()
         let apiUrl = "https://api.nytimes.com/svc/books/v3/lists/names.json?"
                 
-        session.dataTask(with: URL(string: apiUrl+"&api-key=\(self.getToken())")!) { data, response, error in
+        session.dataTask(with: URL(string: apiUrl+"&api-key=\(key)")!) { data, response, error in
             if let error = error {
                 completionHandler(.failure(error))
                 return
@@ -201,15 +201,17 @@ class NYTRepository {
     private func getToken() -> String {
         var myDict: [String:String]?
         if let path = Bundle.main.path(forResource: "Environment", ofType: "plist") {
+            print(path)
             myDict = NSDictionary(contentsOfFile: path) as? [String:String]
         }
+        print(myDict)
         return myDict!["NewYorkKey"]!
     }
 
     
     /**
         Converte os espaços da String para %20 para fazer a chamda na API
-     
+     s
         - Parametros:
             - str: String que vai ser manipulada
  
