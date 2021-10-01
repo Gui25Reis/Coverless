@@ -19,7 +19,7 @@ class DiscoverViewController: UIViewController {
     }}
     
     enum ViewState {
-        case presenting, loading, error
+        case presenting, loading, error, refreshing
     }
     
     init(designSystem: DesignSystem = DefaultDesignSystem(),
@@ -50,6 +50,10 @@ class DiscoverViewController: UIViewController {
         contentView.bindCollectionView(delegate: self, dataSource: dataSource)
         handleLoadingState()
         selectBooks()
+        
+        if let refreshControl = contentView.collectionView.refreshControl {
+            refreshControl.addTarget(self, action: #selector(refreshBooks), for: .valueChanged)
+        }
     }
     
     @objc
@@ -67,6 +71,17 @@ class DiscoverViewController: UIViewController {
         }
     }
     
+    @objc
+    private func refreshBooks() {
+        self.state = .refreshing
+        dataSource.fetchBooks { [weak self] in
+            DispatchQueue.main.async {
+                self?.state = .presenting
+                self?.contentView.collectionView.reloadData()
+            }
+        }
+    }
+    
     private func handleState() {
         switch state {
         case .presenting:
@@ -75,6 +90,8 @@ class DiscoverViewController: UIViewController {
             handleLoadingState()
         case .error:
             handleErrorState()
+        case .refreshing:
+            handleRefreshState()
         }
     }
     
@@ -88,6 +105,10 @@ class DiscoverViewController: UIViewController {
     
     private func handleErrorState() {
         
+    }
+    
+    private func handleRefreshState() {
+        contentView.setupRefreshState()
     }
 
 }
@@ -104,10 +125,7 @@ extension DiscoverViewController: UICollectionViewDelegate {
 
 extension DiscoverViewController: SynopsisCellDelegate {
     func showInfo(for book: Book) {
-        
-        let viewModel = MoreInfoViewModel(bookID: book.id ?? "", synopsis: book.description , rating: 4)
-        
-        coordinator?.showMoreInfo(viewModel: viewModel)
+        coordinator?.showMoreInfo(for: book)
     }
     
     func discoverBook(_ book: Book) {

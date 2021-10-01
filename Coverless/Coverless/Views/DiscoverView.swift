@@ -37,10 +37,12 @@ final class DiscoverView: UIView, Designable {
         return collectionView
     }()
     
+    private let refreshControl: UIRefreshControl
     private let loadingView: LoadingView
     
     init(designSystem: DesignSystem = DefaultDesignSystem()) {
         loadingView = LoadingView(designSystem: designSystem)
+        refreshControl = UIRefreshControl()
         super.init(frame: .zero)
         setupHierarchy()
         setupLayout()
@@ -53,6 +55,7 @@ final class DiscoverView: UIView, Designable {
     
     private func setupHierarchy() {
         addSubview(collectionView)
+        collectionView.refreshControl = refreshControl
     }
     
     private func setupLayout() {
@@ -71,7 +74,16 @@ final class DiscoverView: UIView, Designable {
     
     func setupPresentationState() {
         collectionView.backgroundView = nil
+        
+        if refreshControl.isRefreshing {
+            refreshControl.endRefreshing()
+        }
+        
         loadingView.stop()
+    }
+    
+    func setupRefreshState() {
+        refreshControl.beginRefreshing()
     }
     
     func stylize(with designSystem: DesignSystem) {
@@ -79,6 +91,8 @@ final class DiscoverView: UIView, Designable {
         collectionView.backgroundColor = .clear
         collectionView.accessibilityContainerType = .list
         collectionView.shouldGroupAccessibilityChildren = true
+        refreshControl.tintColor = designSystem.palette.accent
+        refreshControl.attributedTitle = NSAttributedString(string: "fetching more books...")
     }
     
     func bindCollectionView(delegate: UICollectionViewDelegate, dataSource: UICollectionViewDataSource) {

@@ -11,6 +11,9 @@ class DiscoveredBookViewController: UIViewController {
     
     private let contentView: DiscoveredBookView
     private let book: Book
+    private lazy var barButtonItem: UIBarButtonItem  = .init(barButtonSystemItem: .done, target: self, action: #selector(didTapDone))
+    
+    weak var coordinator: DiscoverCoordinator?
     
     init(book:Book, designSystem: DesignSystem = DefaultDesignSystem()) {
         self.book = book
@@ -28,8 +31,14 @@ class DiscoveredBookViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        contentView.accessibilityViewIsModal = true
+        navigationItem.rightBarButtonItem = barButtonItem
+    }
+    
+    @objc
+    private func didTapDone() {
+        UIAccessibility.post(notification: .screenChanged, argument: coordinator?.navigationController)
+        dismiss(animated: true, completion: nil)
     }
 
 }
