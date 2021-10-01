@@ -11,18 +11,32 @@ class DiscoverViewController: UIViewController {
     
     weak var coordinator: DiscoverCoordinator?
     
-    let contentView: DiscoverView
-    let dataSource: DiscoverCollectionViewDataSource
+    private let contentView: DiscoverView
+    private let dataSource: DiscoverCollectionViewDataSource
+    
+    private var state: ViewState { didSet {
+        handleState()
+    }}
+    
+    enum ViewState {
+        case presenting, loading, error
+    }
     
     init(designSystem: DesignSystem = DefaultDesignSystem(),
          dataSource: DiscoverCollectionViewDataSource = DiscoverCollectionViewDataSource()) {
         self.contentView = DiscoverView()
         self.dataSource = dataSource
+        self.state = .loading
         super.init(nibName: nil, bundle: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleSubjectNotification(_:)), name: .didSelectSubject, object: nil)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     override func loadView() {
@@ -34,59 +48,70 @@ class DiscoverViewController: UIViewController {
         super.viewDidLoad()
         dataSource.cellDelegate = self
         contentView.bindCollectionView(delegate: self, dataSource: dataSource)
+        handleLoadingState()
+        selectBooks()
+    }
+    
+    @objc
+    private func handleSubjectNotification(_ notification: Notification) {
+        selectBooks()
+    }
+    
+    private func selectBooks() {
+        self.state = .loading
+        dataSource.fetchBooks { [weak self] in
+            DispatchQueue.main.async {
+                self?.state = .presenting
+                self?.contentView.collectionView.reloadData()
+            }
+        }
+    }
+    
+    private func handleState() {
+        switch state {
+        case .presenting:
+            handlePresetingState()
+        case .loading:
+            handleLoadingState()
+        case .error:
+            handleErrorState()
+        }
+    }
+    
+    private func handlePresetingState() {
+        contentView.setupPresentationState()
+    }
+    
+    private func handleLoadingState() {
+        contentView.setupLoadingState()
+    }
+    
+    private func handleErrorState() {
+        
     }
 
 }
-extension DiscoverViewController:UICollectionViewDelegate {
+extension DiscoverViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
-            guard let cell = collectionView.cellForItem(at: indexPath) as? SubjectCell else {
-                return
-            }
-            updateSubjectCellAppearence(cell, isSelected: true)
-            handleSubjectCellSelection(for: collectionView, at: indexPath)
-        }
-    }
-    
-    private func handleSubjectCellSelection(for collectionView: UICollectionView, at indexPath: IndexPath) {
         
-
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
-            guard let cell = collectionView.cellForItem(at: indexPath) as? SubjectCell else {
-                return
-            }
-            updateSubjectCellAppearence(cell, isSelected: false)
-            handleSubjectCellDeselection(for: collectionView, at: indexPath)
-        }
-    }
-    
-    private func handleSubjectCellDeselection(for collectionView: UICollectionView, at indexPath: IndexPath) {
-        
-    }
-    
-    private func updateSubjectCellAppearence(_ cell: SubjectCell, isSelected: Bool) {
-        
-        
-        if isSelected {
-            cell.didSelectCell()
-        } else {
-            cell.didDeselectCell()
-        }
+
     }
     
 }
 
 extension DiscoverViewController: SynopsisCellDelegate {
-    func showInfo() {
-        coordinator?.showMoreInfo(viewModel: MoreInfoViewModel(bookID: "123", synopsis: "Harry Potter é um garoto órfão que vive infeliz com seus tios, os Dursleys. Ele recebe uma carta contendo um convite para ingressar em Hogwarts, uma famosa escola especializada em formar jovens…", rating: 0))
+    func showInfo(for book: Book) {
+        
+        let viewModel = MoreInfoViewModel(bookID: book.id ?? "", synopsis: book.description , rating: 4)
+        
+        coordinator?.showMoreInfo(viewModel: viewModel)
     }
     
-    func discoverBook() {
-        print("discover pressed")
+    func discoverBook(_ book: Book) {
+        coordinator?.discoverBook(book: book)
     }
     
     

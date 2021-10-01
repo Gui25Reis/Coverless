@@ -28,7 +28,6 @@ final class MoreInfoView: UIView, Designable {
         tv.isEditable = false
         tv.stylize(with: designSystem.text.body)
         tv.adjustsFontForContentSizeCategory = true
-        tv.text = "Harry Potter é um garoto órfão que vive infeliz com seus tios, os Dursleys. Ele recebe uma carta contendo um convite para ingressar em Hogwarts, uma famosa escola especializada em formar jovens… Harry Potter é um garoto órfão que vive infeliz com seus tios, os Dursleys. Ele recebe uma carta contendo um convite para ingressar em Hogwarts, uma famosa escola especializada em formar jovens…"
         let padding = -tv.textContainer.lineFragmentPadding
         tv.contentInset = .init(top: padding, left: padding, bottom: 0, right: padding)
         
@@ -41,6 +40,39 @@ final class MoreInfoView: UIView, Designable {
         l.stylize(with: designSystem.text.header)
         l.numberOfLines = 0
         l.text = "Rating"
+        return l
+    }()
+    
+    private lazy var stars: StarsRating = {
+        let stars = StarsRating()
+        stars.translatesAutoresizingMaskIntoConstraints = false
+        return stars
+    }()
+    
+    private lazy var otherInfoHeader: UILabel = {
+        let l = UILabel()
+        l.translatesAutoresizingMaskIntoConstraints = false
+        l.stylize(with: designSystem.text.header)
+        l.numberOfLines = 0
+        l.text = "Other info"
+        return l
+    }()
+    
+    private lazy var authorLabel: UILabel = {
+        let l = UILabel()
+        l.translatesAutoresizingMaskIntoConstraints = false
+        l.stylize(with: designSystem.text.body)
+        l.numberOfLines = 0
+        l.text = "Author: Robert C. Martin"
+        return l
+    }()
+    
+    private lazy var publisherLabel: UILabel = {
+        let l = UILabel()
+        l.translatesAutoresizingMaskIntoConstraints = false
+        l.stylize(with: designSystem.text.body)
+        l.numberOfLines = 0
+        l.text = "Publisher: Clean code books"
         return l
     }()
     
@@ -72,6 +104,8 @@ final class MoreInfoView: UIView, Designable {
         stv.translatesAutoresizingMaskIntoConstraints = false
         stv.distribution = .equalSpacing
         stv.spacing = designSystem.spacing.smallPositive
+        stv.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 8, right: 0)
+        stv.isLayoutMarginsRelativeArrangement = true
         return stv
     }()
     
@@ -102,6 +136,10 @@ final class MoreInfoView: UIView, Designable {
         stackView.addArrangedSubview(synopsisHeader)
         stackView.addArrangedSubview(synopsisField)
         stackView.addArrangedSubview(ratingHeader)
+        stackView.addArrangedSubview(stars)
+        stackView.addArrangedSubview(otherInfoHeader)
+        stackView.addArrangedSubview(authorLabel)
+        stackView.addArrangedSubview(publisherLabel)
     }
     
     private func setupLayout() {
@@ -142,6 +180,7 @@ final class MoreInfoView: UIView, Designable {
     //MARK: Bindings
     func setupContent(synopsis: String, rating: Int) {
         synopsisField.text = synopsis
+        stars.setRating(rating: rating)
         
     }
     

@@ -15,7 +15,7 @@ struct Items: Decodable {
 }
 
 struct BookId: Decodable {
-    let id:String
+    let id:String?
     let volumeInfo:BookInformation
     let saleInfo:BookShop?
 }
@@ -24,6 +24,8 @@ struct BookInformation: Decodable {
     let title:String?
     let description:String?
     let imageLinks:BookImages?
+    let authors:[String]?
+    let publisher:String?
 }
 
 
@@ -45,6 +47,7 @@ struct BookShop:Decodable {
 */
 struct UsedCategory {
     var maxBooks:Int
-    var timesUsed:Int
+    var avaiable:[Int]
+    var cont:Int
 }
 

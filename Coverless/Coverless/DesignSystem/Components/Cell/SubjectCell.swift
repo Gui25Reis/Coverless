@@ -39,6 +39,18 @@ final class SubjectCell: UICollectionViewCell, Designable {
         subject = nil
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        setupShadow()
+    }
+    
+    private func setupShadow() {
+        layer.shadowPath = UIBezierPath(roundedRect: contentView.bounds, cornerRadius: 18).cgPath
+        layer.shadowOffset = CGSize(width: 2, height: 2.0)
+        layer.shadowRadius = 2.0
+        layer.shadowOpacity = 0.1
+    }
+    
     private func setupHierarchy() {
         contentView.addSubview(descriptionLabel)
     }
@@ -53,11 +65,13 @@ final class SubjectCell: UICollectionViewCell, Designable {
     }
     
     func didSelectCell(with designSystem: DesignSystem = DefaultDesignSystem()) {
+        isSelected = true
         contentView.backgroundColor = designSystem.palette.accent
         descriptionLabel.textColor = .white
     }
     
     func didDeselectCell(with designSystem: DesignSystem = DefaultDesignSystem()) {
+        isSelected = false
         contentView.backgroundColor = designSystem.palette.backgroundCell
         descriptionLabel.textColor = designSystem.palette.accent
 
@@ -82,14 +96,6 @@ final class SubjectCell: UICollectionViewCell, Designable {
         contentView.backgroundColor = designSystem.palette.backgroundCell
         contentView.layer.cornerRadius = 18
         descriptionLabel.isUserInteractionEnabled = false
-        
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOffset = CGSize(width: 2, height: 2.0)
-        layer.shadowRadius = 2.0
-        layer.shadowOpacity = 0.2
-        layer.masksToBounds = false
-        
-        
     }
     
     private func setupAccesibility() {
