@@ -181,6 +181,7 @@ final class AsyncImage: UIView {
     }
 }
 
+/*
 #if(DEBUG)
 import SwiftUI
 
@@ -194,3 +195,4 @@ struct DiscoveredBookView_Preview: PreviewProvider {
     }
 }
 #endif
+*/

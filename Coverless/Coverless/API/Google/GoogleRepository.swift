@@ -35,9 +35,10 @@ class GoogleRepository {
         var startIndex:Int = 0
         var used:Bool = false
         
-        if let textStruct = self.lastCategory[text] {
+        if let _ = self.lastCategory[text] {
             used = true
-            startIndex = textStruct.avaiable[0]
+            self.lastCategory[text]?.index += 1
+            startIndex = self.lastCategory[text]!.index
         }
         
         guard let url = URL(string: self.getUrl(text, startIndex)) else {
@@ -65,9 +66,9 @@ class GoogleRepository {
                 return
             }
             
-            
             // Erro na hora de decodificar
             guard let books = try? JSONDecoder().decode(Items.self, from: data) else {
+                self.lastCategory[text]?.index = -1
                 completionHandler(.failure(APIError.badDecode))
                 return
             }
@@ -75,14 +76,10 @@ class GoogleRepository {
             self.books = []
             self.compactInfo(items: books)
             
-            if (used) {
-                self.lastCategory[text]?.avaiable.removeFirst()
-                self.lastCategory[text]?.cont += self.books.count
-            } else {
+            if (!used) {
                 self.lastCategory[text] = UsedCategory(
                     maxBooks: books.totalItems,
-                    avaiable: Array(1...books.totalItems/40).shuffled(),
-                    cont: 0
+                    index: 0
                 )
             }
             completionHandler(.success(self.books))
@@ -119,9 +116,10 @@ class GoogleRepository {
         let key = self.getToken()
         if key == "" {return ""}
         
+        print("\n\n\n\tStart index = \(startIndex*40)\n\n\n")
         var apiUrl = "https://www.googleapis.com/books/v1/volumes?"             // Chamada normal
         apiUrl += "q=\(NYTRepository.fixStringSpaces(text))+subject:"           // Palavra chave + filtro
-        apiUrl += "&startIndex=\(startIndex)&maxResults=40"                     // Momento da lista
+        apiUrl += "&startIndex=\(startIndex * 40)&maxResults=40"                // Momento da lista
         apiUrl += "&printType=books&langRestrict=en"                            // Tipo de resultado
         apiUrl += "&key=\(key)"                                                 // Token
         return apiUrl
@@ -134,6 +132,9 @@ class GoogleRepository {
             - items: Struct com as informações recebidas da API
     */
     private func compactInfo(items:Items) -> Void {
+//        guard let items = items.items else {
+//            return
+//        }
         for info in items.items {
             // Condições para pegar um livro
             if let id = info.id,
