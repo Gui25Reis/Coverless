@@ -120,7 +120,6 @@ class GoogleRepository {
         let key = self.getToken()
         if key == "" {return ""}
         
-        print("\n\n\n\tStart index = \(startIndex*40)\n\n\n")
         var apiUrl = "https://www.googleapis.com/books/v1/volumes?"             // Chamada normal
         apiUrl += "q=\(NYTRepository.fixStringSpaces(text))+subject:"           // Palavra chave + filtro
         apiUrl += "&startIndex=\(startIndex * 40)&maxResults=40"                // Momento da lista
