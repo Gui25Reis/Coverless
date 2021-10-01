@@ -15,7 +15,7 @@ struct Items: Decodable {
 }
 
 struct BookId: Decodable {
-    let id:String
+    let id:String?
     let volumeInfo:BookInformation
     let saleInfo:BookShop?
 }
