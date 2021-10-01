@@ -47,6 +47,8 @@ class DiscoverViewController: UIViewController {
     public override func viewDidLoad() -> Void {
         super.viewDidLoad()
         dataSource.cellDelegate = self
+        dataSource.footerDelegate = self
+        
         contentView.bindCollectionView(delegate: self, dataSource: dataSource)
         handleLoadingState()
         selectBooks()
@@ -132,5 +134,10 @@ extension DiscoverViewController: SynopsisCellDelegate {
         coordinator?.discoverBook(book: book)
     }
     
-    
+}
+
+extension DiscoverViewController: DiscoverViewFooterDelegate {
+    func refreshList() {
+        refreshBooks()
+    }
 }
