@@ -10,4 +10,6 @@ struct DesignText {
     let body: TextStyle = BodyTextStyle()
     let title: TextStyle = TitleTextStyle()
     let header: TextStyle = HeaderTextStyle()
+    let largeSerif: TextStyle = LargeSerifTextStyle()
+    let largeTitle: TextStyle = LargeTitleTextStyle()
 }

@@ -111,7 +111,7 @@ extension DiscoverViewController: SynopsisCellDelegate {
     }
     
     func discoverBook(_ book: Book) {
-        print("discover pressed")
+        coordinator?.discoverBook(book: book)
     }
     
     

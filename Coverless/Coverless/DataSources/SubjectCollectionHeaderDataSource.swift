@@ -36,7 +36,7 @@ final class SubjectCollectionHeaderDataSource: NSObject, UICollectionViewDelegat
         cell.setup(with: subjects[indexPath.row].name, isSelected: isSelected)
         
         if isSelected {
-            collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
+            collectionView.selectItem(at: indexPath, animated: true, scrollPosition: [])
         }
         
         return cell
