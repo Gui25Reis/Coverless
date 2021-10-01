@@ -13,7 +13,7 @@ import Foundation
 class NYTRepository {
     private var books:[Book] = []
     private var categories:[String:NYTCategory] = [:]
-    
+    private var currentRunningTask:URLSessionDataTask? = nil
     
     /**
         Faz a chamada da API com base na palavra chave.
@@ -28,13 +28,84 @@ class NYTRepository {
     public func getBooks(text:String, _ completionHandler: @escaping (Result<[Book], Error>) -> Void) -> Void {
         self.books = []
         
+        // while (self.categories.isEmpty) {}
+        
+        if (self.categories.isEmpty) {
+            self.getCategories() {result in
+                switch result {
+                    case .success(_):
+                    
+                        self.apiCallBooks(text: text) { books in
+                            switch books {
+                                case .success(let book):
+                                    completionHandler(.success(book))
+                                    
+                                case .failure(let error):
+                                    completionHandler(.failure(error))
+                            }
+                        }
+
+                    case .failure(let error):
+                        completionHandler(.failure(error))
+                }
+            }
+        } else {
+            self.apiCallBooks(text: text) { books in
+                switch books {
+                    case .success(let book):
+                        completionHandler(.success(book))
+                    
+                    case .failure(let error):
+                        completionHandler(.failure(error))
+                }
+            }
+        }
+    }
+        
+    
+    /**
+         Pega todas as categorias disponiveis pela API
+      
+         - Return: um dicionário com as chaves sendo as categorias e pos valores as informações delas.`
+    */
+    public func getCategories(_ completionHandler: @escaping (Result<[String:NYTCategory], Error>) -> Void) -> Void {
+        let session = URLSession.shared
+        let key = self.getToken()
+        let apiUrl = "https://api.nytimes.com/svc/books/v3/lists/names.json?"
+                
+        session.dataTask(with: URL(string: apiUrl+"&api-key=\(key)")!) { data, response, error in
+            if let error = error {
+                completionHandler(.failure(error))
+                return
+            }
+            
+            if let response = response as? HTTPURLResponse, response.statusCode == 200 {
+                if let data = data {
+                    let decoder = JSONDecoder()
+                    let categories = try! decoder.decode(NYTCategories.self, from: data)
+                    
+                    completionHandler(.success(self.compactCategoryInfo(items: categories)))
+                }
+            }
+        }.resume()
+    }
+    
+    
+    
+    private func apiCallBooks(text:String, _ completionHandler: @escaping (Result<[Book], Error>) -> Void) -> Void {
         let session:URLSession = URLSession.shared
+        
+        if let currentRunningTask = self.currentRunningTask {
+            currentRunningTask.cancel()
+            self.currentRunningTask = nil
+        }
                 
         var apiUrl:String = "https://api.nytimes.com/svc/books/v3/lists/"       // Chamada padrão
         apiUrl += "\(self.getDate(category: self.categories[text]!))"           // Data randomica
-        apiUrl += "/\(self.fixStringSpaces(text)).json?"                        // Filtragem pela categoria
+        apiUrl += "/\(text).json?"                                              // Filtragem pela categoria
         
-        session.dataTask(with: URL(string: apiUrl+"api-key=\(self.getToken())")!) { data, response, error in
+        
+        let task = session.dataTask(with: URL(string: apiUrl+"api-key=\(self.getToken())")!) { data, response, error in
             if let error = error {
                 completionHandler(.failure(error))
                 return
@@ -50,35 +121,28 @@ class NYTRepository {
                     completionHandler(.success(self.books))
                 }
             }
-        }.resume()
+        }
+        
+        self.currentRunningTask = task
+        task.resume()
     }
     
     
-    /**
-         Pega todas as categorias disponiveis pela API
-      
-         - Return: um dicionário com as chaves sendo as categorias e pos valores as informações delas.`
-    */
-    public func getCategories(_ completionHandler: @escaping (Result<[String:NYTCategory], Error>) -> Void) -> Void {
-        let session = URLSession.shared
-        
-        let apiUrl = "https://api.nytimes.com/svc/books/v3/lists/names.json?"
-                
-        session.dataTask(with: URL(string: apiUrl+"&api-key=\(self.getToken())")!) { data, response, error in
-            if let error = error {
-                completionHandler(.failure(error))
-                return
+    
+    private func apiSuccessCall(text: String) -> [Book] {
+        var bookList:[Book]!
+        self.apiCallBooks(text: text) { books in
+            switch books {
+                case .success(let book):
+                    bookList = book
+                    break
+                case .failure(let error):
+                    bookList = []
+                    print("Erro nos Livros: \(error)")
+                    break
             }
-            
-            if let response = response as? HTTPURLResponse, response.statusCode == 200 {
-                if let data = data {
-                    let decoder = JSONDecoder()
-                    let categories = try! decoder.decode(NYTCategories.self, from: data)
-                    
-                    completionHandler(.success(self.compactCategoryInfo(items: categories)))
-                }
-            }
-        }.resume()
+        }
+        return bookList
     }
     
     
@@ -137,21 +201,23 @@ class NYTRepository {
     private func getToken() -> String {
         var myDict: [String:String]?
         if let path = Bundle.main.path(forResource: "Environment", ofType: "plist") {
+            print(path)
             myDict = NSDictionary(contentsOfFile: path) as? [String:String]
         }
+        print(myDict)
         return myDict!["NewYorkKey"]!
     }
 
     
     /**
         Converte os espaços da String para %20 para fazer a chamda na API
-     
+     s
         - Parametros:
             - str: String que vai ser manipulada
  
         - Return: nova string
     */
-    private func fixStringSpaces(_ str:String) -> String {
+    public static func fixStringSpaces(_ str:String) -> String {
         return str.replacingOccurrences(of: " ", with: "%20")
     }
     
@@ -172,7 +238,9 @@ class NYTRepository {
                 c.primary_isbn10 != nil &&
                 c.primary_isbn10 != "None" &&
                 c.book_image != nil &&
-                c.buy_links != nil
+                c.buy_links != nil &&
+                c.author != nil &&
+                c.publisher != nil
             ){
                 var salesDict:[String:String] = [:]
                 for sales in c.buy_links! {salesDict[sales.name] = sales.url}
@@ -184,6 +252,8 @@ class NYTRepository {
                         title: c.title!.capitalized,
                         description: c.description!,
                         image: c.book_image!,
+                        author: c.author!,
+                        publisher: c.publisher!,
                         buyLinks: salesDict
                     )
                 )
@@ -201,10 +271,10 @@ class NYTRepository {
     private func compactCategoryInfo(items:NYTCategories) -> [String:NYTCategory] {
         var dict:[String:NYTCategory] = [:]
         for c in items.results {
-            dict[c.list_name] = NYTCategory(
+            dict[c.list_name_encoded] = NYTCategory(
                 list_name: c.list_name,
                 // display_name: c.display_name,
-                // list_name_encoded: c.list_name_encoded,
+                list_name_encoded: c.list_name_encoded,
                 oldest_published_date: c.oldest_published_date,
                 newest_published_date: c.newest_published_date,
                 updated: c.updated

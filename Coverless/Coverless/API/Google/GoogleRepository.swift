@@ -10,6 +10,10 @@ import Foundation
 
 /**
     Classe responsável pela comunicação direta com a API do Google Books
+ 
+    Aqui é feita as requisições para API do Google books. Sempre que é feito uma nova chamada de uma categoria
+ vai ser retornado uma nova lista de livros. Só vai repetir a lista de livros quando acabar os diferentes, ai a lista passa
+ a repetir.
 */
 class GoogleRepository {
     private var books:[Book] = []
@@ -28,51 +32,62 @@ class GoogleRepository {
     */
     public func getBooks(text:String, _ completionHandler: @escaping (Result<[Book], Error>) -> Void) -> Void {
         
-        // Verifica se essa categoria ja foi usada
-        var used:Bool = false
-        if (self.lastCategory[text] != nil) {used = true}
-        else {self.lastCategory = [:]}
-        
-        // Se essa categoria já foi escolhida pega novos livros
         var startIndex:Int = 0
-        if (used) {
-            startIndex = self.lastCategory[text]!.timesUsed * 40
-            if (startIndex > self.lastCategory[text]!.maxBooks) {return}
+        var used:Bool = false
+        
+        if let textStruct = self.lastCategory[text] {
+            used = true
+            startIndex = textStruct.avaiable[0]
+        }
+        
+        guard let url = URL(string: self.getUrl(text, startIndex)) else {
+            completionHandler(.failure(APIError.badURL))
+            return
         }
         
         
-        
-
-        self.books = []
-
-        // API:
-        let session = URLSession.shared
-        
-        var apiUrl = "https://www.googleapis.com/books/v1/volumes?"             // Chamada normal
-        apiUrl += "q=\(text)+subject:"                                          // Palavra chave + filtro
-        apiUrl += "&startIndex=\(startIndex)&maxResults=40&printType=books"     // Parte da lista
-        
-        session.dataTask(with: URL(string: apiUrl+"&key=\(self.getToken())")!) { data, response, error in
-            // if let error = error {
-            if (error != nil) {// || (self.lastCategory[text] != nil && startIndex > self.lastCategory[text]!.maxBooks) {
-                completionHandler(.failure(error!))
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            // Erro da sessão
+            if let error = error {
+                completionHandler(.failure(APIError.url(error as? URLError)))
                 return
             }
             
-            if let response = response as? HTTPURLResponse, response.statusCode == 200 {
-                if let data = data {
-                    let decoder = JSONDecoder()
-                    let books = try! decoder.decode(Items.self, from: data)
-                    
-                    self.compactInfo(items: books)
-                    
-                    if (used) {self.lastCategory[text]?.timesUsed = self.lastCategory[text]!.timesUsed + 1}
-                    else {self.lastCategory[text] = UsedCategory(maxBooks: books.totalItems, timesUsed: 1)}
-                    
-                    completionHandler(.success(self.books))
-                }
+            // Não fez conexão com a API: servidor ou internet off
+            if let response = response as? HTTPURLResponse, response.statusCode != 200 {
+                completionHandler(.failure(APIError.badResponse(statusCode: response.statusCode)))
+                return
             }
-        }.resume()
+            
+            // Erro na hora de pagar os dados
+            guard let data = data else {
+                completionHandler(.failure(APIError.badData))
+                return
+            }
+            
+            
+            // Erro na hora de decodificar
+            guard let books = try? JSONDecoder().decode(Items.self, from: data) else {
+                completionHandler(.failure(APIError.badDecode))
+                return
+            }
+            
+            self.books = []
+            self.compactInfo(items: books)
+            
+            if (used) {
+                self.lastCategory[text]?.avaiable.removeFirst()
+                self.lastCategory[text]?.cont += self.books.count
+            } else {
+                self.lastCategory[text] = UsedCategory(
+                    maxBooks: books.totalItems,
+                    avaiable: Array(1...books.totalItems/40).shuffled(),
+                    cont: 0
+                )
+            }
+            completionHandler(.success(self.books))
+        }
+        task.resume()
     }
     
     
@@ -82,13 +97,35 @@ class GoogleRepository {
         - Return: chave da API
     */
     private func getToken() -> String {
-        var myDict: [String:String]?
-        if let path = Bundle.main.path(forResource: "Environment", ofType: "plist") {
-            myDict = NSDictionary(contentsOfFile: path) as? [String:String]
-        }
-        return myDict!["GoogleKey"]!
+        // Verifica se o arquivo existir
+        guard let path = Bundle.main.path(forResource: "Environment", ofType: "plist") else {return ""}
+        
+        let myDict = NSDictionary(contentsOfFile: path) as? [String:String]
+        
+        // Verifica se tem a chave
+        guard let key = myDict?["GoogleKey"] else {return ""}
+        
+        return key
     }
 
+    
+    
+    /**
+        Cria a URL para fazer a chamada na API
+     
+        - Return: url da requisição
+    */
+    private func getUrl(_ text:String, _ startIndex:Int) -> String {
+        let key = self.getToken()
+        if key == "" {return ""}
+        
+        var apiUrl = "https://www.googleapis.com/books/v1/volumes?"             // Chamada normal
+        apiUrl += "q=\(NYTRepository.fixStringSpaces(text))+subject:"           // Palavra chave + filtro
+        apiUrl += "&startIndex=\(startIndex)&maxResults=40"                     // Momento da lista
+        apiUrl += "&printType=books&langRestrict=en"                            // Tipo de resultado
+        apiUrl += "&key=\(key)"                                                 // Token
+        return apiUrl
+    }
     
     /**
         Faz a filtragem dos dados recebido para os livros
@@ -97,26 +134,31 @@ class GoogleRepository {
             - items: Struct com as informações recebidas da API
     */
     private func compactInfo(items:Items) -> Void {
-        for b in items.items {
-            //print(b.volumeInfo)
-            //print("\n\n")
-            if ( // Condições para pegar um livro
-                b.volumeInfo.title != nil &&
-                b.volumeInfo.description != nil &&
-                b.saleInfo != nil &&
-                b.saleInfo!.buyLink != nil &&
-                b.volumeInfo.imageLinks != nil &&
-                b.volumeInfo.imageLinks!.thumbnail != nil &&
-                b.volumeInfo.imageLinks!.smallThumbnail != nil
-            ){
+        for info in items.items {
+            // Condições para pegar um livro
+            if let id = info.id,
+               let title = info.volumeInfo.title,
+               let authors = info.volumeInfo.authors,
+               let publisher = info.volumeInfo.publisher,
+               let description = info.volumeInfo.description,
+               let _ = info.saleInfo,
+               let buyLink = info.saleInfo!.buyLink,
+               let _ = info.volumeInfo.imageLinks,
+               let imgThumbnail = info.volumeInfo.imageLinks!.thumbnail
+            {
+                var allAuthors:String = ""
+                for author in authors {allAuthors += author + " ,"}
+                
                 self.books.append(
                     Book(
-                        id: b.id,
+                        id: id,
                         isbn10: nil,
-                        title: b.volumeInfo.title!.capitalized,
-                        description: b.volumeInfo.description!,
-                        image:b.volumeInfo.imageLinks!.thumbnail!,
-                        buyLinks:["Google Books":"\(b.saleInfo!.buyLink!)"]
+                        title: title.capitalized,
+                        description: description,
+                        image:imgThumbnail,
+                        author: String(allAuthors.dropLast()),
+                        publisher: publisher,
+                        buyLinks:["Google Books":"\(buyLink)"]
                     )
                 )
             }

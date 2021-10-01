@@ -14,13 +14,14 @@ final class DiscoverView: UIView, Designable {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(500.0))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [ item ])
-        group.edgeSpacing = .init(leading: .fixed(0), top: .fixed(4), trailing: .fixed(0), bottom: .fixed(4))
+        group.edgeSpacing = .init(leading: .fixed(0), top: .fixed(0), trailing: .fixed(0), bottom: .fixed(8))
+        group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 18, bottom: 0, trailing: 18)
         let section = NSCollectionLayoutSection(group: group)
         let header = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .estimated(80)),
             elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
         section.boundarySupplementaryItems = [header]
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0.0, leading: 20.0, bottom: 0.0, trailing: 20.0)
+        //section.contentInsets = NSDirectionalEdgeInsets(top: 0.0, leading: 18.0, bottom: 0.0, trailing: 18.0)
         let layout = UICollectionViewCompositionalLayout(section: section)
         
         
@@ -36,7 +37,10 @@ final class DiscoverView: UIView, Designable {
         return collectionView
     }()
     
+    private let loadingView: LoadingView
+    
     init(designSystem: DesignSystem = DefaultDesignSystem()) {
+        loadingView = LoadingView(designSystem: designSystem)
         super.init(frame: .zero)
         setupHierarchy()
         setupLayout()
@@ -51,13 +55,23 @@ final class DiscoverView: UIView, Designable {
         addSubview(collectionView)
     }
     
-    func setupLayout() {
+    private func setupLayout() {
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
             collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
+    }
+    
+    func setupLoadingState() {
+        collectionView.backgroundView = loadingView
+        loadingView.start()
+    }
+    
+    func setupPresentationState() {
+        collectionView.backgroundView = nil
+        loadingView.stop()
     }
     
     func stylize(with designSystem: DesignSystem) {

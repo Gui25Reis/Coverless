@@ -8,6 +8,6 @@
 import Foundation
 
 protocol SynopsisCellDelegate: AnyObject {
-    func showInfo() -> Void
-    func discoverBook() -> Void
+    func showInfo(for book: Book) -> Void
+    func discoverBook(_ book: Book) -> Void
 }
