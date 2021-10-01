@@ -10,6 +10,10 @@ import Foundation
 
 /**
     Classe responsável pela comunicação direta com a API do Google Books
+ 
+    Aqui é feita as requisições para API do Google books. Sempre que é feito uma nova chamada de uma categoria
+ vai ser retornado uma nova lista de livros. Só vai repetir a lista de livros quando acabar os diferentes, ai a lista passa
+ a repetir.
 */
 class GoogleRepository {
     private var books:[Book] = []
@@ -31,30 +35,24 @@ class GoogleRepository {
         // Verifica se essa categoria ja foi usada
         var used:Bool = false
         if (self.lastCategory[text] != nil) {used = true}
-        else {self.lastCategory = [:]}
         
         // Se essa categoria já foi escolhida pega novos livros
         var startIndex:Int = 0
-        if (used) {
-            startIndex = self.lastCategory[text]!.timesUsed * 40
-            if (startIndex > self.lastCategory[text]!.maxBooks) {return}
-        }
-        
-        
-        
-
+        if (used) {startIndex = (self.lastCategory[text]?.avaiable[0])!}
+                
         self.books = []
 
         // API:
         let session = URLSession.shared
         
         var apiUrl = "https://www.googleapis.com/books/v1/volumes?"             // Chamada normal
-        apiUrl += "q=\(text)+subject:"                                          // Palavra chave + filtro
-        apiUrl += "&startIndex=\(startIndex)&maxResults=40&printType=books"     // Parte da lista
+        apiUrl += "q=\(NYTRepository.fixStringSpaces(text))+subject:"           // Palavra chave + filtro
+        apiUrl += "&startIndex=\(startIndex)&maxResults=40"                     // Momento da lista
+        apiUrl += "&printType=books&langRestrict=en"                            // Tipo de resultado
+        
         
         session.dataTask(with: URL(string: apiUrl+"&key=\(self.getToken())")!) { data, response, error in
-            // if let error = error {
-            if (error != nil) {// || (self.lastCategory[text] != nil && startIndex > self.lastCategory[text]!.maxBooks) {
+            if (error != nil) {
                 completionHandler(.failure(error!))
                 return
             }
@@ -66,9 +64,20 @@ class GoogleRepository {
                     
                     self.compactInfo(items: books)
                     
-                    if (used) {self.lastCategory[text]?.timesUsed = self.lastCategory[text]!.timesUsed + 1}
-                    else {self.lastCategory[text] = UsedCategory(maxBooks: books.totalItems, timesUsed: 1)}
-                    
+                    if (used) {
+                        self.lastCategory[text]?.avaiable.removeFirst()
+                        print("\nCategoria: \(text) - Faltam: \(self.lastCategory[text]!.avaiable.count)\n")
+                        self.lastCategory[text]?.cont += self.books.count
+                    }
+                    if (!used || self.lastCategory[text]?.avaiable.count == 0) {
+                        print("\n\n\nAcabou \(text): \(self.lastCategory[text]?.cont ?? 0) de \(self.lastCategory[text]?.maxBooks ?? 0)\n\n\n")
+                        
+                        self.lastCategory[text] = UsedCategory(
+                            maxBooks: books.totalItems,
+                            avaiable: Array(1...books.totalItems/40).shuffled(),
+                            cont: 0
+                        )
+                    }
                     completionHandler(.success(self.books))
                 }
             }
@@ -107,8 +116,14 @@ class GoogleRepository {
                 b.saleInfo!.buyLink != nil &&
                 b.volumeInfo.imageLinks != nil &&
                 b.volumeInfo.imageLinks!.thumbnail != nil &&
-                b.volumeInfo.imageLinks!.smallThumbnail != nil
+                b.volumeInfo.imageLinks!.smallThumbnail != nil &&
+                b.volumeInfo.publisher != nil &&
+                b.volumeInfo.authors != nil &&
+                b.volumeInfo.authors != []
             ){
+                var allAuthors:String = ""
+                for author in b.volumeInfo.authors! {allAuthors += author + " ,"}
+                
                 self.books.append(
                     Book(
                         id: b.id,
@@ -116,6 +131,8 @@ class GoogleRepository {
                         title: b.volumeInfo.title!.capitalized,
                         description: b.volumeInfo.description!,
                         image:b.volumeInfo.imageLinks!.thumbnail!,
+                        author: String(allAuthors.dropLast()),
+                        publisher: b.volumeInfo.publisher!,
                         buyLinks:["Google Books":"\(b.saleInfo!.buyLink!)"]
                     )
                 )

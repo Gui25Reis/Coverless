@@ -34,6 +34,7 @@ class NYTRepository {
             self.getCategories() {result in
                 switch result {
                     case .success(_):
+                    
                         self.apiCallBooks(text: text) { books in
                             switch books {
                                 case .success(let book):
@@ -214,7 +215,7 @@ class NYTRepository {
  
         - Return: nova string
     */
-    private func fixStringSpaces(_ str:String) -> String {
+    public static func fixStringSpaces(_ str:String) -> String {
         return str.replacingOccurrences(of: " ", with: "%20")
     }
     
@@ -235,7 +236,9 @@ class NYTRepository {
                 c.primary_isbn10 != nil &&
                 c.primary_isbn10 != "None" &&
                 c.book_image != nil &&
-                c.buy_links != nil
+                c.buy_links != nil &&
+                c.author != nil &&
+                c.publisher != nil
             ){
                 var salesDict:[String:String] = [:]
                 for sales in c.buy_links! {salesDict[sales.name] = sales.url}
@@ -247,6 +250,8 @@ class NYTRepository {
                         title: c.title!.capitalized,
                         description: c.description!,
                         image: c.book_image!,
+                        author: c.author!,
+                        publisher: c.publisher!,
                         buyLinks: salesDict
                     )
                 )

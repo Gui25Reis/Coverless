@@ -46,7 +46,6 @@
 		5B47F65926F3E2CB00FDF48D /* ShelfViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B47F65826F3E2CB00FDF48D /* ShelfViewController.swift */; };
 		5B5A8BE526F907D200914277 /* HeaderTextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5A8BE426F907D200914277 /* HeaderTextStyle.swift */; };
 		5B79504F2703B13A007C1973 /* SubjectCollectionHeaderDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B79504E2703B13A007C1973 /* SubjectCollectionHeaderDataSource.swift */; };
-		5B7950512703B823007C1973 /* Environment.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B7950502703B823007C1973 /* Environment.plist */; };
 		5B7950532704EEAC007C1973 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7950522704EEAC007C1973 /* LoadingView.swift */; };
 		5B79A4C22702666700CFDFD6 /* SubjectCollectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B79A4C12702666700CFDFD6 /* SubjectCollectionHeader.swift */; };
 		5B7AB18427037BA3009380B4 /* CarouselAccessibilityElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7AB18327037BA3009380B4 /* CarouselAccessibilityElement.swift */; };
@@ -119,7 +118,6 @@
 		5B47F65826F3E2CB00FDF48D /* ShelfViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfViewController.swift; sourceTree = "<group>"; };
 		5B5A8BE426F907D200914277 /* HeaderTextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderTextStyle.swift; sourceTree = "<group>"; };
 		5B79504E2703B13A007C1973 /* SubjectCollectionHeaderDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectCollectionHeaderDataSource.swift; sourceTree = "<group>"; };
-		5B7950502703B823007C1973 /* Environment.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Environment.plist; sourceTree = "<group>"; };
 		5B7950522704EEAC007C1973 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		5B79A4C12702666700CFDFD6 /* SubjectCollectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectCollectionHeader.swift; sourceTree = "<group>"; };
 		5B7AB18327037BA3009380B4 /* CarouselAccessibilityElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselAccessibilityElement.swift; sourceTree = "<group>"; };

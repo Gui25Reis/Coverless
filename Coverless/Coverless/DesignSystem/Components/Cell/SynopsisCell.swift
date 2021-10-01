@@ -24,13 +24,16 @@ class SynopsisCell: UICollectionViewCell, Designable{
         synopsisLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: \.largePositive),
         synopsisLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: \.mediumNegative),
         synopsisLabel.trailingAnchor.constraint(equalTo: infoButton.leadingAnchor, constant: \.smallNegative),
+        
         infoButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: \.mediumNegative),
         infoButton.bottomAnchor.constraint(equalTo: contentView.centerYAnchor, constant: \.xSmallNegative),
         infoButton.heightAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.2, constant: -20),
+        
         discoverButton.heightAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.2, constant: -20),
         discoverButton.leadingAnchor.constraint(equalTo: infoButton.leadingAnchor),
         discoverButton.trailingAnchor.constraint(equalTo: infoButton.trailingAnchor),
         discoverButton.topAnchor.constraint(equalTo: contentView.centerYAnchor, constant: \.xSmallPositive),
+        
         contentView.heightAnchor.constraint(greaterThanOrEqualTo: contentView.widthAnchor, multiplier: 0.4)
     ]
     
@@ -97,20 +100,13 @@ class SynopsisCell: UICollectionViewCell, Designable{
     }
     
     private func activateConstraints(){
-        if (traitCollection.preferredContentSizeCategory
-                < .accessibilityMedium) { // Default font sizes
-            accessibilityLayout.forEach{
-                $0.isActive = false
-            }
+        if (traitCollection.preferredContentSizeCategory < .accessibilityMedium) { // Default font sizes
+            NSLayoutConstraint.deactivate(accessibilityLayout)
             NSLayoutConstraint.activate(normalLayout)
-            
         } else { // Accessibility font sizes
-            normalLayout.forEach{
-                $0.isActive = false
-            }
+            NSLayoutConstraint.deactivate(normalLayout)
             NSLayoutConstraint.activate(accessibilityLayout)
         }
-        
     }
     
     private func setupActions() {
@@ -154,6 +150,7 @@ class SynopsisCell: UICollectionViewCell, Designable{
         backgroundColor = designSystem.palette.backgroundCell
         layer.cornerRadius = 12
         synopsisLabel.stylize(with: designSystem.text.body)
+        synopsisLabel.numberOfLines = 10
     }
     
     func setupAccessibility() {
