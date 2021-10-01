@@ -10,8 +10,9 @@ import UIKit
 class ShopView: UIView{
     
     let designSystem: DesignSystem
-
+    
     private let imageLogo: UIImageView
+    public var url: String
     public let shopTitle: UILabel
     public let priceValue: UILabel
     public let shopButton: UIButton
@@ -64,6 +65,7 @@ class ShopView: UIView{
         shopTitle = UILabel()
         priceValue = UILabel()
         shopButton = UIButton()
+        url = String()
         designSystem = DefaultDesignSystem()
         super.init(frame: .zero)
         setupLayout()
@@ -73,12 +75,13 @@ class ShopView: UIView{
         addSubview(priceValue)
         addSubview(shopButton)
         activateConstraints()
+        setupActions()
         
         
     }
     /// passa as informacoes de compra para a view
-    init(image: UIImage, titulo: String, price: String, designSystem: DesignSystem = DefaultDesignSystem()){
-        
+    init(image: UIImage, titulo: String, price: String,url: String, designSystem: DesignSystem = DefaultDesignSystem()){
+        self.url = url
         self.designSystem = designSystem
         
         imageLogo = UIImageView()
@@ -103,6 +106,7 @@ class ShopView: UIView{
         addSubview(shopButton)
         
         activateConstraints()
+        setupActions()
     }
 
     required init?(coder: NSCoder) {
@@ -150,6 +154,16 @@ class ShopView: UIView{
             NSLayoutConstraint.activate(accessibilityLayout)
         }
         
+    }
+    
+    private func setupActions(){
+        shopButton.addTarget(self, action: #selector(openURL), for: .touchUpInside)
+    }
+    
+    @objc func openURL(){
+        if let url = URL(string: url) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
     }
     
     func setAccessibility(){

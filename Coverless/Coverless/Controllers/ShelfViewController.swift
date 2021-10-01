@@ -50,7 +50,7 @@ final class ShelfViewController: UIViewController, ShelfCellDelegate{
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         segmentedControl.addTarget(self, action: #selector(indexChanged(_: )), for: .valueChanged)
         segmentedControl.selectedSegmentIndex = 0
-        
+        switchSegmented()
         
         view.addSubview(segmentedControl)
         view.addSubview(cv)
@@ -118,9 +118,12 @@ final class ShelfViewController: UIViewController, ShelfCellDelegate{
         {
         case 0:
             books = DataBooks.shared.getBooks().filter { $0.isFavorite == true}
+            if books.count == 0 {
+                setEmptyMessage(message: "No favorite books yet. Check out your discovered books in the Discovered option")
+            }
             //cv.reloadData()
         case 1:
-            books = DataBooks.shared.getBooks().filter { $0.isFavorite == false}
+            books = DataBooks.shared.getBooks()
             //cv.reloadData()
         default:
             break;
@@ -146,9 +149,12 @@ extension ShelfViewController:UICollectionViewDelegate{
 extension ShelfViewController:UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if (DataBooks.shared.getBooks().count == 0) {
-            setEmptyMessage() //emptyState
+            setEmptyMessage(message: "No books discovered on the shelf. Let's discover a new one?") //ALL emptyState
+            segmentedControl.isHidden = true
+      
         } else {
             restore() //collectionview com dados do coreData
+            segmentedControl.isHidden = false
         }
         return books.count
     }
@@ -164,11 +170,11 @@ extension ShelfViewController:UICollectionViewDataSource{
         return cell
     }
     
-    func setEmptyMessage() {
-        let empty = EmptyView()
+    func setEmptyMessage(message: String) {
+        let empty = EmptyView(message: message)
         cv.backgroundView = empty
+        cv.reloadData()
         empty.delegate = self
-        segmentedControl.isHidden = true
     }
     
     func restore() {

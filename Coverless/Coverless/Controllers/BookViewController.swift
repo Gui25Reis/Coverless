@@ -33,17 +33,31 @@ class BookViewController: UIViewController {
         contentView.setupButtonRead(setRead)
         contentView.setupButtonReading(setReading)
         contentView.setupButtonAbandoned(setAbandoned)
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareTapped))
 
     }
     
     private func setRead(){
         book.status = 0
+        DataBooks.shared.saveContext()
+
     }
     private func setReading(){
         book.status = 1
+        DataBooks.shared.saveContext()
+
     }
     private func setAbandoned(){
         book.status = 2
+        DataBooks.shared.saveContext()
+
     }
     
+    @objc private func shareTapped(){
+        let msgDefault = "Hey, look at this book I discovered through the Coverless app!"
+        let shareVc = UIActivityViewController(activityItems: [msgDefault,book.title ?? "","Synopsis:(\(book.synopsis ?? "Unavailable")",book.shopLink ?? ""], applicationActivities: [])
+        shareVc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+                present(shareVc, animated: true)
+    }
 }

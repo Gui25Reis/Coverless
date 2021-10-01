@@ -25,6 +25,7 @@ class ShelfCell: UICollectionViewCell, Designable{
     /* MARK: - Constraints da normais e de acessibilidade */
     private lazy var normalLayout = [
         imgView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.30),
+        imgView.heightAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.40),
         imgView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: \.mediumPositive),
         imgView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: \.largePositive),
         imgView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,constant: \.mediumNegative),
@@ -36,14 +37,14 @@ class ShelfCell: UICollectionViewCell, Designable{
         favButton.heightAnchor.constraint(equalToConstant: 36),
         
         bookTitle.trailingAnchor.constraint(equalTo:contentView.trailingAnchor,constant: \.smallNegative),
-        bookTitle.topAnchor.constraint(equalTo: contentView.topAnchor, constant: \.largePositive),
-        bookTitle.bottomAnchor.constraint(equalTo: bookStatus.topAnchor, constant: \.mediumNegative),
+        bookTitle.topAnchor.constraint(equalTo: contentView.topAnchor, constant: \.smallPositive),
+        bookTitle.bottomAnchor.constraint(equalTo: bookStatus.topAnchor, constant: \.smallNegative),
         
         bookStatus.leadingAnchor.constraint(equalTo: imgView.trailingAnchor,constant: \.smallPositive),
-        bookStatus.bottomAnchor.constraint(equalTo: stars.topAnchor, constant: \.mediumNegative),
+        bookStatus.bottomAnchor.constraint(equalTo: stars.topAnchor, constant: \.smallNegative),
         bookStatus.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.4),
         
-        stars.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: \.largeNegative),
+        stars.bottomAnchor.constraint(equalTo: imgView.bottomAnchor, constant: \.largeNegative),
         stars.leadingAnchor.constraint(equalTo: imgView.trailingAnchor,constant: \.smallPositive),
         stars.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: \.mediumNegative)
 
@@ -182,7 +183,7 @@ class ShelfCell: UICollectionViewCell, Designable{
         ///fav Button
         stylize(with: DefaultDesignSystem.shared)        
     }
-   
+
     ///funcao que eh recebe informacao do coreData
     
     func setFavorite(status: Bool){

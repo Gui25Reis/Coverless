@@ -39,25 +39,22 @@ class EmptyView: UIView{
         discoverButton.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: \.smallNegative)
     ]
     
-    
-    init() {
+    init(message: String){
         imageBook = ImageBook(image: UIImage(named: "ImageBookDefault")!)
         scrollView = UIScrollView()
         emptyText = UILabel()
         discoverButton = UIButton()
         designSystem = DefaultDesignSystem()
+        emptyText.text = message
         super.init(frame: .zero)
         addSubview(scrollView)
         scrollView.addSubview(imageBook)
         scrollView.addSubview(emptyText)
         scrollView.addSubview(discoverButton)
-
-        
         setupLayout()
         stylize(with: designSystem)
         activateConstraints()
         setupActions()
-
     }
     
     required init?(coder: NSCoder) {fatalError("init(coder:) has not been implemented")}
@@ -77,7 +74,6 @@ class EmptyView: UIView{
         discoverButton.layer.cornerRadius = 8
         
         ///texto
-        emptyText.text = "No books discovered on the shelf. Let's discover a new one?"
         emptyText.numberOfLines = 0
     }
     

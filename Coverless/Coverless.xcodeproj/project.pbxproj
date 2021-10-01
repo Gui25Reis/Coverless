@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1337333B2704FBD20052BF27 /* ShelfCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1337333A2704FBD20052BF27 /* ShelfCellDelegate.swift */; };
+		1337333F27077C730052BF27 /* Environment.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1337333E27077C730052BF27 /* Environment.plist */; };
 		13471FBB26F283C4007296E2 /* BodyTextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13471FBA26F283C4007296E2 /* BodyTextStyle.swift */; };
 		13471FBD26F28ED3007296E2 /* SynopsisCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13471FBC26F28ED3007296E2 /* SynopsisCell.swift */; };
 		134739942703ADDB002E0AE3 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134739932703ADDB002E0AE3 /* EmptyView.swift */; };
@@ -32,9 +33,7 @@
 		22F62BE327038F6D0076CA34 /* UIView+NSLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F62BE127038F6D0076CA34 /* UIView+NSLayoutConstraint.swift */; };
 		22F62BE427038F6D0076CA34 /* PropertyListDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F62BE227038F6D0076CA34 /* PropertyListDecoder.swift */; };
 		22F62BE627038F780076CA34 /* CoverlessDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F62BE527038F780076CA34 /* CoverlessDataRepository.swift */; };
-		22F7868E2704D8FA00110BDC /* Environment.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22F7868D2704D8FA00110BDC /* Environment.plist */; };
 		5B0F188E26FE4529008626F9 /* CollectionViewAccessibilityHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0F188D26FE4529008626F9 /* CollectionViewAccessibilityHeader.swift */; };
-		5B207E592706560A00A347EC /* Environment.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B207E582706560A00A347EC /* Environment.plist */; };
 		5B47F64426F2CB4200FDF48D /* SymbolAccesibilityConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B47F64326F2CB4200FDF48D /* SymbolAccesibilityConfiguration.swift */; };
 		5B47F64626F2CCA800FDF48D /* UIImageView+TraitCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B47F64526F2CCA800FDF48D /* UIImageView+TraitCollection.swift */; };
 		5B47F64826F3700500FDF48D /* UIImage+TraitCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B47F64726F3700500FDF48D /* UIImage+TraitCollection.swift */; };
@@ -84,6 +83,7 @@
 
 /* Begin PBXFileReference section */
 		1337333A2704FBD20052BF27 /* ShelfCellDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShelfCellDelegate.swift; sourceTree = "<group>"; };
+		1337333E27077C730052BF27 /* Environment.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Environment.plist; sourceTree = "<group>"; };
 		13471FBA26F283C4007296E2 /* BodyTextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyTextStyle.swift; sourceTree = "<group>"; };
 		13471FBC26F28ED3007296E2 /* SynopsisCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynopsisCell.swift; sourceTree = "<group>"; };
 		134739932703ADDB002E0AE3 /* EmptyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
@@ -110,7 +110,6 @@
 		22F62BE127038F6D0076CA34 /* UIView+NSLayoutConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+NSLayoutConstraint.swift"; sourceTree = "<group>"; };
 		22F62BE227038F6D0076CA34 /* PropertyListDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyListDecoder.swift; sourceTree = "<group>"; };
 		22F62BE527038F780076CA34 /* CoverlessDataRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverlessDataRepository.swift; sourceTree = "<group>"; };
-		22F7868D2704D8FA00110BDC /* Environment.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Environment.plist; path = ../../../../../../Desktop/Environment.plist; sourceTree = "<group>"; };
 		5B0F188D26FE4529008626F9 /* CollectionViewAccessibilityHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewAccessibilityHeader.swift; sourceTree = "<group>"; };
 		5B207E582706560A00A347EC /* Environment.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Environment.plist; sourceTree = "<group>"; };
 		5B47F64326F2CB4200FDF48D /* SymbolAccesibilityConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolAccesibilityConfiguration.swift; sourceTree = "<group>"; };
@@ -369,7 +368,7 @@
 		5BD62AE026FE5FF200EC924D /* API */ = {
 			isa = PBXGroup;
 			children = (
-				22F7868D2704D8FA00110BDC /* Environment.plist */,
+				1337333E27077C730052BF27 /* Environment.plist */,
 				220C04AA2706DA130039A08C /* APIError.swift */,
 				5BD62AE426FE601B00EC924D /* Google */,
 				5BD62AE126FE601B00EC924D /* NewYorkTIme */,
@@ -471,6 +470,7 @@
 		5BFEE41226FA4D5000D3A6CC /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
+				5B207E582706560A00A347EC /* Environment.plist */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -533,10 +533,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				224DBC9426F113B3002303F3 /* LaunchScreen.storyboard in Resources */,
-				5B207E592706560A00A347EC /* Environment.plist in Resources */,
 				224DBC9126F113B3002303F3 /* Assets.xcassets in Resources */,
 				5BD290E126FD0E420082620D /* Subjects.plist in Resources */,
-				22F7868E2704D8FA00110BDC /* Environment.plist in Resources */,
+				1337333F27077C730052BF27 /* Environment.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -754,7 +753,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 534V229RMK;
+				DEVELOPMENT_TEAM = V8V28A4DX2;
 				INFOPLIST_FILE = Coverless/System/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -773,7 +772,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 534V229RMK;
+				DEVELOPMENT_TEAM = V8V28A4DX2;
 				INFOPLIST_FILE = Coverless/System/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -12,6 +12,7 @@ final class BookView: UIView, Designable {
     let designSystem: DesignSystem
     var currentStatus: BookStatus
     private var book: MyBook
+    private var shopLink: String
 
     //MARK: Views
     private lazy var imgBook: UIView = {
@@ -90,7 +91,7 @@ final class BookView: UIView, Designable {
     }()
     
     private lazy var shopView: ShopView = {
-        let shopView = ShopView(image: UIImage(named: "ImageBookDefault")!, titulo: "Amazon Prime", price: "XX,00"/*"R$\(price)"*/)
+        let shopView = ShopView(image: UIImage(named: "ImageBookDefault")!, titulo: "Amazon Prime", price: "XX,00"/*"R$\(price)"*/,url: "")
         shopView.translatesAutoresizingMaskIntoConstraints = false
         return shopView
     }()
@@ -134,6 +135,7 @@ final class BookView: UIView, Designable {
         self.book = book
         self.designSystem = designSystem
         self.tabBarHeight = tabBarHeight
+        self.shopLink = "..."
         currentStatus = .reading
         super.init(frame: .zero)
         checkCurrentStatus()
@@ -196,7 +198,7 @@ final class BookView: UIView, Designable {
         stackView.strechToBounds(of: contentView)
     }
     
-    //MARK: Bindings and actions
+    //MARK: Core data
 
     //atualizar para setupContent(book: MyBook)
     public func setupContentBook() {
@@ -204,11 +206,19 @@ final class BookView: UIView, Designable {
         currentStatus = BookStatus(rawValue: Int(book.status)) ?? .reading
         checkCurrentStatus()
         ///link
+        shopView.shopTitle.text = "Google Books"
+        shopView.priceValue.isHidden = true //escondendo informacao que nao conseguimos coletar
+        shopLink = book.shopLink ?? ""
+        shopView.url = book.shopLink ?? "https://google.com"
         ///rating?
+        ratingStars.setRating(rating: Int(book.rating))
         ///sinopse
+        synopsisField.text = book.synopsis
 
     }
     
+    //MARK: Bindings and actions
+
     private func setupActions() {
         statusButtonRead.addTarget(self, action: #selector(setStatusRead), for: .touchUpInside)
         statusButtonReading.addTarget(self, action: #selector(setStatusReading), for: .touchUpInside)
@@ -221,7 +231,7 @@ final class BookView: UIView, Designable {
     }
     func setupButtonReading(_ action: @escaping () -> Void) {
         let readingAction: UIAction = UIAction { _ in action() }
-        statusButtonRead.addAction(readingAction, for: .touchUpInside)
+        statusButtonReading.addAction(readingAction, for: .touchUpInside)
     }
     func setupButtonAbandoned(_ action: @escaping () -> Void) {
         let abandonedAction: UIAction = UIAction { _ in action() }
@@ -234,6 +244,7 @@ final class BookView: UIView, Designable {
     private func setStatusRead() {
         currentStatus = .read
         checkCurrentStatus()
+
     }
     
     @objc
@@ -268,7 +279,6 @@ final class BookView: UIView, Designable {
         statusButtonRead.setStatus(status: .read)
         statusButtonReading.setStatus(status: .reading)
         statusButtonAbandoned.setStatus(status: .abandoned)
-        DataBooks.shared.saveContext() //salva o estado do botao agora selecionado no coreData
     }
     
     //MARK: Designable Protocol
