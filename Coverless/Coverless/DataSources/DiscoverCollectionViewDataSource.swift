@@ -11,14 +11,14 @@ class DiscoverCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     
     weak var cellDelegate: SynopsisCellDelegate?
     private let subjectDataSource: SubjectCollectionHeaderDataSource = .init()
-    private let repository: NYTRepository = .init()
+    private let repository: GoogleRepository = .init()
     
     var data: [Book] = []
     
     func fetchBooks(_ completionHandler: @escaping () -> Void) {
         let subject = subjectDataSource.selectedSubject
         
-        repository.getBooks(text: subject?.value ?? "") {[weak self] result in
+        repository.getBooks(text: subject?.name ?? "") {[weak self] result in
             switch result {
             case .failure(let error):
                 print(error)

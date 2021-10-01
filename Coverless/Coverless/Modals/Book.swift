@@ -19,5 +19,7 @@ struct Book {
     let title:String
     let description:String
     let image:String
+    let author:String
+    let publisher:String
     let buyLinks:[String:String]
 }
