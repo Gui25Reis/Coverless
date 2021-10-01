@@ -16,9 +16,7 @@ import Foundation
  a repetir.
 */
 class GoogleRepository {
-    private var books:[Book] = []
-    private lazy var lastCategory:[String:UsedCategory] = [:]
-    
+    private lazy var lastCategory:[String:Int] = [:]
     
     /**
         Faz a chamada da API com base na palavra chave.
@@ -31,14 +29,13 @@ class GoogleRepository {
             - Error: erro caso tenha algum
     */
     public func getBooks(text:String, _ completionHandler: @escaping (Result<[Book], Error>) -> Void) -> Void {
-        
         var startIndex:Int = 0
         var used:Bool = false
         
         if let _ = self.lastCategory[text] {
             used = true
-            self.lastCategory[text]?.index += 1
-            startIndex = self.lastCategory[text]!.index
+            self.lastCategory[text]? += 1
+            startIndex = self.lastCategory[text]!
         }
         
         guard let url = URL(string: self.getUrl(text, startIndex)) else {
@@ -68,21 +65,28 @@ class GoogleRepository {
             
             // Erro na hora de decodificar
             guard let books = try? JSONDecoder().decode(Items.self, from: data) else {
-                self.lastCategory[text]?.index = -1
                 completionHandler(.failure(APIError.badDecode))
                 return
             }
             
-            self.books = []
-            self.compactInfo(items: books)
-            
-            if (!used) {
-                self.lastCategory[text] = UsedCategory(
-                    maxBooks: books.totalItems,
-                    index: 0
-                )
+            // Acessando um index que não existe
+            guard let _ = books.items else {
+                self.lastCategory[text]? = -1
+                self.getBooks(text: text) { result in
+                    switch result {
+                    case .success(let book):
+                        completionHandler(.success(book))
+                        
+                    case .failure(let error):
+                        completionHandler(.failure(error))
+                    }
+                }
+                return
             }
-            completionHandler(.success(self.books))
+                        
+            if (!used) {self.lastCategory[text] = 0}
+            
+            completionHandler(.success(self.compactInfo(items: books)))
         }
         task.resume()
     }
@@ -131,38 +135,40 @@ class GoogleRepository {
         - Parâmetros:
             - items: Struct com as informações recebidas da API
     */
-    private func compactInfo(items:Items) -> Void {
-//        guard let items = items.items else {
-//            return
-//        }
-        for info in items.items {
-            // Condições para pegar um livro
-            if let id = info.id,
-               let title = info.volumeInfo.title,
-               let authors = info.volumeInfo.authors,
-               let publisher = info.volumeInfo.publisher,
-               let description = info.volumeInfo.description,
-               let _ = info.saleInfo,
-               let buyLink = info.saleInfo!.buyLink,
-               let _ = info.volumeInfo.imageLinks,
-               let imgThumbnail = info.volumeInfo.imageLinks!.thumbnail
-            {
-                var allAuthors:String = ""
-                for author in authors {allAuthors += author + " ,"}
-                
-                self.books.append(
-                    Book(
-                        id: id,
-                        isbn10: nil,
-                        title: title.capitalized,
-                        description: description,
-                        image:imgThumbnail,
-                        author: String(allAuthors.dropLast()),
-                        publisher: publisher,
-                        buyLinks:["Google Books":"\(buyLink)"]
+    private func compactInfo(items:Items) -> [Book] {
+        var books:[Book] = []
+        
+        if let items = items.items {
+            for info in items {
+                // Condições para pegar um livro
+                if let id = info.id,
+                   let title = info.volumeInfo.title,
+                   let authors = info.volumeInfo.authors,
+                   let publisher = info.volumeInfo.publisher,
+                   let description = info.volumeInfo.description,
+                   let _ = info.saleInfo,
+                   let buyLink = info.saleInfo!.buyLink,
+                   let _ = info.volumeInfo.imageLinks,
+                   let imgThumbnail = info.volumeInfo.imageLinks!.thumbnail
+                {
+                    var allAuthors:String = ""
+                    for author in authors {allAuthors += author + " ,"}
+                    
+                    books.append(
+                        Book(
+                            id: id,
+                            isbn10: nil,
+                            title: title.capitalized,
+                            description: description,
+                            image:imgThumbnail,
+                            author: String(allAuthors.dropLast()),
+                            publisher: publisher,
+                            buyLinks:["Google Books":"\(buyLink)"]
+                        )
                     )
-                )
+                }
             }
         }
+        return books
     }
 }

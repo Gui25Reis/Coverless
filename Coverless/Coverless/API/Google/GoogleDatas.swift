@@ -11,7 +11,7 @@ import Foundation
 
 struct Items:Decodable {
     let totalItems:Int
-    let items:[BookId]
+    let items:[BookId]?
 }
 
 struct BookId:Decodable {
@@ -37,15 +37,4 @@ struct BookImages:Decodable {
 
 struct BookShop:Decodable {
     let buyLink:String?
-}
-
-
-/* MARK: - Outros */
-
-/**
-    Salva as informaçòes da última cateogira usada na APi do Google Books
-*/
-struct UsedCategory {
-    var maxBooks:Int
-    var index:Int
 }
