@@ -21,17 +21,13 @@ final class ShelfViewController: UIViewController, ShelfCellDelegate{
     let designSystem: DesignSystem = DefaultDesignSystem()
     let cv: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: ShelfViewController.createCollectionViewLayout())
     
-    let segmentedControl = UISegmentedControl(items: ["Favorites","Discovered"])
+    let segmentedControl = UISegmentedControl(items: ["All discovered","Favorites"])
     
     /* MARK: - Ciclo de Vida */
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        switchSegmented()
         self.cv.reloadData()
-        //adicao no core data para testes
-        //let _ = DataBooks.shared.addBook(id: "1234", title: "Meu livro", status: Int32(0), rating: Int32(3), isFavorite: true)
-        //let _ = DataBooks.shared.addBook(id: "1234", title: "Meu livro 2", status: Int32(0), rating: Int32(3), isFavorite: false)
     }
     
     public override func viewDidLoad() -> Void {
@@ -50,10 +46,9 @@ final class ShelfViewController: UIViewController, ShelfCellDelegate{
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         segmentedControl.addTarget(self, action: #selector(indexChanged(_: )), for: .valueChanged)
         segmentedControl.selectedSegmentIndex = 0
-        switchSegmented()
-        
         view.addSubview(segmentedControl)
         view.addSubview(cv)
+        switchSegmented()
         
         ///configurando constraints
         NSLayoutConstraint.activate([
@@ -117,17 +112,15 @@ final class ShelfViewController: UIViewController, ShelfCellDelegate{
         switch segmentedControl.selectedSegmentIndex
         {
         case 0:
-            books = DataBooks.shared.getBooks().filter { $0.isFavorite == true}
-            if books.count == 0 {
-                setEmptyMessage(message: "No favorite books yet. Check out your discovered books in the Discovered option")
-            }
+            books = DataBooks.shared.getBooks()
             //cv.reloadData()
         case 1:
-            books = DataBooks.shared.getBooks()
+            books = DataBooks.shared.getBooks().filter { $0.isFavorite == true}
             //cv.reloadData()
         default:
             break;
         }
+        cv.reloadData()
     }
     
     
@@ -173,7 +166,6 @@ extension ShelfViewController:UICollectionViewDataSource{
     func setEmptyMessage(message: String) {
         let empty = EmptyView(message: message)
         cv.backgroundView = empty
-        cv.reloadData()
         empty.delegate = self
     }
     
