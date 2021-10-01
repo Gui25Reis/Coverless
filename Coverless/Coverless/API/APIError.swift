@@ -5,17 +5,24 @@
 //  Created by Gui Reis on 01/10/21.
 //
 
-import Foundation
+import struct Foundation.URLError
 
-enum APIError: Error, CustomStringConvertible {
+
+/**
+    Classe responsável pelo tratamento dos erros que podem acontecer na API.
+ 
+    Todos os erros são categorizados e tratados, podendo ter acesso á eles pelo que é mostrado ao usuário
+ (`localizedDescription` ) ou para o desenvolvedor (`description`).
+*/
+enum APIError:Error, CustomStringConvertible {
     case badURL
-    case badResponse(statusCode: Int)
-    case url(URLError?)
-    case badDecode
     case badData
+    case badDecode
+    case badResponse(statusCode:Int)
+    case url(URLError?)
     
     /// Feedback para o usuário
-    var localizedDescription: String {
+    var localizedDescription:String {
         switch self {
         case .badURL, .badDecode, .badData:
             return "Sorry, something went wrong."
@@ -29,7 +36,7 @@ enum APIError: Error, CustomStringConvertible {
     }
     
     /// Feedback completo para desenvolver
-    var description: String {
+    var description:String {
         switch self {
         case .badURL: return "URL inválida"
         case .badData: return "Erro nos dados recebidos"
