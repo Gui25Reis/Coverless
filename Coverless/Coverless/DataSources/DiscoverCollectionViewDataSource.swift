@@ -10,6 +10,8 @@ import UIKit
 class DiscoverCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     
     weak var cellDelegate: SynopsisCellDelegate?
+    weak var footerDelegate: DiscoverViewFooterDelegate?
+    
     private let subjectDataSource: SubjectCollectionHeaderDataSource = .init()
     private let repository: GoogleRepository = .init()
     
@@ -43,17 +45,29 @@ class DiscoverCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
-        guard
-            let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader,
-                                                                         withReuseIdentifier: SubjectCollectionHeader.identifier,
-                                                                         for: indexPath) as? SubjectCollectionHeader
-        else {
-            preconditionFailure("Header View configured wrong")
+        if kind == UICollectionView.elementKindSectionHeader {
+            guard
+                let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader,
+                                                                             withReuseIdentifier: SubjectCollectionHeader.identifier,
+                                                                             for: indexPath) as? SubjectCollectionHeader
+            else {
+                preconditionFailure("Header View configured wrong")
+            }
+            header.setup(dataSource: subjectDataSource)
+            return header
+            
+        } else {
+            guard let footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter,
+                                                                               withReuseIdentifier: DiscoverViewFooter.identifier,
+                                                                               for: indexPath) as? DiscoverViewFooter
+            else {
+                preconditionFailure("Footer View configured wrong")
+            }
+            
+            footer.setup(delegate: footerDelegate)
+            
+            return footer
         }
-        
-        header.setup(dataSource: subjectDataSource)
-        
-        return header
     }
     
 }

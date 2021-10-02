@@ -122,7 +122,8 @@ class SynopsisCell: UICollectionViewCell, Designable{
     func setup(book: Book, delegate: SynopsisCellDelegate?) {
         self.book = book
         synopsisLabel.text = book.description
-        synopsisLabel.accessibilityLabel = "Card de sinopse:\(book.description)"
+        synopsisLabel.lineBreakStrategy = .standard
+        synopsisLabel.accessibilityLabel = "Synopsis: \(synopsisLabel.text ?? "")"
         stylize(with: DefaultDesignSystem.shared)
         self.delegate = delegate
     }
@@ -155,7 +156,6 @@ class SynopsisCell: UICollectionViewCell, Designable{
     
     func setupAccessibility() {
         synopsisLabel.isAccessibilityElement = true
-        synopsisLabel.accessibilityLabel = "Synopsis Card:\(synopsisLabel.text ?? "")"
         infoButton.isAccessibilityElement = true
         infoButton.accessibilityLabel = "More Info"
         

@@ -13,11 +13,11 @@ final class MoreInfoViewController: UIViewController {
     lazy var contentView: MoreInfoView = {
         MoreInfoView(designSystem: DefaultDesignSystem.shared, tabBarHeight: tabBarController?.tabBar.frame.height ?? 100)
     }()
+
+    let book: Book
     
-    let viewModel: MoreInfoViewModel
-    
-    init(viewModel: MoreInfoViewModel) {
-        self.viewModel = viewModel
+    init(book: Book) {
+        self.book = book
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -30,7 +30,7 @@ final class MoreInfoViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        contentView.setupContent(synopsis: viewModel.synopsis, rating: viewModel.rating)
+        contentView.setupContent(book: book)
         contentView.setupButtonBinding(addToShelf)
     }
     

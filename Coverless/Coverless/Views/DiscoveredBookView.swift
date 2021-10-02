@@ -13,6 +13,30 @@ final class DiscoveredBookView: UIView {
     private let discoverLabel: UILabel
     private let bookTitle: UILabel
     
+    private let scrollView: UIScrollView = {
+        let sv = UIScrollView()
+        sv.translatesAutoresizingMaskIntoConstraints = false
+        return sv
+    }()
+    
+    private let contentView: UIView = {
+        let v = UIView()
+        v.translatesAutoresizingMaskIntoConstraints = false
+        return v
+    }()
+    
+    private lazy var stackView: UIStackView = {
+        let stv = UIStackView()
+        stv.axis = .vertical
+        stv.translatesAutoresizingMaskIntoConstraints = false
+        stv.distribution = .equalSpacing
+        stv.alignment = .fill
+        stv.spacing = 42
+        stv.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 8, right: 0)
+        stv.isLayoutMarginsRelativeArrangement = true
+        return stv
+    }()
+    
     init(designSystem: DesignSystem, book: Book) {
         self.imageView = AsyncImage(url: URL(string: book.image), designSystem: designSystem)
         self.discoverLabel = UILabel()
@@ -21,82 +45,7 @@ final class DiscoveredBookView: UIView {
         setupHierarchy()
         setupLayout()
         setupStyle(with: designSystem, book: book)
-    }
-    
-    func setupHierarchy() {
-        addSubview(imageView)
-        addSubview(discoverLabel)
-        addSubview(bookTitle)
-    }
-    
-    func setupLayout() {
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        let imageConstraints: [NSLayoutConstraint] = [
-            imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            imageView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            imageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.6),
-            imageView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 0.9)
-            
-        ]
-        
-        NSLayoutConstraint.activate(imageConstraints)
-        
-        discoverLabel.translatesAutoresizingMaskIntoConstraints = false
-        let discoverLabelConstraints: [NSLayoutConstraint] = [
-            discoverLabel.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor, constant: \.largePositive),
-            discoverLabel.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
-            discoverLabel.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
-            discoverLabel.bottomAnchor.constraint(equalTo: imageView.topAnchor, constant: \.largeNegative)
-        ]
-        
-        NSLayoutConstraint.activate(discoverLabelConstraints)
-        
-        bookTitle.translatesAutoresizingMaskIntoConstraints = false
-        let titleLabelConstraints: [NSLayoutConstraint] = [
-            bookTitle.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor, constant: \.xLargeNegative),
-            bookTitle.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
-            bookTitle.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor)
-        ]
-        NSLayoutConstraint.activate(titleLabelConstraints)
-    }
-    
-    func setupStyle(with designSystem: DesignSystem, book: Book) {
-        backgroundColor = designSystem.palette.backgroundPrimary
-        discoverLabel.stylize(with: designSystem.text.largeTitle)
-        bookTitle.stylize(with: designSystem.text.largeSerif)
-        bookTitle.numberOfLines = 0
-        discoverLabel.numberOfLines = 0
-        discoverLabel.text = "Discovered Book"
-        bookTitle.text = "Really Huge to title to see how it's gonna behave"
-        
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
-
-final class AsyncImage: UIView {
-    
-    private let imageView: UIImageView
-    private let loadingView: LoadingView
-    
-    init(url: URL?, designSystem: DesignSystem) {
-        imageView = UIImageView()
-        loadingView = LoadingView(designSystem: designSystem)
-        loadingView.backgroundColor = designSystem.palette.backgroundCell
-        super.init(frame: .zero)
-        backgroundColor = .red
-        setupHierarchy()
-        setupLayout()
-        setupStyle()
-        
-        if let url = url {
-            load(from: url)
-        } else {
-            setDefaultPlaceholder()
-        }
-        
+        setupAccessibility()
     }
     
     required init?(coder: NSCoder) {
@@ -104,81 +53,59 @@ final class AsyncImage: UIView {
     }
     
     private func setupHierarchy() {
-        addSubview(imageView)
-        addSubview(loadingView)
+        addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        contentView.addSubview(stackView)
+        stackView.addArrangedSubview(discoverLabel)
+        stackView.addArrangedSubview(imageView)
+        stackView.addArrangedSubview(bookTitle)
+    }
+    
+   private func setupLayout() {
+        
+        scrollView.strechToBounds(of: layoutMarginsGuide)
+        contentView.strechToBounds(of: scrollView)
+        contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
+        stackView.strechToBounds(of: contentView)
+        
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        loadingView.translatesAutoresizingMaskIntoConstraints = false
-    }
-    
-    private func setupLayout() {
-        imageView.strechToBounds(of: self)
-        loadingView.strechToBounds(of: self)
-    }
-    
-    private func setupStyle() {
-        imageView.clipsToBounds = true
-        imageView.contentMode = .scaleAspectFit
-        loadingView.clipsToBounds = true
-        hideImageAndShowLoading()
-        clipsToBounds = true
-        layer.cornerRadius = 12
-    }
-    
-    private func hideImageAndShowLoading() {
-        imageView.isHidden = true
-        loadingView.isHidden = false
-        loadingView.start()
-    }
-    
-    private func load(from url: URL) {
-        URLSession.shared.dataTask(with: url) {[weak self] data, response, error in
-            guard let self = self else { return }
+        let imageConstraints: [NSLayoutConstraint] = [
+            imageView.widthAnchor.constraint(equalTo: stackView.widthAnchor),
+            imageView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 0.9)
             
-            if let error = error {
-                print(error)
-                DispatchQueue.main.async {
-                    self.setDefaultPlaceholder()
-                }
-            }
-            if let response = response as? HTTPURLResponse, response.statusCode == 200 {
-                if let data = data {
-                    if let image = UIImage(data: data) {
-                        DispatchQueue.main.async {
-                            self.setImageView(with: image)
-                        }
-                    } else {
-                        DispatchQueue.main.async {
-                            self.setDefaultPlaceholder()
-                        }
-                    }
-                } else {
-                    DispatchQueue.main.async {
-                        self.setDefaultPlaceholder()
-                    }
-                }
-            } else {
-                DispatchQueue.main.async {
-                    self.setDefaultPlaceholder()
-                }
-            }
-        }.resume()
+        ]
+        
+        NSLayoutConstraint.activate(imageConstraints)
     }
     
-    func setDefaultPlaceholder() {
-        hideLoadingAndShowImage()
-        imageView.image = .remove
+    private func setupStyle(with designSystem: DesignSystem, book: Book) {
+        backgroundColor = designSystem.palette.backgroundPrimary
+        discoverLabel.stylize(with: designSystem.text.largeTitle)
+        bookTitle.stylize(with: designSystem.text.largeSerif)
+        discoverLabel.text = "Discovered Book"
+        discoverLabel.accessibilityLabel = "Discovered Book"
+        bookTitle.text = book.title
+        bookTitle.accessibilityLabel = book.title
+        
     }
     
-    func setImageView(with image: UIImage) {
-        hideLoadingAndShowImage()
-        imageView.image = image
+    private func setupAccessibility() {
+        discoverLabel.isAccessibilityElement = true
+        discoverLabel.accessibilityTraits = .header
+        discoverLabel.numberOfLines = 0
+        
+        bookTitle.isAccessibilityElement = true
+        bookTitle.accessibilityTraits = .staticText
+        bookTitle.numberOfLines = 0
+        
+        imageView.isAccessibilityElement = true
+        imageView.accessibilityTraits = .image
+        imageView.accessibilityLabel = "Book Cover"
+        
+        accessibilityElements = [discoverLabel, imageView, bookTitle]
     }
     
-    private func hideLoadingAndShowImage() {
-        loadingView.stop()
-        loadingView.isHidden = true
-        imageView.isHidden = false
-    }
+    
 }
 
 /*
@@ -190,7 +117,6 @@ struct DiscoveredBookView_Preview: PreviewProvider {
         Group {
             AnyViewRepresentable(DiscoveredBookView(designSystem: DefaultDesignSystem(), book: Book(id: "", isbn10: "", title: "Harry Potter", description: "", image: "https://books.google.com/books/content?id=-bF2CwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api", author: "", publisher: "", buyLinks: [:])))
                 .environment(\.sizeCategory, .accessibilityExtraExtraExtraLarge)
-            AnyViewRepresentable(AsyncImage(url: URL(string: "https://books.google.com/books/content?id=x605AwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api"), designSystem: DefaultDesignSystem()))
         }
     }
 }

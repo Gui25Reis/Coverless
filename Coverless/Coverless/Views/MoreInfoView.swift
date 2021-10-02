@@ -16,6 +16,7 @@ final class MoreInfoView: UIView, Designable {
         let header = UILabel()
         header.translatesAutoresizingMaskIntoConstraints = false
         header.text = "Synopsis"
+        header.accessibilityLabel = "Synopsis"
         header.numberOfLines = 0
         header.stylize(with: designSystem.text.header)
         return header
@@ -34,27 +35,13 @@ final class MoreInfoView: UIView, Designable {
         return tv
     }()
     
-    private lazy var ratingHeader: UILabel = {
-        let l = UILabel()
-        l.translatesAutoresizingMaskIntoConstraints = false
-        l.stylize(with: designSystem.text.header)
-        l.numberOfLines = 0
-        l.text = "Rating"
-        return l
-    }()
-    
-    private lazy var stars: StarsRating = {
-        let stars = StarsRating()
-        stars.translatesAutoresizingMaskIntoConstraints = false
-        return stars
-    }()
-    
     private lazy var otherInfoHeader: UILabel = {
         let l = UILabel()
         l.translatesAutoresizingMaskIntoConstraints = false
         l.stylize(with: designSystem.text.header)
         l.numberOfLines = 0
-        l.text = "Other info"
+        l.text = "Book info"
+        l.accessibilityLabel = "Book info"
         return l
     }()
     
@@ -63,7 +50,6 @@ final class MoreInfoView: UIView, Designable {
         l.translatesAutoresizingMaskIntoConstraints = false
         l.stylize(with: designSystem.text.body)
         l.numberOfLines = 0
-        l.text = "Author: Robert C. Martin"
         return l
     }()
     
@@ -72,7 +58,6 @@ final class MoreInfoView: UIView, Designable {
         l.translatesAutoresizingMaskIntoConstraints = false
         l.stylize(with: designSystem.text.body)
         l.numberOfLines = 0
-        l.text = "Publisher: Clean code books"
         return l
     }()
     
@@ -80,6 +65,8 @@ final class MoreInfoView: UIView, Designable {
         let b = UIButton()
         b.backgroundColor = designSystem.palette.buttonBackgroundPrimary
         b.setTitle("Discover Book", for: .normal)
+        b.accessibilityLabel = "Discover book"
+        b.accessibilityHint = "Double tap to add the book to your collection"
         b.setTitleColor(designSystem.palette.buttonTextPrimary, for: .normal)
         b.layer.cornerRadius = 8
         b.translatesAutoresizingMaskIntoConstraints = false
@@ -120,6 +107,7 @@ final class MoreInfoView: UIView, Designable {
         stylize(with: designSystem)
         setupHierarchy()
         setupLayout()
+        setupAccessibility()
     }
     
     required init?(coder: NSCoder) {
@@ -135,8 +123,6 @@ final class MoreInfoView: UIView, Designable {
         contentView.addSubview(stackView)
         stackView.addArrangedSubview(synopsisHeader)
         stackView.addArrangedSubview(synopsisField)
-        stackView.addArrangedSubview(ratingHeader)
-        stackView.addArrangedSubview(stars)
         stackView.addArrangedSubview(otherInfoHeader)
         stackView.addArrangedSubview(authorLabel)
         stackView.addArrangedSubview(publisherLabel)
@@ -149,7 +135,6 @@ final class MoreInfoView: UIView, Designable {
     }
     
     private func setupScrollViewConstraints() {
-        //scrollView.strechToBounds(of: layoutMarginsGuide)
         let constraints: [NSLayoutConstraint] = [
             scrollView.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor, constant: \.smallPositive),
             scrollView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
@@ -178,10 +163,39 @@ final class MoreInfoView: UIView, Designable {
     }
     
     //MARK: Bindings
-    func setupContent(synopsis: String, rating: Int) {
-        synopsisField.text = synopsis
-        stars.setRating(rating: rating)
+    func setupContent(book: Book) {
+        synopsisField.text = book.description
         
+        let authorLabelContent = "Author: \(book.author)"
+        authorLabel.text = authorLabelContent
+        authorLabel.accessibilityLabel = authorLabelContent
+        
+        let publisherLabelContent = "Publisher: \(book.publisher)"
+        publisherLabel.text = publisherLabelContent
+        publisherLabel.accessibilityLabel = publisherLabelContent
+        
+    }
+    
+    func setupAccessibility() {
+        synopsisHeader.accessibilityTraits = .header
+        synopsisHeader.isAccessibilityElement = true
+        
+        synopsisField.isAccessibilityElement = true
+        synopsisField.accessibilityTraits = .staticText
+        
+        otherInfoHeader.accessibilityTraits = .header
+        otherInfoHeader.isAccessibilityElement = true
+        
+        authorLabel.isAccessibilityElement = true
+        authorLabel.accessibilityTraits = .staticText
+        
+        publisherLabel.isAccessibilityElement = true
+        publisherLabel.accessibilityTraits = .staticText
+        
+        discoverButton.isAccessibilityElement = true
+        discoverButton.accessibilityTraits = .button
+        
+        accessibilityElements = [synopsisHeader, synopsisField, otherInfoHeader, authorLabel, publisherLabel, discoverButton]
     }
     
     func setupButtonBinding(_ action: @escaping () -> Void) {

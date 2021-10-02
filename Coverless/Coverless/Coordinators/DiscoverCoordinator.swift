@@ -29,8 +29,8 @@ class DiscoverCoordinator: Coordinator {
         
     }
     
-    func showMoreInfo(viewModel: MoreInfoViewModel) {
-        let vc = MoreInfoViewController(viewModel: viewModel)
+    func showMoreInfo(for book: Book) {
+        let vc = MoreInfoViewController(book: book)
         vc.coordinator = self
         vc.navigationItem.title = "More info"
         navigationController.pushViewController(vc, animated: true)
@@ -38,7 +38,9 @@ class DiscoverCoordinator: Coordinator {
     
     func discoverBook(book: Book) {
         let vc = DiscoveredBookViewController(book: book)
-        navigationController.present(vc, animated: true, completion: nil)
+        let nvc = UINavigationController(rootViewController: vc)
+        UIAccessibility.post(notification: .screenChanged, argument: nvc)
+        navigationController.present(nvc, animated: true, completion: nil)
     }
     
     private func setupBarAppearence() {
