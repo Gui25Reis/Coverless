@@ -6,14 +6,25 @@
 //
 
 import UIKit
+import CoreData
 
-final class ShelfViewController: UIViewController, ShelfCellDelegate{
+final class ShelfViewController: UIViewController, NSFetchedResultsControllerDelegate, ShelfCellDelegate{
     
     func turnFav() {
         ///atualizada o vetor que esta sendo carregado na collection
         switchSegmented()
     }
     
+    private lazy var fetchResultController: NSFetchedResultsController<MyBook> = {
+        let request: NSFetchRequest<MyBook> = MyBook.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \MyBook.title, ascending: true)]
+        let frc = NSFetchedResultsController(fetchRequest: request,
+                                             managedObjectContext: DataBooks.shared.contenxt,
+                                             sectionNameKeyPath: nil,
+                                             cacheName: nil)
+        frc.delegate = self
+        return frc
+    }()
     
     weak var coordinator: ShelfCoordinator?
     private var books:[MyBook] = []
@@ -65,6 +76,12 @@ final class ShelfViewController: UIViewController, ShelfCellDelegate{
         cv.isAccessibilityElement = false
         cv.shouldGroupAccessibilityChildren = true
         
+        do {
+            try fetchResultController.performFetch()
+            self.books = fetchResultController.fetchedObjects ?? []
+        } catch {
+            fatalError("fudeu brasil")
+        }
     }
     
     
@@ -73,6 +90,10 @@ final class ShelfViewController: UIViewController, ShelfCellDelegate{
     
     // Coloque aqui as funções de consfigurações em geral
     
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        guard let books = controller.fetchedObjects as? [MyBook] else { return }
+        self.books = books
+    }
     
     
     /* MARK: - Ações dos botões */
@@ -109,18 +130,17 @@ final class ShelfViewController: UIViewController, ShelfCellDelegate{
     
     
     func switchSegmented(){
+        let fetchedBooks = fetchResultController.fetchedObjects ?? []
+        
         switch segmentedControl.selectedSegmentIndex
         {
         case 0:
-            books = DataBooks.shared.getBooks()
-            //cv.reloadData()
+            books = fetchedBooks
         case 1:
-            books = DataBooks.shared.getBooks().filter { $0.isFavorite == true}
-            //cv.reloadData()
+            books = fetchedBooks.filter { $0.isFavorite == true }
         default:
-            break;
+            break
         }
-        cv.reloadData()
     }
     
     
@@ -141,7 +161,8 @@ extension ShelfViewController:UICollectionViewDelegate{
 
 extension ShelfViewController:UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if (DataBooks.shared.getBooks().count == 0) {
+        let books = fetchResultController.fetchedObjects ?? []
+        if books.isEmpty {
             setEmptyMessage(message: "No books discovered on the shelf. Let's discover a new one?") //ALL emptyState
             segmentedControl.isHidden = true
       
@@ -149,7 +170,7 @@ extension ShelfViewController:UICollectionViewDataSource{
             restore() //collectionview com dados do coreData
             segmentedControl.isHidden = false
         }
-        return books.count
+        return self.books.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
