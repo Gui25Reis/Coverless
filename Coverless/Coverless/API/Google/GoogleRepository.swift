@@ -16,9 +16,7 @@ import Foundation
  a repetir.
 */
 class GoogleRepository {
-    private var books:[Book] = []
-    private lazy var lastCategory:[String:UsedCategory] = [:]
-    
+    private lazy var lastCategory:[String:Int] = [:]
     
     /**
         Faz a chamada da API com base na palavra chave.
@@ -31,13 +29,13 @@ class GoogleRepository {
             - Error: erro caso tenha algum
     */
     public func getBooks(text:String, _ completionHandler: @escaping (Result<[Book], Error>) -> Void) -> Void {
-        
         var startIndex:Int = 0
         var used:Bool = false
         
-        if let textStruct = self.lastCategory[text] {
+        if let _ = self.lastCategory[text] {
             used = true
-            startIndex = textStruct.avaiable[0]
+            self.lastCategory[text]? += 1
+            startIndex = self.lastCategory[text]!
         }
         
         guard let url = URL(string: self.getUrl(text, startIndex)) else {
@@ -65,27 +63,30 @@ class GoogleRepository {
                 return
             }
             
-            
             // Erro na hora de decodificar
             guard let books = try? JSONDecoder().decode(Items.self, from: data) else {
                 completionHandler(.failure(APIError.badDecode))
                 return
             }
             
-            self.books = []
-            self.compactInfo(items: books)
-            
-            if (used) {
-                self.lastCategory[text]?.avaiable.removeFirst()
-                self.lastCategory[text]?.cont += self.books.count
-            } else {
-                self.lastCategory[text] = UsedCategory(
-                    maxBooks: books.totalItems,
-                    avaiable: Array(1...books.totalItems/40).shuffled(),
-                    cont: 0
-                )
+            // Acessando um index que não existe
+            guard let _ = books.items else {
+                self.lastCategory[text]? = -1
+                self.getBooks(text: text) { result in
+                    switch result {
+                    case .success(let book):
+                        completionHandler(.success(book))
+                        
+                    case .failure(let error):
+                        completionHandler(.failure(error))
+                    }
+                }
+                return
             }
-            completionHandler(.success(self.books))
+                        
+            if (!used) {self.lastCategory[text] = 0}
+            
+            completionHandler(.success(self.compactInfo(items: books)))
         }
         task.resume()
     }
@@ -121,7 +122,7 @@ class GoogleRepository {
         
         var apiUrl = "https://www.googleapis.com/books/v1/volumes?"             // Chamada normal
         apiUrl += "q=\(NYTRepository.fixStringSpaces(text))+subject:"           // Palavra chave + filtro
-        apiUrl += "&startIndex=\(startIndex)&maxResults=40"                     // Momento da lista
+        apiUrl += "&startIndex=\(startIndex * 40)&maxResults=40"                // Momento da lista
         apiUrl += "&printType=books&langRestrict=en"                            // Tipo de resultado
         apiUrl += "&key=\(key)"                                                 // Token
         return apiUrl
@@ -133,35 +134,40 @@ class GoogleRepository {
         - Parâmetros:
             - items: Struct com as informações recebidas da API
     */
-    private func compactInfo(items:Items) -> Void {
-        for info in items.items {
-            // Condições para pegar um livro
-            if let id = info.id,
-               let title = info.volumeInfo.title,
-               let authors = info.volumeInfo.authors,
-               let publisher = info.volumeInfo.publisher,
-               let description = info.volumeInfo.description,
-               let _ = info.saleInfo,
-               let buyLink = info.saleInfo!.buyLink,
-               let _ = info.volumeInfo.imageLinks,
-               let imgThumbnail = info.volumeInfo.imageLinks!.thumbnail
-            {
-                var allAuthors:String = ""
-                for author in authors {allAuthors += author + " ,"}
-                
-                self.books.append(
-                    Book(
-                        id: id,
-                        isbn10: nil,
-                        title: title.capitalized,
-                        description: description,
-                        image:imgThumbnail,
-                        author: String(allAuthors.dropLast()),
-                        publisher: publisher,
-                        buyLinks:["Google Books":"\(buyLink)"]
+    private func compactInfo(items:Items) -> [Book] {
+        var books:[Book] = []
+        
+        if let items = items.items {
+            for info in items {
+                // Condições para pegar um livro
+                if let id = info.id,
+                   let title = info.volumeInfo.title,
+                   let authors = info.volumeInfo.authors,
+                   let publisher = info.volumeInfo.publisher,
+                   let description = info.volumeInfo.description,
+                   let _ = info.saleInfo,
+                   let buyLink = info.saleInfo!.buyLink,
+                   let _ = info.volumeInfo.imageLinks,
+                   let imgThumbnail = info.volumeInfo.imageLinks!.thumbnail
+                {
+                    var allAuthors:String = ""
+                    for author in authors {allAuthors += author + " ,"}
+                    
+                    books.append(
+                        Book(
+                            id: id,
+                            isbn10: nil,
+                            title: title.capitalized,
+                            description: description,
+                            image:imgThumbnail,
+                            author: String(allAuthors.dropLast()),
+                            publisher: publisher,
+                            buyLinks:["Google Books":"\(buyLink)"]
+                        )
                     )
-                )
+                }
             }
         }
+        return books
     }
 }

@@ -201,10 +201,8 @@ class NYTRepository {
     private func getToken() -> String {
         var myDict: [String:String]?
         if let path = Bundle.main.path(forResource: "Environment", ofType: "plist") {
-            print(path)
             myDict = NSDictionary(contentsOfFile: path) as? [String:String]
         }
-        print(myDict)
         return myDict!["NewYorkKey"]!
     }
 
