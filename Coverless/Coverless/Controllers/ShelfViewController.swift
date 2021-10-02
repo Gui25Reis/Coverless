@@ -7,7 +7,13 @@
 
 import UIKit
 
-final class ShelfViewController: UIViewController, ShelfCellDelegate {
+final class ShelfViewController: UIViewController, ShelfCellDelegate{
+    
+    func turnFav() {
+        ///atualizada o vetor que esta sendo carregado na collection
+        switchSegmented()
+    }
+    
     
     weak var coordinator: ShelfCoordinator?
     private var books:[MyBook] = []
@@ -15,16 +21,14 @@ final class ShelfViewController: UIViewController, ShelfCellDelegate {
     let designSystem: DesignSystem = DefaultDesignSystem()
     let cv: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: ShelfViewController.createCollectionViewLayout())
     
-    let segmentedControl = UISegmentedControl(items: ["Favorites","Discovered"])
+    let segmentedControl = UISegmentedControl(items: ["All discovered","Favorites"])
     
     /* MARK: - Ciclo de Vida */
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.books = DataBooks.shared.getBooks()
         self.cv.reloadData()
     }
-    
     
     public override func viewDidLoad() -> Void {
         super.viewDidLoad()
@@ -42,10 +46,9 @@ final class ShelfViewController: UIViewController, ShelfCellDelegate {
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         segmentedControl.addTarget(self, action: #selector(indexChanged(_: )), for: .valueChanged)
         segmentedControl.selectedSegmentIndex = 0
-        
-        
         view.addSubview(segmentedControl)
         view.addSubview(cv)
+        switchSegmented()
         
         ///configurando constraints
         NSLayoutConstraint.activate([
@@ -61,7 +64,6 @@ final class ShelfViewController: UIViewController, ShelfCellDelegate {
         cv.register(ShelfCell.self, forCellWithReuseIdentifier: "cell")
         cv.isAccessibilityElement = false
         cv.shouldGroupAccessibilityChildren = true
-        
         
     }
     
@@ -100,47 +102,54 @@ final class ShelfViewController: UIViewController, ShelfCellDelegate {
         return UICollectionViewCompositionalLayout(section: section)
     }
     
-    func turnFav() {
-        //
+    @objc func indexChanged(_ sender: UISegmentedControl) {
+        switchSegmented()
+        cv.reloadData()
     }
     
-    @objc func indexChanged(_ sender: UISegmentedControl) {
-            switch segmentedControl.selectedSegmentIndex
-            {
-            case 0:
-                print("Favorites Selected")
-            case 1:
-                print("Discover Selected")
-            default:
-                break;
-            }
+    
+    func switchSegmented(){
+        switch segmentedControl.selectedSegmentIndex
+        {
+        case 0:
+            books = DataBooks.shared.getBooks()
+            //cv.reloadData()
+        case 1:
+            books = DataBooks.shared.getBooks().filter { $0.isFavorite == true}
+            //cv.reloadData()
+        default:
+            break;
+        }
+        cv.reloadData()
     }
+    
     
     func setAccessibility(){
         segmentedControl.isAccessibilityElement = true
         segmentedControl.accessibilityHint = "Select your preferences"
     }
+    
 }
 
 /* MARK: - Collection View */
 
 extension ShelfViewController:UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        coordinator?.showBook()
-        //coordinator?.showBook(bookSelected: book[indexPath])
+        coordinator?.showBook(book: books[indexPath.row])
     }
 }
 
 extension ShelfViewController:UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if (self.books.count == 0) {
-            setEmptyMessage()
+        if (DataBooks.shared.getBooks().count == 0) {
+            setEmptyMessage(message: "No books discovered on the shelf. Let's discover a new one?") //ALL emptyState
+            segmentedControl.isHidden = true
+      
         } else {
-            restore()
-            return 10
-
+            restore() //collectionview com dados do coreData
+            segmentedControl.isHidden = false
         }
-        return self.books.count
+        return books.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -148,16 +157,16 @@ extension ShelfViewController:UICollectionViewDataSource{
         else {
             preconditionFailure("Cell Register not configured correctly")
         }
-        //cell.setup(books[indexPath])
-        cell.setup(title:"Harry Potter and the Secret Chamber",status: .abandoned ,rating: 3,delegate: self)
+        cell.setup(book: books[indexPath.row])
+        cell.setFavorite(status: books[indexPath.row].isFavorite)
+        cell.delegate = self
         return cell
     }
     
-    func setEmptyMessage() {
-        let messageLabel = EmptyView()
-        cv.backgroundView = messageLabel
-        messageLabel.delegate = self
-        segmentedControl.isHidden = true
+    func setEmptyMessage(message: String) {
+        let empty = EmptyView(message: message)
+        cv.backgroundView = empty
+        empty.delegate = self
     }
     
     func restore() {
@@ -165,9 +174,12 @@ extension ShelfViewController:UICollectionViewDataSource{
     }
 }
 
+/* MARK: - Extensions */
+
 extension ShelfViewController: EmptyViewDelegate {
     func toDiscover() {
         tabBarController!.selectedIndex = 0
     }
     
 }
+

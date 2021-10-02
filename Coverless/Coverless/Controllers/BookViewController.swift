@@ -2,14 +2,16 @@ import UIKit
 
 class BookViewController: UIViewController {
     weak var coordinator: ShelfCoordinator?
-    //let book: MyBook
+    private var book: MyBook
     
     lazy var contentView: BookView = {
-        BookView(designSystem: DefaultDesignSystem.shared, tabBarHeight: tabBarController?.tabBar.frame.height ?? 100)
+        BookView(book:book, designSystem: DefaultDesignSystem.shared, tabBarHeight: tabBarController?.tabBar.frame.height ?? 100)
     }()
     
     
-    init(){
+    init(book: MyBook){
+        //recebe o livro que esta sendo acessado atraves da collection
+        self.book = book
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -27,21 +29,35 @@ class BookViewController: UIViewController {
     
     override func viewDidLoad() {
         //atualizar para contentView.setupContent(book: book)
-        contentView.setupContent()
+        contentView.setupContentBook()
         contentView.setupButtonRead(setRead)
         contentView.setupButtonReading(setReading)
         contentView.setupButtonAbandoned(setAbandoned)
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareTapped))
 
     }
     
     private func setRead(){
-        print("status Read")
+        book.status = 0
+        DataBooks.shared.saveContext()
+
     }
     private func setReading(){
-        print("status Reading")
+        book.status = 1
+        DataBooks.shared.saveContext()
+
     }
     private func setAbandoned(){
-        print("status Abandoned")
+        book.status = 2
+        DataBooks.shared.saveContext()
+
     }
     
+    @objc private func shareTapped(){
+        let msgDefault = "Hey, look at this book I discovered through the Coverless app!"
+        let shareVc = UIActivityViewController(activityItems: [msgDefault,book.title ?? "","Synopsis:(\(book.synopsis ?? "Unavailable")",book.shopLink ?? ""], applicationActivities: [])
+        shareVc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+                present(shareVc, animated: true)
+    }
 }

@@ -9,10 +9,11 @@ import UIKit
 
 final class BookView: UIView, Designable {
     
-    //let book: MyBook
     let designSystem: DesignSystem
     var currentStatus: BookStatus
-    
+    private var book: MyBook
+    private var shopLink: String
+
     //MARK: Views
     private lazy var imgBook: UIView = {
         let img = ImageBook(image: UIImage(named: "ImageBookDefault")!)
@@ -90,7 +91,7 @@ final class BookView: UIView, Designable {
     }()
     
     private lazy var shopView: ShopView = {
-        let shopView = ShopView(image: UIImage(named: "ImageBookDefault")!, titulo: "Amazon Prime", price: "XX,00"/*"R$\(price)"*/)
+        let shopView = ShopView(image: UIImage(named: "ImageBookDefault")!, titulo: "Amazon Prime", price: "XX,00"/*"R$\(price)"*/,url: "")
         shopView.translatesAutoresizingMaskIntoConstraints = false
         return shopView
     }()
@@ -130,9 +131,11 @@ final class BookView: UIView, Designable {
     
     //MARK: Init
     
-    init(designSystem: DesignSystem = DefaultDesignSystem.shared, tabBarHeight: CGFloat = 49) {
+    init(book: MyBook, designSystem: DesignSystem = DefaultDesignSystem.shared, tabBarHeight: CGFloat = 49) {
+        self.book = book
         self.designSystem = designSystem
         self.tabBarHeight = tabBarHeight
+        self.shopLink = "..."
         currentStatus = .reading
         super.init(frame: .zero)
         checkCurrentStatus()
@@ -195,14 +198,27 @@ final class BookView: UIView, Designable {
         stackView.strechToBounds(of: contentView)
     }
     
-    //MARK: Bindings and actions
+    //MARK: Core data
 
     //atualizar para setupContent(book: MyBook)
-    func setupContent() {
-        //self.book = book
+    public func setupContentBook() {
+        ///status de leitura
+        currentStatus = BookStatus(rawValue: Int(book.status)) ?? .reading
+        checkCurrentStatus()
+        ///link
+        shopView.shopTitle.text = "Google Books"
+        shopView.priceValue.isHidden = true //escondendo informacao que nao conseguimos coletar
+        shopLink = book.shopLink ?? ""
+        shopView.url = book.shopLink ?? "https://google.com"
+        ///rating?
+        ratingStars.setRating(rating: Int(book.rating))
+        ///sinopse
+        synopsisField.text = book.synopsis
 
     }
     
+    //MARK: Bindings and actions
+
     private func setupActions() {
         statusButtonRead.addTarget(self, action: #selector(setStatusRead), for: .touchUpInside)
         statusButtonReading.addTarget(self, action: #selector(setStatusReading), for: .touchUpInside)
@@ -215,7 +231,7 @@ final class BookView: UIView, Designable {
     }
     func setupButtonReading(_ action: @escaping () -> Void) {
         let readingAction: UIAction = UIAction { _ in action() }
-        statusButtonRead.addAction(readingAction, for: .touchUpInside)
+        statusButtonReading.addAction(readingAction, for: .touchUpInside)
     }
     func setupButtonAbandoned(_ action: @escaping () -> Void) {
         let abandonedAction: UIAction = UIAction { _ in action() }
@@ -228,6 +244,7 @@ final class BookView: UIView, Designable {
     private func setStatusRead() {
         currentStatus = .read
         checkCurrentStatus()
+
     }
     
     @objc
@@ -242,6 +259,7 @@ final class BookView: UIView, Designable {
         checkCurrentStatus()
     }
     
+    ///funcao utilizada para representacao visual dos botoes
     private func checkCurrentStatus(){
         if currentStatus == .read{
             statusButtonRead.setState(isActive: true)
@@ -261,13 +279,6 @@ final class BookView: UIView, Designable {
         statusButtonRead.setStatus(status: .read)
         statusButtonReading.setStatus(status: .reading)
         statusButtonAbandoned.setStatus(status: .abandoned)
-    }
-    
-    private func changeColor(button:UIButton){
-        let color = button.currentTitleColor
-        let colorBack = button.backgroundColor
-        button.setTitleColor(colorBack, for: .normal)
-        button.backgroundColor = color
     }
     
     //MARK: Designable Protocol
