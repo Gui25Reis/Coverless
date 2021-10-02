@@ -106,7 +106,8 @@ class ShelfCell: UICollectionViewCell, Designable{
         bookStatus.translatesAutoresizingMaskIntoConstraints = false
         favButton.translatesAutoresizingMaskIntoConstraints = false
         stars.translatesAutoresizingMaskIntoConstraints = false
-
+        stars.isHidden = true
+    
         imgView.backgroundColor = colors[Int.random(in: 0..<colors.count)]
         activateConstraints()
     }
@@ -238,12 +239,10 @@ class ShelfCell: UICollectionViewCell, Designable{
         bookStatus.accessibilityHint = "Book status"
         bookStatus.accessibilityTraits = .none
     
-        stars.isAccessibilityElement = true
+        stars.isAccessibilityElement = false
         stars.accessibilityHint = "Book review"
         stars.accessibilityLabel = "Rating:\(stars.getRating()) stars out of five"
-        stars.accessibilityHint = .none
-        //stars.shouldGroupAccessibilityChildren = true
-        
+        stars.accessibilityHint = .none        
 
     }
 }

@@ -11,6 +11,10 @@ class DataBooks{
     static let shared:DataBooks = DataBooks()
     private init() {}
     
+    var contenxt: NSManagedObjectContext {
+        persistentContainer.viewContext
+    }
+    
     // MARK: - Core Data stack
     ///var privada ja que nao vai ser acessada
     private lazy var persistentContainer: NSPersistentContainer = {

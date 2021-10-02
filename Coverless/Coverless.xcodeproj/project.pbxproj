@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1337333B2704FBD20052BF27 /* ShelfCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1337333A2704FBD20052BF27 /* ShelfCellDelegate.swift */; };
-		1337333F27077C730052BF27 /* Environment.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1337333E27077C730052BF27 /* Environment.plist */; };
 		13471FBB26F283C4007296E2 /* BodyTextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13471FBA26F283C4007296E2 /* BodyTextStyle.swift */; };
 		13471FBD26F28ED3007296E2 /* SynopsisCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13471FBC26F28ED3007296E2 /* SynopsisCell.swift */; };
 		134739942703ADDB002E0AE3 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134739932703ADDB002E0AE3 /* EmptyView.swift */; };
@@ -86,7 +85,6 @@
 
 /* Begin PBXFileReference section */
 		1337333A2704FBD20052BF27 /* ShelfCellDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShelfCellDelegate.swift; sourceTree = "<group>"; };
-		1337333E27077C730052BF27 /* Environment.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Environment.plist; sourceTree = "<group>"; };
 		13471FBA26F283C4007296E2 /* BodyTextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyTextStyle.swift; sourceTree = "<group>"; };
 		13471FBC26F28ED3007296E2 /* SynopsisCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynopsisCell.swift; sourceTree = "<group>"; };
 		134739932703ADDB002E0AE3 /* EmptyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
@@ -770,7 +768,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Kings.Coverless;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -789,7 +787,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Kings.Coverless;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
