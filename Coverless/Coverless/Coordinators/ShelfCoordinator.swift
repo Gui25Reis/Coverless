@@ -27,12 +27,11 @@ class ShelfCoordinator: Coordinator {
         navigationController.pushViewController(vc, animated: true)
     }
     
-    //atualizar funcao para func showBook(book: MyBook)
-    func showBook() {
-        let vc = BookViewController()
+    func showBook(book: MyBook) {
+        let vc = BookViewController(book: book)
 
         vc.coordinator = self
-        vc.navigationItem.title = "Book Title"
+        vc.navigationItem.title = book.title
         navigationController.pushViewController(vc, animated: true)
     }
     private func setupBarAppearence() {
