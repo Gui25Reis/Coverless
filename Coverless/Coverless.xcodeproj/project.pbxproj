@@ -12,6 +12,8 @@
 		13471FBD26F28ED3007296E2 /* SynopsisCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13471FBC26F28ED3007296E2 /* SynopsisCell.swift */; };
 		134739942703ADDB002E0AE3 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134739932703ADDB002E0AE3 /* EmptyView.swift */; };
 		134739962703AFB9002E0AE3 /* EmptyViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134739952703AFB9002E0AE3 /* EmptyViewDelegate.swift */; };
+		134E991A2708E95000EECED5 /* OnboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134E99192708E95000EECED5 /* OnboardViewController.swift */; };
+		134E991C2708EB5800EECED5 /* OnboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134E991B2708EB5800EECED5 /* OnboardView.swift */; };
 		136F845226F53208004AAFF2 /* ShelfCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136F845126F53208004AAFF2 /* ShelfCell.swift */; };
 		136F845626F53D78004AAFF2 /* TitleTextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136F845526F53D77004AAFF2 /* TitleTextStyle.swift */; };
 		136F845926F7690A004AAFF2 /* ImageBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136F845826F7690A004AAFF2 /* ImageBook.swift */; };
@@ -89,6 +91,8 @@
 		13471FBC26F28ED3007296E2 /* SynopsisCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynopsisCell.swift; sourceTree = "<group>"; };
 		134739932703ADDB002E0AE3 /* EmptyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		134739952703AFB9002E0AE3 /* EmptyViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyViewDelegate.swift; sourceTree = "<group>"; };
+		134E99192708E95000EECED5 /* OnboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardViewController.swift; sourceTree = "<group>"; };
+		134E991B2708EB5800EECED5 /* OnboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardView.swift; sourceTree = "<group>"; };
 		136F845126F53208004AAFF2 /* ShelfCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfCell.swift; sourceTree = "<group>"; };
 		136F845526F53D77004AAFF2 /* TitleTextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTextStyle.swift; sourceTree = "<group>"; };
 		136F845826F7690A004AAFF2 /* ImageBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBook.swift; sourceTree = "<group>"; };
@@ -258,6 +262,7 @@
 				5B47F65826F3E2CB00FDF48D /* ShelfViewController.swift */,
 				5B89273326F52ABD0002A3DA /* MoreInfoViewController.swift */,
 				5B8BE6D027064D45007FB6E7 /* DiscoveredBookViewController.swift */,
+				134E99192708E95000EECED5 /* OnboardViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -274,6 +279,7 @@
 				5BE7CFC726FBA6EB00927439 /* DiscoverView.swift */,
 				5B7950522704EEAC007C1973 /* LoadingView.swift */,
 				5B8BE6CA27062409007FB6E7 /* DiscoveredBookView.swift */,
+				134E991B2708EB5800EECED5 /* OnboardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -578,6 +584,7 @@
 				5BE28DFC26F12D940043F19E /* DefaultDesignSystem.swift in Sources */,
 				224DBCA226F114DD002303F3 /* MenuView.swift in Sources */,
 				5B8BE6D127064D45007FB6E7 /* DiscoveredBookViewController.swift in Sources */,
+				134E991C2708EB5800EECED5 /* OnboardView.swift in Sources */,
 				5BD62AE726FE601B00EC924D /* NYTDatas.swift in Sources */,
 				5BE28E0126F134EB0043F19E /* UIColor+Palette.swift in Sources */,
 				5B7950532704EEAC007C1973 /* LoadingView.swift in Sources */,
@@ -609,6 +616,7 @@
 				5BE28E0526F136E50043F19E /* DefaultDesignSpacing.swift in Sources */,
 				22F62BE327038F6D0076CA34 /* UIView+NSLayoutConstraint.swift in Sources */,
 				5BD290E326FD1CCC0082620D /* Subject.swift in Sources */,
+				134E991A2708E95000EECED5 /* OnboardViewController.swift in Sources */,
 				5B89273426F52ABD0002A3DA /* MoreInfoViewController.swift in Sources */,
 				1337333B2704FBD20052BF27 /* ShelfCellDelegate.swift in Sources */,
 				224DBC8826F113B3002303F3 /* AppDelegate.swift in Sources */,
@@ -759,7 +767,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = WK7599VNDW;
+				DEVELOPMENT_TEAM = V8V28A4DX2;
 				INFOPLIST_FILE = Coverless/System/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -778,7 +786,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = WK7599VNDW;
+				DEVELOPMENT_TEAM = V8V28A4DX2;
 				INFOPLIST_FILE = Coverless/System/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -43,6 +43,13 @@ class DiscoverCoordinator: Coordinator {
         navigationController.present(nvc, animated: true, completion: nil)
     }
     
+    func presentOnboard(){
+        let vc = OnboardViewController(isOnboarding: true)
+        let nvc = UINavigationController(rootViewController: vc)
+        UIAccessibility.post(notification: .screenChanged, argument: nvc)
+        navigationController.present(nvc, animated: true, completion: nil)
+    }
+    
     private func setupBarAppearence() {
         let designSystem: DesignSystem = DefaultDesignSystem.shared
         

@@ -41,12 +41,12 @@ class ShelfCell: UICollectionViewCell, Designable{
         bookTitle.bottomAnchor.constraint(equalTo: bookStatus.topAnchor, constant: \.smallNegative),
         
         bookStatus.leadingAnchor.constraint(equalTo: imgView.trailingAnchor,constant: \.smallPositive),
-        bookStatus.bottomAnchor.constraint(equalTo: stars.topAnchor, constant: \.smallNegative),
-        bookStatus.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.4),
+        bookStatus.bottomAnchor.constraint(equalTo: imgView.bottomAnchor, constant: \.smallNegative),
+        bookStatus.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.4)
         
-        stars.bottomAnchor.constraint(equalTo: imgView.bottomAnchor, constant: \.largeNegative),
-        stars.leadingAnchor.constraint(equalTo: imgView.trailingAnchor,constant: \.smallPositive),
-        stars.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: \.mediumNegative)
+//        stars.bottomAnchor.constraint(equalTo: imgView.bottomAnchor, constant: \.largeNegative),
+//        stars.leadingAnchor.constraint(equalTo: imgView.trailingAnchor,constant: \.smallPositive),
+//        stars.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: \.mediumNegative)
 
     ]
     
@@ -63,10 +63,10 @@ class ShelfCell: UICollectionViewCell, Designable{
 
         bookStatus.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: \.smallPositive),
         bookStatus.trailingAnchor.constraint(equalTo:contentView.trailingAnchor,constant: \.mediumNegative),
-        bookStatus.bottomAnchor.constraint(equalTo: stars.topAnchor, constant: \.mediumNegative),
+        bookStatus.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: \.smallNegative),
         
-        stars.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: \.largeNegative),
-        stars.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: \.smallPositive),
+//        stars.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: \.largeNegative),
+//        stars.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: \.smallPositive),
         
         imgView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.6)
     ]
@@ -87,7 +87,7 @@ class ShelfCell: UICollectionViewCell, Designable{
         contentView.addSubview(bookTitle)
         contentView.addSubview(bookStatus)
         contentView.addSubview(favButton)
-        contentView.addSubview(stars)
+        //contentView.addSubview(stars)
         setupLayout()
         setupActions()
     }
@@ -106,8 +106,7 @@ class ShelfCell: UICollectionViewCell, Designable{
         bookStatus.translatesAutoresizingMaskIntoConstraints = false
         favButton.translatesAutoresizingMaskIntoConstraints = false
         stars.translatesAutoresizingMaskIntoConstraints = false
-        stars.isHidden = true
-    
+        
         imgView.backgroundColor = colors[Int.random(in: 0..<colors.count)]
         activateConstraints()
     }
@@ -230,7 +229,7 @@ class ShelfCell: UICollectionViewCell, Designable{
         
         
         favButton.isAccessibilityElement = true
-        favButton.accessibilityHint = "To favorite"
+        favButton.accessibilityHint = "To favorite. Current status is \(book.isFavorite)"
         favButton.accessibilityLabel = "Heart symbol"
         
         bookTitle.isAccessibilityElement = true
