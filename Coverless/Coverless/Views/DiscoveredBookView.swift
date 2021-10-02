@@ -188,7 +188,7 @@ import SwiftUI
 struct DiscoveredBookView_Preview: PreviewProvider {
     static var previews: some View {
         Group {
-            AnyViewRepresentable(DiscoveredBookView(designSystem: DefaultDesignSystem(), book: Book(id: "", isbn10: "", title: "Harry Potter", description: "", image: "https://books.google.com/books/content?id=-bF2CwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api", buyLinks: [:])))
+            AnyViewRepresentable(DiscoveredBookView(designSystem: DefaultDesignSystem(), book: Book(id: "", isbn10: "", title: "Harry Potter", description: "", image: "https://books.google.com/books/content?id=-bF2CwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api", author: "", publisher: "", buyLinks: [:])))
                 .environment(\.sizeCategory, .accessibilityExtraExtraExtraLarge)
             AnyViewRepresentable(AsyncImage(url: URL(string: "https://books.google.com/books/content?id=x605AwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api"), designSystem: DefaultDesignSystem()))
         }
