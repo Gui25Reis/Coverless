@@ -17,7 +17,7 @@ final class SubjectCollectionHeader: UICollectionReusableView {
         let tagGroup = NSCollectionLayoutGroup.horizontal(layoutSize: tagItemSize, subitems: [tagItem])
         tagGroup.edgeSpacing = .init(leading: .fixed(8), top: .fixed(4), trailing: .fixed(0), bottom: .fixed(4))
         let tagSection = NSCollectionLayoutSection(group: tagGroup)
-        tagSection.orthogonalScrollingBehavior = .paging
+        tagSection.orthogonalScrollingBehavior = .continuous
         
         let layout = UICollectionViewCompositionalLayout(section: tagSection)
         

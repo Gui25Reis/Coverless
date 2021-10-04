@@ -20,7 +20,7 @@ final class DiscoverView: UIView, Designable {
         let header = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .estimated(80)),
             elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
-        let footer = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .estimated(55)), elementKind: UICollectionView.elementKindSectionFooter, alignment: .bottom)
+        let footer = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .absolute(100)), elementKind: UICollectionView.elementKindSectionFooter, alignment: .bottom)
         section.boundarySupplementaryItems = [header, footer]
         //section.contentInsets = NSDirectionalEdgeInsets(top: 0.0, leading: 18.0, bottom: 0.0, trailing: 18.0)
         let layout = UICollectionViewCompositionalLayout(section: section)
