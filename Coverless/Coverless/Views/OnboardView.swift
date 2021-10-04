@@ -95,6 +95,7 @@ class ViewOnboarding:UIView{
     }
     func setAccessibility(){
         labelTitulo.isAccessibilityElement = true
+        labelTitulo.accessibilityHint = "Title of onboard Page"
         label.isAccessibilityElement = true
         imageView.isAccessibilityElement = false
     }

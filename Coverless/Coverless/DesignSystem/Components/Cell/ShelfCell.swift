@@ -143,7 +143,7 @@ class ShelfCell: UICollectionViewCell, Designable{
         
         //elementos
         bookTitle.stylize(with: designSystem.text.title)
-        bookTitle.numberOfLines = 0
+        bookTitle.numberOfLines = 4
         
         //favButton
         //testando o botao de fav
