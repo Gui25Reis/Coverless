@@ -20,6 +20,7 @@
 		136F845B26F76E90004AAFF2 /* StatusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136F845A26F76E90004AAFF2 /* StatusButton.swift */; };
 		136F845D26F906C1004AAFF2 /* StarsRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136F845C26F906C1004AAFF2 /* StarsRating.swift */; };
 		220C04AB2706DA130039A08C /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220C04AA2706DA130039A08C /* APIError.swift */; };
+		221A0D92270B2CD500BEA501 /* Environment.plist in Resources */ = {isa = PBXBuildFile; fileRef = 221A0D91270B2CD500BEA501 /* Environment.plist */; };
 		223B720526FE616200B9822E /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223B720426FE616200B9822E /* Book.swift */; };
 		224DBC8826F113B3002303F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224DBC8726F113B3002303F3 /* AppDelegate.swift */; };
 		224DBC8A26F113B3002303F3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224DBC8926F113B3002303F3 /* SceneDelegate.swift */; };
@@ -57,7 +58,6 @@
 		5B8BE6CD27063519007FB6E7 /* LargeTitleTextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8BE6CC27063519007FB6E7 /* LargeTitleTextStyle.swift */; };
 		5B8BE6CF2706355D007FB6E7 /* LargeSerifTextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8BE6CE2706355D007FB6E7 /* LargeSerifTextStyle.swift */; };
 		5B8BE6D127064D45007FB6E7 /* DiscoveredBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8BE6D027064D45007FB6E7 /* DiscoveredBookViewController.swift */; };
-		5BA275492707784A00459DD1 /* Environment.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5BA275482707784A00459DD1 /* Environment.plist */; };
 		5BA2754D2707A20E00459DD1 /* DiscoverViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA2754C2707A20E00459DD1 /* DiscoverViewFooter.swift */; };
 		5BA2754F2707A78400459DD1 /* DiscoverViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA2754E2707A78400459DD1 /* DiscoverViewDelegate.swift */; };
 		5BA275512707A7A200459DD1 /* AsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA275502707A7A200459DD1 /* AsyncImage.swift */; };
@@ -99,6 +99,7 @@
 		136F845A26F76E90004AAFF2 /* StatusButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusButton.swift; sourceTree = "<group>"; };
 		136F845C26F906C1004AAFF2 /* StarsRating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarsRating.swift; sourceTree = "<group>"; };
 		220C04AA2706DA130039A08C /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		221A0D91270B2CD500BEA501 /* Environment.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Environment.plist; path = ../../../../../../Desktop/Environment.plist; sourceTree = "<group>"; };
 		223B720426FE616200B9822E /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		224DBC8426F113B3002303F3 /* Coverless.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Coverless.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		224DBC8726F113B3002303F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -138,7 +139,6 @@
 		5B8BE6CC27063519007FB6E7 /* LargeTitleTextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeTitleTextStyle.swift; sourceTree = "<group>"; };
 		5B8BE6CE2706355D007FB6E7 /* LargeSerifTextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeSerifTextStyle.swift; sourceTree = "<group>"; };
 		5B8BE6D027064D45007FB6E7 /* DiscoveredBookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveredBookViewController.swift; sourceTree = "<group>"; };
-		5BA275482707784A00459DD1 /* Environment.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Environment.plist; sourceTree = "<group>"; };
 		5BA2754C2707A20E00459DD1 /* DiscoverViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewFooter.swift; sourceTree = "<group>"; };
 		5BA2754E2707A78400459DD1 /* DiscoverViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewDelegate.swift; sourceTree = "<group>"; };
 		5BA275502707A7A200459DD1 /* AsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImage.swift; sourceTree = "<group>"; };
@@ -384,7 +384,7 @@
 		5BD62AE026FE5FF200EC924D /* API */ = {
 			isa = PBXGroup;
 			children = (
-				5BA275482707784A00459DD1 /* Environment.plist */,
+				221A0D91270B2CD500BEA501 /* Environment.plist */,
 				220C04AA2706DA130039A08C /* APIError.swift */,
 				5BD62AE426FE601B00EC924D /* Google */,
 				5BD62AE126FE601B00EC924D /* NewYorkTIme */,
@@ -545,7 +545,7 @@
 				224DBC9426F113B3002303F3 /* LaunchScreen.storyboard in Resources */,
 				224DBC9126F113B3002303F3 /* Assets.xcassets in Resources */,
 				5BD290E126FD0E420082620D /* Subjects.plist in Resources */,
-				5BA275492707784A00459DD1 /* Environment.plist in Resources */,
+				221A0D92270B2CD500BEA501 /* Environment.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
