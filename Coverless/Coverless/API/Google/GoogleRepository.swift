@@ -17,6 +17,8 @@ import Foundation
 */
 class GoogleRepository {
     private lazy var lastCategory:[String:Int] = [:]
+    private lazy var lastCategoryCont:[String:Int] = [:]
+    private lazy var textUsed:String = ""
     
     /**
         Faz a chamada da API com base na palavra chave.
@@ -84,8 +86,10 @@ class GoogleRepository {
                 return
             }
                         
-            if (!used) {self.lastCategory[text] = 0}
+            if (!used) {self.lastCategory[text] = 0; self.lastCategoryCont[text] = 0}
             
+            // print("Deu certo")
+            self.textUsed = text
             completionHandler(.success(self.compactInfo(items: books)))
         }
         task.resume()
@@ -121,7 +125,7 @@ class GoogleRepository {
         if key == "" {return ""}
         
         var apiUrl = "https://www.googleapis.com/books/v1/volumes?"             // Chamada normal
-        apiUrl += "q=\(NYTRepository.fixStringSpaces(text))+subject:"           // Palavra chave + filtro
+        apiUrl += "q=subject:\(NYTRepository.fixStringSpaces(text))"            // Palavra chave + filtro
         apiUrl += "&startIndex=\(startIndex * 40)&maxResults=40"                // Momento da lista
         apiUrl += "&printType=books&langRestrict=en"                            // Tipo de resultado
         apiUrl += "&key=\(key)"                                                 // Token
@@ -144,11 +148,11 @@ class GoogleRepository {
                    let title = info.volumeInfo.title,
                    let authors = info.volumeInfo.authors,
                    let publisher = info.volumeInfo.publisher,
-                   let description = info.volumeInfo.description,
-                   let _ = info.saleInfo,
-                   let buyLink = info.saleInfo!.buyLink,
-                   let _ = info.volumeInfo.imageLinks,
-                   let imgThumbnail = info.volumeInfo.imageLinks!.thumbnail
+                   let description = info.volumeInfo.description //,
+                   // let _ = info.saleInfo,
+                   // let buyLink = info.saleInfo!.buyLink,
+                   // let _ = info.volumeInfo.imageLinks,
+                   // let imgThumbnail = info.volumeInfo.imageLinks!.thumbnail
                 {
                     var allAuthors:String = ""
                     for author in authors {allAuthors += author + " ,"}
@@ -159,15 +163,16 @@ class GoogleRepository {
                             isbn10: nil,
                             title: title.capitalized,
                             description: description,
-                            image:imgThumbnail,
+                            image: "",//imgThumbnail,
                             author: String(allAuthors.dropLast()),
                             publisher: publisher,
-                            buyLinks:["Google Books":"\(buyLink)"]
+                            buyLinks: [:]//["Google Books":"\(buyLink)"]
                         )
                     )
                 }
             }
         }
+        self.lastCategoryCont[self.textUsed]! += books.count
         return books
     }
 }
