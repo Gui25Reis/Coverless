@@ -1,2 +1,11 @@
 # Arquivos do Mac
 *.DS_Store
+
+# Chaves e infos pessoais
+Coverless/Coverless/API/Environment.plist
+*Environment.plist
+
+# XCode
+xcuserdata/
+Coverless/Coverless.xcodeproj/project.xcworkspace/xcuserdata/
+Coverless/Coverless/API/Environment.plist
