@@ -44,6 +44,15 @@ final class DiscoverView: UIView, Designable {
     private let refreshControl: UIRefreshControl
     private let loadingView: LoadingView
     
+    private var isContentLoaded: Bool {
+        get {
+            !collectionView.isHidden
+        } set {
+            collectionView.isHidden = !newValue
+            loadingView.isHidden = newValue
+        }
+    }
+    
     init(designSystem: DesignSystem = DefaultDesignSystem()) {
         loadingView = LoadingView(designSystem: designSystem)
         refreshControl = UIRefreshControl()
@@ -59,21 +68,20 @@ final class DiscoverView: UIView, Designable {
     
     private func setupHierarchy() {
         addSubview(collectionView)
+        addSubview(loadingView)
         collectionView.refreshControl = refreshControl
     }
     
     private func setupLayout() {
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor)
-        ])
+        collectionView.strechToBounds(of: self)
+        loadingView.translatesAutoresizingMaskIntoConstraints = false
+        loadingView.strechToBounds(of: layoutMarginsGuide)
+        isContentLoaded = false
     }
     
     func setupLoadingState() {
-        collectionView.backgroundView = loadingView
         loadingView.start()
+        isContentLoaded = false
     }
     
     func setupPresentationState() {
@@ -84,6 +92,7 @@ final class DiscoverView: UIView, Designable {
         }
         
         loadingView.stop()
+        isContentLoaded = true
     }
     
     func setupRefreshState() {
