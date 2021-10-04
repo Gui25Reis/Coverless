@@ -14,6 +14,9 @@ class DiscoverViewController: UIViewController {
     private let contentView: DiscoverView
     private let dataSource: DiscoverCollectionViewDataSource
     
+    ///userdefault para onboard
+    let defaults = UserDefaults.standard
+    
     private var state: ViewState { didSet {
         handleState()
     }}
@@ -40,6 +43,12 @@ class DiscoverViewController: UIViewController {
     }
     
     override func loadView() {
+        let isFirstRun = defaults.bool(forKey: "isFirstRun")
+        ///colocado como false pq o user default ja inicia como false
+        if isFirstRun == false{
+            coordinator?.presentOnboard()
+            defaults.set(true,forKey: "isFirstRun")
+        }
         view = contentView
         
     }

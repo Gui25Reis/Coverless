@@ -69,7 +69,7 @@ final class StatusButton: UIButton, Designable {
         self.backgroundColor = color.withAlphaComponent(0.15)
     }
     private func setButtonStyleInative(color: UIColor){
-        setTitleColor(.white, for: .normal)
+        setTitleColor(.backgroundPrimary, for: .normal)
         self.backgroundColor = color
     }
     
