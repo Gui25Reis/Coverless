@@ -73,7 +73,7 @@ class GoogleRepository {
             
             // Acessando um index que não existe
             guard let _ = books.items else {
-                // print("\n\n\n\t====== Categoria: \(text) - \(self.lastCategoryCont[text] ?? 0) livors.======\n\n\n")
+                print("\n\n\n\t====== Categoria: \(text) - \(self.lastCategoryCont[text] ?? 0) livors.======\n\n\n")
                 self.lastCategory[text]? = -1
                 self.getBooks(text: text) { result in
                     switch result {
