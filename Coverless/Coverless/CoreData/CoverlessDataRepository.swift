@@ -63,7 +63,7 @@ class DataBooks{
         let livro = MyBook(context: self.persistentContainer.viewContext)
         
         livro.id = book.id
-        livro.status = Int32(1)
+        livro.status = Int32(2)
         livro.title = book.title
         livro.rating = 5
         livro.isFavorite = false

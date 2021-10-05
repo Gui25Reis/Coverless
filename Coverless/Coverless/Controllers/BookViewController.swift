@@ -33,7 +33,7 @@ class BookViewController: UIViewController {
         contentView.setupContentBook()
         contentView.setupButtonRead(setRead)
         contentView.setupButtonReading(setReading)
-        contentView.setupButtonAbandoned(setAbandoned)
+        contentView.setupButtonAbandoned(setWant)
         
         navigationItem.rightBarButtonItem = shareButtonBar
         shareButtonBar.isAccessibilityElement = true
@@ -52,7 +52,7 @@ class BookViewController: UIViewController {
         DataBooks.shared.saveContext()
 
     }
-    private func setAbandoned(){
+    private func setWant(){
         book.status = 2
         DataBooks.shared.saveContext()
 
