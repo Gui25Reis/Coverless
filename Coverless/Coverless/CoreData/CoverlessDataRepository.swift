@@ -68,7 +68,11 @@ class DataBooks{
         livro.rating = 5
         livro.isFavorite = false
         livro.synopsis = book.description
-        livro.shopLink = ""//Array(book.buyLinks.values)[0]
+        
+        if let links = book.buyLinks{
+            livro.shopLink =  Array(links.values)[0]
+        }
+        //livro.shopLink = Array(book.buyLinks.values)[0]
         
         imageFetcher.saveImage(from: URL(string: book.image ?? "")) {[weak self] res in
             
