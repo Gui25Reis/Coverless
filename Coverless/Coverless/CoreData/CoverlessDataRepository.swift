@@ -64,7 +64,15 @@ class DataBooks{
         livro.rating = 5
         livro.isFavorite = false
         livro.synopsis = book.description
-        livro.shopLink = ""//Array(book.buyLinks.values)[0]
+        
+        let url =  Array(book.buyLinks.values)
+        print(url)
+        if url.isEmpty == true{
+            livro.shopLink = ""
+        } else{
+            livro.shopLink = Array(book.buyLinks.values)[0]
+        }
+        //livro.shopLink = Array(book.buyLinks.values)[0]
         
         self.saveContext()
         return livro

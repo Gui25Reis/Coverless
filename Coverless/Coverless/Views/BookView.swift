@@ -170,8 +170,11 @@ final class BookView: UIView, Designable {
         stackViewButtons.addArrangedSubview(statusButtonReading)
         stackViewButtons.addArrangedSubview(statusButtonAbandoned)
         ///shop
-        stackView.addArrangedSubview(shopHeader)
-        stackView.addArrangedSubview(shopView)
+        if book.shopLink != ""{
+            stackView.addArrangedSubview(shopHeader)
+            stackView.addArrangedSubview(shopView)
+        }
+        
 
     }
     
