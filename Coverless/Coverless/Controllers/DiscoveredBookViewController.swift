@@ -26,11 +26,11 @@ class DiscoveredBookViewController: UIViewController {
             
             //so adiciona um novo livro se ele ainda nao foi adicionado
             if !exists{
-                let _ = DataBooks.shared.addBook(book: book)
+                DataBooks.shared.addBook(book: book)
             }
         }
         else{
-            let _ = DataBooks.shared.addBook(book: book)
+            DataBooks.shared.addBook(book: book)
         }
         
         super.init(nibName: nil, bundle: nil)

@@ -83,6 +83,8 @@
 		5BE7CFC826FBA6EB00927439 /* DiscoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE7CFC726FBA6EB00927439 /* DiscoverView.swift */; };
 		5BE7CFCB26FBB82500927439 /* DiscoverCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE7CFCA26FBB82500927439 /* DiscoverCollectionViewDataSource.swift */; };
 		5BE7CFCD26FBBA4F00927439 /* SubjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE7CFCC26FBBA4F00927439 /* SubjectCell.swift */; };
+		5BE9E3DB270CBA4B00109466 /* Environment.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5BE9E3DA270CBA4B00109466 /* Environment.plist */; };
+		5BE9E3DE270CBACA00109466 /* ImageFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE9E3DD270CBACA00109466 /* ImageFetcher.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -164,6 +166,8 @@
 		5BE7CFC726FBA6EB00927439 /* DiscoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverView.swift; sourceTree = "<group>"; };
 		5BE7CFCA26FBB82500927439 /* DiscoverCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		5BE7CFCC26FBBA4F00927439 /* SubjectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectCell.swift; sourceTree = "<group>"; };
+		5BE9E3DA270CBA4B00109466 /* Environment.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Environment.plist; sourceTree = "<group>"; };
+		5BE9E3DD270CBACA00109466 /* ImageFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFetcher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +206,7 @@
 			children = (
 				224DBC8626F113B3002303F3 /* Coverless */,
 				224DBC8526F113B3002303F3 /* Products */,
+				5BDD3D6F270CC89800A60CF3 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -216,6 +221,7 @@
 		224DBC8626F113B3002303F3 /* Coverless */ = {
 			isa = PBXGroup;
 			children = (
+				5BE9E3DC270CBA7D00109466 /* Utils */,
 				5B79A4BD270265C900CFDFD6 /* Accessibility */,
 				22F62BE027038F2C0076CA34 /* Extensions */,
 				22F62BDF27038EE80076CA34 /* CoreData */,
@@ -410,6 +416,14 @@
 			path = Google;
 			sourceTree = "<group>";
 		};
+		5BDD3D6F270CC89800A60CF3 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				22BC6C61270CC0BF00B45B14 /* Environment.plist */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		5BE28DFA26F12D380043F19E /* DesignSystem */ = {
 			isa = PBXGroup;
 			children = (
@@ -483,6 +497,14 @@
 				5B79504E2703B13A007C1973 /* SubjectCollectionHeaderDataSource.swift */,
 			);
 			path = DataSources;
+			sourceTree = "<group>";
+		};
+		5BE9E3DC270CBA7D00109466 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				5BE9E3DD270CBACA00109466 /* ImageFetcher.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -562,6 +584,7 @@
 				22F62BDE27038C9A0076CA34 /* CoverlessData.xcdatamodeld in Sources */,
 				5B47F64626F2CCA800FDF48D /* UIImageView+TraitCollection.swift in Sources */,
 				5B47F65526F3DCBF00FDF48D /* MainTabBarController.swift in Sources */,
+				5BE9E3DE270CBACA00109466 /* ImageFetcher.swift in Sources */,
 				136F845626F53D78004AAFF2 /* TitleTextStyle.swift in Sources */,
 				134739942703ADDB002E0AE3 /* EmptyView.swift in Sources */,
 				22F62BE627038F780076CA34 /* CoverlessDataRepository.swift in Sources */,

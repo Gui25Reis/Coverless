@@ -160,7 +160,7 @@ class GoogleRepository {
                             isbn10: nil,
                             title: title.capitalized,
                             description: description,
-                            image: info.volumeInfo.imageLinks?.thumbnail ?? "",
+                            image: info.volumeInfo.imageLinks?.thumbnail,
                             author: String(allAuthors.dropLast()),
                             publisher: publisher,
                             buyLinks: ["Google Books":"\(info.saleInfo?.buyLink ?? "")"]

@@ -5,7 +5,7 @@ class BookViewController: UIViewController {
     private var book: MyBook
     
     lazy var contentView: BookView = {
-        BookView(book:book, designSystem: DefaultDesignSystem.shared, tabBarHeight: tabBarController?.tabBar.frame.height ?? 100)
+        BookView(book: book, designSystem: DefaultDesignSystem.shared, tabBarHeight: tabBarController?.tabBar.frame.height ?? 100)
     }()
     
     private lazy var shareButtonBar: UIBarButtonItem  = .init(barButtonSystemItem: .action, target: self, action: #selector(shareTapped))
