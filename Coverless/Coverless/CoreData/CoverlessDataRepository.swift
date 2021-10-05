@@ -9,7 +9,11 @@ import CoreData
 
 class DataBooks{
     static let shared:DataBooks = DataBooks()
-    private init() {}
+    
+    private let imageFetcher: ImageFetcher
+    private init(imageFetcher: ImageFetcher = ImageFetcher.shared) {
+        self.imageFetcher = imageFetcher
+    }
     
     var contenxt: NSManagedObjectContext {
         persistentContainer.viewContext
@@ -55,7 +59,7 @@ class DataBooks{
         return []
     }
     
-    func addBook(book: Book) -> MyBook {
+    func addBook(book: Book) {
         let livro = MyBook(context: self.persistentContainer.viewContext)
         
         livro.id = book.id
@@ -66,8 +70,19 @@ class DataBooks{
         livro.synopsis = book.description
         livro.shopLink = ""//Array(book.buyLinks.values)[0]
         
-        self.saveContext()
-        return livro
+        imageFetcher.saveImage(from: URL(string: book.image)) {[weak self] res in
+            
+            guard let self = self else { return }
+            
+            switch res {
+            case .failure(_):
+                livro.imagePath = nil
+            case .success(let path):
+                livro.imagePath = path
+            }
+
+            self.saveContext()
+        }
     }
     
     func deleta(item: MyBook) throws{

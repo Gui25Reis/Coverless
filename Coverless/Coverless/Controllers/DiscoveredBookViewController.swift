@@ -18,7 +18,7 @@ class DiscoveredBookViewController: UIViewController {
     init(book:Book, designSystem: DesignSystem = DefaultDesignSystem()) {
         self.book = book
         self.contentView = DiscoveredBookView(designSystem: designSystem, book: book)
-        let _ = DataBooks.shared.addBook(book: book)
+        DataBooks.shared.addBook(book: book)
         super.init(nibName: nil, bundle: nil)
         
     }
