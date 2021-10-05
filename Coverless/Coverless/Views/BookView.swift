@@ -76,9 +76,9 @@ final class BookView: UIView, Designable {
         return b
     }()
     
-    private lazy var statusButtonAbandoned: StatusButton = {
+    private lazy var statusButtonWant: StatusButton = {
         let b = StatusButton()
-        b.setStatus(status: .abandoned)
+        b.setStatus(status: .want)
         b.translatesAutoresizingMaskIntoConstraints = false
         return b
     }()
@@ -166,9 +166,11 @@ final class BookView: UIView, Designable {
         ///botoes de status
         stackView.addArrangedSubview(statusHeader)
         stackView.addArrangedSubview(stackViewButtons)
-        stackViewButtons.addArrangedSubview(statusButtonRead)
+        stackViewButtons.addArrangedSubview(statusButtonWant)
         stackViewButtons.addArrangedSubview(statusButtonReading)
-        stackViewButtons.addArrangedSubview(statusButtonAbandoned)
+        stackViewButtons.addArrangedSubview(statusButtonRead)
+        
+        
         ///shop
         if book.shopLink != ""{
             stackView.addArrangedSubview(shopHeader)
@@ -226,7 +228,7 @@ final class BookView: UIView, Designable {
     private func setupActions() {
         statusButtonRead.addTarget(self, action: #selector(setStatusRead), for: .touchUpInside)
         statusButtonReading.addTarget(self, action: #selector(setStatusReading), for: .touchUpInside)
-        statusButtonAbandoned.addTarget(self, action: #selector(setStatusAbandoned), for: .touchUpInside)
+        statusButtonWant.addTarget(self, action: #selector(setStatusWant), for: .touchUpInside)
     }
     
     func setupButtonRead(_ action: @escaping () -> Void) {
@@ -238,8 +240,8 @@ final class BookView: UIView, Designable {
         statusButtonReading.addAction(readingAction, for: .touchUpInside)
     }
     func setupButtonAbandoned(_ action: @escaping () -> Void) {
-        let abandonedAction: UIAction = UIAction { _ in action() }
-        statusButtonAbandoned.addAction(abandonedAction, for: .touchUpInside)
+        let wantAction: UIAction = UIAction { _ in action() }
+        statusButtonWant.addAction(wantAction, for: .touchUpInside)
     }
     
     //MARK: Buttons Functions
@@ -258,8 +260,8 @@ final class BookView: UIView, Designable {
     }
     
     @objc
-    private func setStatusAbandoned(){
-        currentStatus = .abandoned
+    private func setStatusWant(){
+        currentStatus = .want
         checkCurrentStatus()
     }
     
@@ -268,21 +270,21 @@ final class BookView: UIView, Designable {
         if currentStatus == .read{
             statusButtonRead.setState(isActive: true)
             statusButtonReading.setState(isActive: false)
-            statusButtonAbandoned.setState(isActive: false)
+            statusButtonWant.setState(isActive: false)
         }
         else if currentStatus == .reading{
             statusButtonRead.setState(isActive: false)
             statusButtonReading.setState(isActive: true)
-            statusButtonAbandoned.setState(isActive: false)
+            statusButtonWant.setState(isActive: false)
         }
         else{
             statusButtonRead.setState(isActive: false)
             statusButtonReading.setState(isActive: false)
-            statusButtonAbandoned.setState(isActive: true)
+            statusButtonWant.setState(isActive: true)
         }
         statusButtonRead.setStatus(status: .read)
         statusButtonReading.setStatus(status: .reading)
-        statusButtonAbandoned.setStatus(status: .abandoned)
+        statusButtonWant.setStatus(status: .want)
     }
     
     //MARK: Designable Protocol
@@ -312,8 +314,8 @@ final class BookView: UIView, Designable {
         statusButtonReading.isAccessibilityElement = true
         statusButtonReading.accessibilityTraits = .button
         
-        statusButtonAbandoned.isAccessibilityElement = true
-        statusButtonAbandoned.accessibilityTraits = .button
+        statusButtonWant.isAccessibilityElement = true
+        statusButtonWant.accessibilityTraits = .button
     
         shopHeader.isAccessibilityElement = true
         shopView.isAccessibilityElement = true
@@ -325,7 +327,7 @@ final class BookView: UIView, Designable {
         shopView.shopButton.isAccessibilityElement = true
         shopView.shopButton.accessibilityHint = "click to be redirected"
         
-        self.accessibilityElements = [synopsisField,ratingHeader, ratingStars,statusHeader,statusButtonRead,statusButtonReading,statusButtonAbandoned,shopHeader,shopView, shopView.shopTitle,shopView.priceValue,shopView.shopButton]
+        self.accessibilityElements = [synopsisField,ratingHeader, ratingStars,statusHeader,statusButtonRead,statusButtonReading,statusButtonWant,shopHeader,shopView, shopView.shopTitle,shopView.priceValue,shopView.shopButton]
         
     }
     
