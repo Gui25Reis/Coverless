@@ -38,7 +38,7 @@ final class DiscoveredBookView: UIView {
     }()
     
     init(designSystem: DesignSystem, book: Book) {
-        self.imageView = AsyncImage(url: URL(string: book.image), designSystem: designSystem)
+        self.imageView = AsyncImage(url: URL(string: book.image ?? ""), designSystem: designSystem)
         self.discoverLabel = UILabel()
         self.bookTitle = UILabel()
         super.init(frame: .zero)
