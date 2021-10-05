@@ -65,12 +65,8 @@ class DataBooks{
         livro.isFavorite = false
         livro.synopsis = book.description
         
-        let url =  Array(book.buyLinks.values)
-        print(url)
-        if url.isEmpty == true{
-            livro.shopLink = ""
-        } else{
-            livro.shopLink = Array(book.buyLinks.values)[0]
+        if let links = book.buyLinks{
+            livro.shopLink =  Array(links.values)[0]
         }
         //livro.shopLink = Array(book.buyLinks.values)[0]
         
