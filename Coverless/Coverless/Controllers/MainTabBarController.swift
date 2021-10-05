@@ -18,5 +18,11 @@ class MainTabBarController: UITabBarController {
         shelf.start()
         viewControllers = [discover.navigationController, shelf.navigationController]
         tabBar.barTintColor = designSystem.palette.backgroundPrimary
+        
+        if #available(iOS 15.0, *) {
+            let appearance = UITabBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            UITabBar.appearance().scrollEdgeAppearance = appearance
+        }
     }
 }

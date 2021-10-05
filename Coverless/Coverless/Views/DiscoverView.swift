@@ -20,7 +20,7 @@ final class DiscoverView: UIView, Designable {
         let header = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .estimated(80)),
             elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
-        let footer = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .estimated(55)), elementKind: UICollectionView.elementKindSectionFooter, alignment: .bottom)
+        let footer = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .absolute(100)), elementKind: UICollectionView.elementKindSectionFooter, alignment: .bottom)
         section.boundarySupplementaryItems = [header, footer]
         //section.contentInsets = NSDirectionalEdgeInsets(top: 0.0, leading: 18.0, bottom: 0.0, trailing: 18.0)
         let layout = UICollectionViewCompositionalLayout(section: section)
@@ -44,6 +44,15 @@ final class DiscoverView: UIView, Designable {
     private let refreshControl: UIRefreshControl
     private let loadingView: LoadingView
     
+    private var isContentLoaded: Bool {
+        get {
+            !collectionView.isHidden
+        } set {
+            collectionView.isHidden = !newValue
+            loadingView.isHidden = newValue
+        }
+    }
+    
     init(designSystem: DesignSystem = DefaultDesignSystem()) {
         loadingView = LoadingView(designSystem: designSystem)
         refreshControl = UIRefreshControl()
@@ -59,21 +68,20 @@ final class DiscoverView: UIView, Designable {
     
     private func setupHierarchy() {
         addSubview(collectionView)
+        addSubview(loadingView)
         collectionView.refreshControl = refreshControl
     }
     
     private func setupLayout() {
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor)
-        ])
+        collectionView.strechToBounds(of: self)
+        loadingView.translatesAutoresizingMaskIntoConstraints = false
+        loadingView.strechToBounds(of: layoutMarginsGuide)
+        isContentLoaded = false
     }
     
     func setupLoadingState() {
-        collectionView.backgroundView = loadingView
         loadingView.start()
+        isContentLoaded = false
     }
     
     func setupPresentationState() {
@@ -84,6 +92,7 @@ final class DiscoverView: UIView, Designable {
         }
         
         loadingView.stop()
+        isContentLoaded = true
     }
     
     func setupRefreshState() {
