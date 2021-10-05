@@ -26,6 +26,7 @@ class ViewOnboarding:UIView{
         self.backgroundColor = .backgroundPrimary
 
         labelTitulo.text = titulo
+        labelTitulo.numberOfLines = 0
         scrollView.addSubview(labelTitulo)
         
         label.text = text
