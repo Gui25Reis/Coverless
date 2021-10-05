@@ -4,33 +4,33 @@
 <array>
 	<dict>
 		<key>name</key>
-		<string>Education</string>
+		<string>Drama</string>
 		<key>value</key>
-		<string>education</string>
+		<string>drama</string>
 	</dict>
 	<dict>
 		<key>name</key>
-		<string>Crime</string>
+		<string>Thriller</string>
 		<key>value</key>
-		<string>crime-and-punishment</string>
+		<string>thriller</string>
 	</dict>
 	<dict>
 		<key>name</key>
-		<string>Espionage</string>
+		<string>Suspense</string>
 		<key>value</key>
-		<string>espionage</string>
+		<string>suspense</string>
 	</dict>
 	<dict>
 		<key>name</key>
-		<string>Religion</string>
+		<string>Humor</string>
 		<key>value</key>
-		<string>religion-spirituality-and-faith</string>
+		<string>humor</string>
 	</dict>
 	<dict>
 		<key>name</key>
 		<string>Adventure</string>
 		<key>value</key>
-		<string>expeditions-disasters-and-adventures</string>
+		<string>adventure</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -40,27 +40,39 @@
 	</dict>
 	<dict>
 		<key>name</key>
-		<string>Fiction</string>
+		<string>Religion</string>
 		<key>value</key>
-		<string>combined-print-and-e-book-fiction</string>
+		<string>religion</string>
 	</dict>
 	<dict>
 		<key>name</key>
-		<string>Nonfiction</string>
+		<string>Classic</string>
 		<key>value</key>
-		<string>combined-print-and-e-book-nonfiction</string>
+		<string>classic</string>
 	</dict>
 	<dict>
 		<key>name</key>
-		<string>Love</string>
+		<string>Paranormal</string>
 		<key>value</key>
-		<string>relationships</string>
+		<string>paranormal</string>
 	</dict>
 	<dict>
 		<key>name</key>
-		<string>Series</string>
+		<string>History</string>
 		<key>value</key>
-		<string>series-books</string>
+		<string>history</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Poetry</string>
+		<key>value</key>
+		<string>poetry</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Horror</string>
+		<key>value</key>
+		<string>horror</string>
 	</dict>
 </array>
 </plist>
