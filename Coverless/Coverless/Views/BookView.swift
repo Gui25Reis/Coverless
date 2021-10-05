@@ -91,7 +91,7 @@ final class BookView: UIView, Designable {
     }()
     
     private lazy var shopView: ShopView = {
-        let shopView = ShopView(image: UIImage(named: "ImageBookDefault")!, titulo: "Amazon Prime", price: "XX,00"/*"R$\(price)"*/,url: "")
+        let shopView = ShopView(image: UIImage(named: "GoogleBooksLogo")!, titulo: "Amazon Prime", price: "XX,00"/*"R$\(price)"*/,url: "")
         shopView.translatesAutoresizingMaskIntoConstraints = false
         return shopView
     }()
@@ -160,8 +160,9 @@ final class BookView: UIView, Designable {
         ///sinopse
         stackView.addArrangedSubview(synopsisField)
         ///rating
-        stackView.addArrangedSubview(ratingHeader)
-        stackView.addArrangedSubview(ratingStars)
+        ///as linhas abaixo estao comentadas pois nao vamos uitilizar o rating por enquanto
+        //stackView.addArrangedSubview(ratingHeader)
+        //stackView.addArrangedSubview(ratingStars)
         ///botoes de status
         stackView.addArrangedSubview(statusHeader)
         stackView.addArrangedSubview(stackViewButtons)
@@ -206,7 +207,7 @@ final class BookView: UIView, Designable {
         currentStatus = BookStatus(rawValue: Int(book.status)) ?? .reading
         checkCurrentStatus()
         ///link
-        shopView.shopTitle.text = "Google Books"
+        shopView.shopTitle.text = "Google Books™"
         shopView.priceValue.isHidden = true //escondendo informacao que nao conseguimos coletar
         shopLink = book.shopLink ?? ""
         shopView.url = book.shopLink ?? "https://google.com"

@@ -8,6 +8,7 @@ class BookViewController: UIViewController {
         BookView(book:book, designSystem: DefaultDesignSystem.shared, tabBarHeight: tabBarController?.tabBar.frame.height ?? 100)
     }()
     
+    private lazy var shareButtonBar: UIBarButtonItem  = .init(barButtonSystemItem: .action, target: self, action: #selector(shareTapped))
     
     init(book: MyBook){
         //recebe o livro que esta sendo acessado atraves da collection
@@ -34,7 +35,10 @@ class BookViewController: UIViewController {
         contentView.setupButtonReading(setReading)
         contentView.setupButtonAbandoned(setAbandoned)
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareTapped))
+        navigationItem.rightBarButtonItem = shareButtonBar
+        shareButtonBar.isAccessibilityElement = true
+        shareButtonBar.accessibilityHint = "Click to share synopsis Book"
+    
 
     }
     

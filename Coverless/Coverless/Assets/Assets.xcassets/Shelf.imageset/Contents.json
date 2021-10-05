@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "Shelf.png",
+      "filename" : "Shelf-4.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -12,7 +12,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "Shelf-3.png",
+      "filename" : "Shelf.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
