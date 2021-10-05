@@ -23,6 +23,8 @@ class MainTabBarController: UITabBarController {
             let appearance = UITabBarAppearance()
             appearance.configureWithOpaqueBackground()
             UITabBar.appearance().scrollEdgeAppearance = appearance
+            
+            appearance.backgroundColor = designSystem.palette.backgroundPrimary
         }
     }
 }
