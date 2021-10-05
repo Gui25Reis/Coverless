@@ -41,7 +41,6 @@ final class ImageFetcher {
         
         session.dataTask(with: url) {[weak self] data, response, error in
             guard
-                error != nil,
                 let response = response as? HTTPURLResponse,
                 response.statusCode == 200,
                 let data = data,
@@ -54,7 +53,7 @@ final class ImageFetcher {
             }
             
             completionHandler(.success(path))
-        }
+        }.resume()
 
     }
     

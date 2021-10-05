@@ -26,7 +26,7 @@ class ImageBook: UIView {
         
     }
     //passar uma imagem pro init
-    init(image: UIImage){
+    init(image: UIImage?){
         imageView = UIImageView()
         imageView.image = image
         super.init(frame: .zero)
@@ -37,6 +37,10 @@ class ImageBook: UIView {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setImage(with image: UIImage?) {
+        imageView.image = image
     }
     
     func style(){

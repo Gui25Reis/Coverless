@@ -70,7 +70,7 @@ class DataBooks{
         livro.synopsis = book.description
         livro.shopLink = ""//Array(book.buyLinks.values)[0]
         
-        imageFetcher.saveImage(from: URL(string: book.image)) {[weak self] res in
+        imageFetcher.saveImage(from: URL(string: book.image ?? "")) {[weak self] res in
             
             guard let self = self else { return }
             

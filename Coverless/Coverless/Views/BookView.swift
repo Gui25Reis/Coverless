@@ -16,7 +16,7 @@ final class BookView: UIView, Designable {
 
     //MARK: Views
     private lazy var imgBook: UIView = {
-        let img = ImageBook(image: UIImage(named: "ImageBookDefault")!)
+        let img = ImageBook(image: ImageFetcher.shared.image(for: book.imagePath))
         img.translatesAutoresizingMaskIntoConstraints = false
         return img
         
