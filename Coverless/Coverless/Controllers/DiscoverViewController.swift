@@ -14,6 +14,8 @@ class DiscoverViewController: UIViewController {
     private let contentView: DiscoverView
     private let dataSource: DiscoverCollectionViewDataSource
     
+    private lazy var infoButtonBar: UIBarButtonItem  = .init(image: UIImage(systemName: "info.circle"), style: .done, target: self, action: #selector(openOnboard))
+    
     ///userdefault para onboard
     let defaults = UserDefaults.standard
     
@@ -54,6 +56,9 @@ class DiscoverViewController: UIViewController {
     }
     
     public override func viewDidLoad() -> Void {
+        
+        navigationItem.rightBarButtonItem = infoButtonBar
+        
         super.viewDidLoad()
         dataSource.cellDelegate = self
         dataSource.footerDelegate = self
@@ -91,6 +96,11 @@ class DiscoverViewController: UIViewController {
                 self?.contentView.collectionView.reloadData()
             }
         }
+    }
+    
+    @objc
+    private func openOnboard(){
+        coordinator?.presentOnboard()
     }
     
     private func handleState() {

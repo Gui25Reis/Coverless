@@ -63,7 +63,7 @@ final class ShelfViewController: UIViewController, NSFetchedResultsControllerDel
         
         ///configurando constraints
         NSLayoutConstraint.activate([
-            segmentedControl.topAnchor.constraint(equalTo: view.topAnchor, constant: 150),
+            segmentedControl.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
             segmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: \.mediumNegative),
             segmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: \.mediumPositive),
             

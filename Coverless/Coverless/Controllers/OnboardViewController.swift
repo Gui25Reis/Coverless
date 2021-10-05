@@ -11,7 +11,9 @@ class OnboardViewController: UIViewController {
     
     var isOnboarding: Bool
     weak var coordinator: DiscoverCoordinator?
-
+    
+    private lazy var closeButtonBar: UIBarButtonItem  = .init(barButtonSystemItem: .close, target: self, action: #selector(actionDismiss))
+    
     //MARK: -View
     lazy var view0:ViewOnboarding =  {
         let view = ViewOnboarding(titulo: "Welcome!",
@@ -58,12 +60,9 @@ class OnboardViewController: UIViewController {
             pageControl.accessibilityLabel = "Page \(i+1) of four"
             
             arrayViews[i].frame = CGRect(x: view.frame.width * CGFloat(i), y: 0, width: view.frame.width, height: view.frame.height)
-            
-           //self.accessibilityElements = [arrayViews[i].labelTitulo,arrayViews[i].label,nextButton,previousButton,pageControl]
-
         }
         scrollView.delegate = self
-        
+    
         return scrollView
     }()
     
@@ -138,15 +137,21 @@ class OnboardViewController: UIViewController {
     
     //MARK: -viewDidLoad
     override func viewDidLoad() {
-        navigationController?.navigationBar.isHidden = true
+        //navigationController?.navigationBar.isHidden = true
+        navigationItem.rightBarButtonItem = closeButtonBar
+        
         super.viewDidLoad()
+        
+        //acessibilidade
+        view.accessibilityViewIsModal = true
+        
         // Do any additional setup after loading the view.
         view.backgroundColor = .backgroundPrimary
         view.addSubview(scrollView)
         view.addSubview(pageControl)
         view.addSubview(previousButton)
         view.addSubview(nextButton)
-        view.addSubview(closeButton)
+        
         setupConstraints()
     }
     
@@ -187,15 +192,6 @@ class OnboardViewController: UIViewController {
             previousButton.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 30)
         ]
         NSLayoutConstraint.activate(previousButtonConstraints)
-        
-        closeButton.translatesAutoresizingMaskIntoConstraints = false
-        let  closeButtonConstraints:[NSLayoutConstraint] = [
-            closeButton.widthAnchor.constraint(equalToConstant: 40),
-            closeButton.heightAnchor.constraint(equalToConstant: 40),
-            closeButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: \.largeNegative),
-            closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: \.largePositive)
-        ]
-        NSLayoutConstraint.activate(closeButtonConstraints)
     }
 
     
@@ -247,17 +243,16 @@ class OnboardViewController: UIViewController {
     }
     
     func setAccessibility(){
-        closeButton.isAccessibilityElement = true
-        closeButton.accessibilityLabel = "Close presentation"
-        closeButton.accessibilityHint = "Click to close onboard page"
-        closeButton.accessibilityTraits = .button
+        closeButtonBar.isAccessibilityElement = true
+        closeButtonBar.accessibilityLabel = "Close presentation"
+        closeButtonBar.accessibilityHint = "Click to close onboard page"
+        
         nextButton.isAccessibilityElement = true
         nextButton.accessibilityHint = "Click to next onboard page"
         previousButton.isAccessibilityElement = true
         previousButton.accessibilityHint = "Click to previous onboard page"
         pageControl.isAccessibilityElement = true
         pageControl.accessibilityLabel = "Page control"
-        //self.accessibilityElements = [nextButton,previousButton,pageControl,closeButton]
 
     }
 }
