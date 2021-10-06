@@ -91,7 +91,7 @@ final class BookView: UIView, Designable {
     }()
     
     private lazy var shopView: ShopView = {
-        let shopView = ShopView(image: UIImage(named: "GoogleBooksLogo")!, titulo: "Amazon Prime", price: "XX,00"/*"R$\(price)"*/,url: "")
+        let shopView = ShopView(image: UIImage(named: "GoogleBooksLogo")!, titulo: "Google Books", price: "XX,00"/*"R$\(price)"*/,url: "")
         shopView.translatesAutoresizingMaskIntoConstraints = false
         return shopView
     }()
@@ -300,7 +300,7 @@ final class BookView: UIView, Designable {
         
         synopsisField.isAccessibilityElement = true
         
-        ratingStars.isAccessibilityElement = true
+        ratingStars.isAccessibilityElement = false
         ratingStars.accessibilityHint = "Book review"
         ratingStars.accessibilityLabel = "Rating:\(ratingStars.getRating()) stars out of five"
         
@@ -322,12 +322,12 @@ final class BookView: UIView, Designable {
         shopView.accessibilityHint = "Options to shop"
         shopView.shopTitle.isAccessibilityElement = true
         shopView.shopTitle.accessibilityLabel = shopView.shopTitle.text
-        shopView.priceValue.isAccessibilityElement = true
+        shopView.priceValue.isAccessibilityElement = false
         shopView.priceValue.accessibilityLabel = shopView.priceValue.text
         shopView.shopButton.isAccessibilityElement = true
         shopView.shopButton.accessibilityHint = "click to be redirected"
         
-        self.accessibilityElements = [synopsisField,ratingHeader, ratingStars,statusHeader,statusButtonRead,statusButtonReading,statusButtonWant,shopHeader,shopView, shopView.shopTitle,shopView.priceValue,shopView.shopButton]
+        self.accessibilityElements = [synopsisField,statusHeader,statusButtonWant,statusButtonReading,statusButtonRead,shopHeader,shopView, shopView.shopTitle,shopView.priceValue,shopView.shopButton]
         
     }
     
