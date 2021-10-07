@@ -35,7 +35,7 @@ final class StatusButton: UIButton, Designable {
                 setButtonStyle(color: designSystem.palette.readColor, text: "Read")
             }
             else if status  == .want{
-                setButtonStyle(color: designSystem.palette.wantColor, text: "Want read")
+                setButtonStyle(color: designSystem.palette.wantColor, text: "Want to read")
             }
             else{
                 setButtonStyle(color: designSystem.palette.readingColor, text: "Reading")
