@@ -160,7 +160,7 @@ final class ShelfViewController: UIViewController, NSFetchedResultsControllerDel
 
 extension ShelfViewController:UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        coordinator?.showBook(book: books[indexPath.row])
+        coordinator?.showBook(book: filteredBooks[indexPath.row])
     }
 }
 
