@@ -16,80 +16,108 @@ import Foundation
  a repetir.
 */
 class GoogleRepository {
-    private lazy var lastCategory:[String:Int] = [:]
+    private var currentBooks: [String : [Book]] = [:]
     
-    /**
-        Faz a chamada da API com base na palavra chave.
-     
-        - Parametros:
-            - text: palavra chave para fazer a busca na API
- 
-        - CompletionHandler:
-            - Result: lista dos livors recebidos (lista com no máximo 40 livros)
-            - Error: erro caso tenha algum
-    */
-    public func getBooks(text:String, _ completionHandler: @escaping (Result<[Book], Error>) -> Void) -> Void {
-        var startIndex:Int = 0
-        var used:Bool = false
+    func getBooks(text: String, _ completionHandler: @escaping (Result<[Book], Error>) -> Void) {
         
-        if let _ = self.lastCategory[text] {
-            used = true
-            self.lastCategory[text]? += 1
-            startIndex = self.lastCategory[text]!
+        guard currentBooks[text] == nil else {
+            completionHandler(.success(getRandomBooks(of: currentBooks[text]!)))
+            return
         }
         
-        // Erro na URL
-        guard let url = URL(string: self.getUrl(text, startIndex)) else {
+        guard let url = URL(string: getUrl(text, 0)) else {
             completionHandler(.failure(APIError.badURL))
             return
         }
         
+        var books: [Book] = []
         
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            // Erro da sessão
-            if let error = error {
-                completionHandler(.failure(APIError.url(error as? URLError)))
+        let dispatchGroup = DispatchGroup()
+        let elementCount = 40
+        
+        dispatchGroup.enter()
+        fetchBook(for: url) {[weak self] result in
+            defer { dispatchGroup.leave() }
+            guard let self = self else {
+                completionHandler(.failure(APIError.badResponse(statusCode: 500)))
                 return
             }
             
-            // Não fez conexão com a API: servidor ou internet off
-            if let response = response as? HTTPURLResponse, response.statusCode != 200 {
-                completionHandler(.failure(APIError.badResponse(statusCode: response.statusCode)))
-                return
-            }
-            
-            // Erro na hora de pagar os dados
-            guard let data = data else {
-                completionHandler(.failure(APIError.badData))
-                return
-            }
-            
-            // Erro na hora de decodificar
-            guard let books = try? JSONDecoder().decode(Items.self, from: data) else {
-                completionHandler(.failure(APIError.badDecode))
-                return
-            }
-            
-            // Acessando um index que não existe
-            guard let _ = books.items else {
-                self.lastCategory[text]? = -1
-                self.getBooks(text: text) { result in
-                    switch result {
-                    case .success(let book):
-                        completionHandler(.success(book))
-                        
-                    case .failure(let error):
-                        completionHandler(.failure(error))
+            switch result {
+            case .failure(let error):
+                completionHandler(.failure(error))
+            case .success(let items):
+                let totalPages = (items.totalItems/elementCount)
+                books.append(contentsOf: self.compactInfo(items: items))
+                
+                Array(1..<totalPages).forEach { index in
+                    
+                    guard let url = URL(string: self.getUrl(text, 0)) else {
+                        completionHandler(.failure(APIError.badData))
+                        return
+                    }
+                    
+                    dispatchGroup.enter()
+                    self.fetchBook(for: url) { result in
+                        defer { dispatchGroup.leave() }
+                        switch result {
+                        case .failure(let error):
+                            completionHandler(.failure(error))
+                        case .success(let items):
+                            books.append(contentsOf: self.compactInfo(items: items))
+                        }
                     }
                 }
-                return
             }
-                        
-            if (!used) {self.lastCategory[text] = 0;}
-            
-            completionHandler(.success(self.compactInfo(items: books)))
         }
-        task.resume()
+        
+        dispatchGroup.notify(queue: .main) {[weak self] in
+            guard let self = self else { return }
+            self.currentBooks[text] = books
+            completionHandler(.success(self.getRandomBooks(of: books)))
+        }
+        
+        
+    }
+    
+    private func getRandomBooks(of books: [Book]) -> [Book] {
+        
+        guard books.count > 10 else {
+            return books
+        }
+        
+        var shuffledBooks = books
+        shuffledBooks.shuffle()
+        
+        return shuffledBooks
+            .enumerated()
+            .filter { (index, element) in
+            index < 10 }
+            .map { $1 }
+    }
+    
+    private func fetchBook(for url: URL, _ completionHandler: @escaping (Result<Items, Error>) -> Void) {
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            
+            if let error = error {
+                completionHandler(.failure(error))
+            }
+            
+            if let response = response as? HTTPURLResponse, response.statusCode == 200 {
+                guard
+                    let data = data,
+                    let items = try? JSONDecoder().decode(Items.self, from: data)
+                else {
+                    completionHandler(.failure(APIError.badData))
+                    return
+                }
+                
+                completionHandler(.success(items))
+
+            } else {
+                completionHandler(.failure(APIError.badResponse(statusCode: 404)))
+            }
+        }.resume()
     }
     
     
@@ -145,11 +173,7 @@ class GoogleRepository {
                    let title = info.volumeInfo.title,
                    let authors = info.volumeInfo.authors,
                    let publisher = info.volumeInfo.publisher,
-                   let description = info.volumeInfo.description //,
-                   // let _ = info.saleInfo,
-                   // let buyLink = info.saleInfo!.buyLink,
-                   // let _ = info.volumeInfo.imageLinks,
-                   // let imgThumbnail = info.volumeInfo.imageLinks!.thumbnail
+                   let description = info.volumeInfo.description
                 {
                     var allAuthors:String = ""
                     for author in authors {allAuthors += author + " ,"}

@@ -91,10 +91,8 @@ class DiscoverViewController: UIViewController {
     private func refreshBooks() {
         self.state = .refreshing
         dataSource.fetchBooks { [weak self] in
-            DispatchQueue.main.async {
-                self?.state = .presenting
-                self?.contentView.collectionView.reloadData()
-            }
+            self?.state = .presenting
+            self?.contentView.collectionView.reloadData()
         }
     }
     
