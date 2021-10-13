@@ -1,17 +1,29 @@
 # Coverless
-[![Version](https://img.shields.io/badge/version-0.1.0-orange)]()
-[![Plataform](https://img.shields.io/badge/plataforma-IOS-lightgrey?)]()
+[![Versão](https://img.shields.io/badge/versão-1.1.0-orange)](https://github.com/Gui25Reis/Coverless/releases/tag/v1.1)
+![Tamanho](https://img.shields.io/badge/tamanho-1,3%20MB-blue)
+[![Plataform](https://img.shields.io/badge/plataforma-IOS%2014+-lightgrey?)](https://apps.apple.com/us/app/coverless-your-book-sugestion/id1587382412)
+[![Swift version](https://img.shields.io/badge/swift-v5.4-blue?logo=swift)](https://swift.org/download/#releases)
 [![License](https://img.shields.io/badge/licença-GNU%20v3.0-brightgreen?)](https://github.com/Gui25Reis/Coverless/blob/main/LICENSE)
 
-App para buscar livros a partir da sinopse
+![Capa](https://github.com/Gui25Reis/Coverless/blob/dev/arquivos/imagens/Git-Capa.png)
 
-1. [Código](#código)
-2. [Documentação](#documentação)
-3. [Licença](#licença)
-4. [Autores](#autores)
+Não julgue um livro pela capa: use a sinopse!
+
+Com o App Coverless, você pode descobrir muitos livros de vários gêneros. Salve seus livros descobertos dentro do aplicativo em uma estante pessoal para olhar mais tarde.
+
+Deixe a magia de uma sinopse conquistar você também!
+
+1. [App Store](#app-store)
+2. [Código](#código)
+3. [Documentação](#documentação)
+4. [Licença](#licença)
+5. [Autores](#autores)
+
+## App Store
+Baixe já o Coverless, disponível na App Store nesse [link](https://apps.apple.com/us/app/coverless-your-book-sugestion/id1587382412).
 
 ## Código
-Código em construção.
+Código foi feito em Swift 5.4 usando o XCode. Baixando o repositório o programa não funcionará pois estamos usando a [API do Google Books](https://developers.google.com/books/docs/overview).
 
 ## Documentação
 Documentação se encontra na [wiki](https://github.com/Gui25Reis/Coverless/wiki) do projeto.
