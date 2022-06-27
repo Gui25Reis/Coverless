@@ -17,8 +17,6 @@ import Foundation
 */
 class GoogleRepository {
     private lazy var lastCategory:[String:Int] = [:]
-    private lazy var lastCategoryCont:[String:Int] = [:]
-    private lazy var textUsed:String = ""
     
     /**
         Faz a chamada da API com base na palavra chave.
@@ -40,6 +38,7 @@ class GoogleRepository {
             startIndex = self.lastCategory[text]!
         }
         
+        // Erro na URL
         guard let url = URL(string: self.getUrl(text, startIndex)) else {
             completionHandler(.failure(APIError.badURL))
             return
@@ -86,10 +85,8 @@ class GoogleRepository {
                 return
             }
                         
-            if (!used) {self.lastCategory[text] = 0; self.lastCategoryCont[text] = 0}
+            if (!used) {self.lastCategory[text] = 0;}
             
-            // print("Deu certo")
-            self.textUsed = text
             completionHandler(.success(self.compactInfo(items: books)))
         }
         task.resume()
@@ -163,16 +160,15 @@ class GoogleRepository {
                             isbn10: nil,
                             title: title.capitalized,
                             description: description,
-                            image: "",//imgThumbnail,
+                            image: info.volumeInfo.imageLinks?.thumbnail,
                             author: String(allAuthors.dropLast()),
                             publisher: publisher,
-                            buyLinks: [:]//["Google Books":"\(buyLink)"]
+                            buyLinks: ["Google Books":"\(info.saleInfo?.buyLink ?? "")"]
                         )
                     )
                 }
             }
         }
-        self.lastCategoryCont[self.textUsed]! += books.count
         return books
     }
 }

@@ -41,6 +41,7 @@ class DiscoverCoordinator: Coordinator {
         let nvc = UINavigationController(rootViewController: vc)
         UIAccessibility.post(notification: .screenChanged, argument: nvc)
         navigationController.present(nvc, animated: true, completion: nil)
+        navigationController.popToRootViewController(animated: true)
     }
     
     func presentOnboard(){

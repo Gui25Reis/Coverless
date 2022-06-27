@@ -26,6 +26,7 @@ class ViewOnboarding:UIView{
         self.backgroundColor = .backgroundPrimary
 
         labelTitulo.text = titulo
+        labelTitulo.numberOfLines = 0
         scrollView.addSubview(labelTitulo)
         
         label.text = text
@@ -95,6 +96,7 @@ class ViewOnboarding:UIView{
     }
     func setAccessibility(){
         labelTitulo.isAccessibilityElement = true
+        labelTitulo.accessibilityHint = "Title of onboard Page"
         label.isAccessibilityElement = true
         imageView.isAccessibilityElement = false
     }

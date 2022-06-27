@@ -11,6 +11,7 @@ class DiscoveredBookViewController: UIViewController {
     
     private let contentView: DiscoveredBookView
     private let book: Book
+    private let data: [MyBook]
     private lazy var barButtonItem: UIBarButtonItem  = .init(barButtonSystemItem: .done, target: self, action: #selector(didTapDone))
     
     weak var coordinator: DiscoverCoordinator?
@@ -18,7 +19,20 @@ class DiscoveredBookViewController: UIViewController {
     init(book:Book, designSystem: DesignSystem = DefaultDesignSystem()) {
         self.book = book
         self.contentView = DiscoveredBookView(designSystem: designSystem, book: book)
-        let _ = DataBooks.shared.addBook(book: book)
+        self.data = DataBooks.shared.getBooks()
+        
+        if !data.isEmpty{
+            let exists = data.map(\.id).contains(book.id)
+            
+            //so adiciona um novo livro se ele ainda nao foi adicionado
+            if !exists{
+                DataBooks.shared.addBook(book: book)
+            }
+        }
+        else{
+            DataBooks.shared.addBook(book: book)
+        }
+        
         super.init(nibName: nil, bundle: nil)
         
     }

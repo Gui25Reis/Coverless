@@ -5,9 +5,10 @@ class BookViewController: UIViewController {
     private var book: MyBook
     
     lazy var contentView: BookView = {
-        BookView(book:book, designSystem: DefaultDesignSystem.shared, tabBarHeight: tabBarController?.tabBar.frame.height ?? 100)
+        BookView(book: book, designSystem: DefaultDesignSystem.shared, tabBarHeight: tabBarController?.tabBar.frame.height ?? 100)
     }()
     
+    private lazy var shareButtonBar: UIBarButtonItem  = .init(barButtonSystemItem: .action, target: self, action: #selector(shareTapped))
     
     init(book: MyBook){
         //recebe o livro que esta sendo acessado atraves da collection
@@ -32,9 +33,12 @@ class BookViewController: UIViewController {
         contentView.setupContentBook()
         contentView.setupButtonRead(setRead)
         contentView.setupButtonReading(setReading)
-        contentView.setupButtonAbandoned(setAbandoned)
+        contentView.setupButtonAbandoned(setWant)
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareTapped))
+        navigationItem.rightBarButtonItem = shareButtonBar
+        shareButtonBar.isAccessibilityElement = true
+        shareButtonBar.accessibilityHint = "Click to share synopsis Book"
+    
 
     }
     
@@ -48,7 +52,7 @@ class BookViewController: UIViewController {
         DataBooks.shared.saveContext()
 
     }
-    private func setAbandoned(){
+    private func setWant(){
         book.status = 2
         DataBooks.shared.saveContext()
 

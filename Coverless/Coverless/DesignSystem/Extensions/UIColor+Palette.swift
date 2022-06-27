@@ -36,8 +36,8 @@ extension UIColor {
         UIColor(named: "ReadingColor")!
     }
 
-    static var abandonedColor: UIColor {
-        UIColor(named: "AbandonedColor")!
+    static var wantColor: UIColor {
+        UIColor(named: "WantColor")!
     }
 
     static var buttonTextPrimary: UIColor {

@@ -143,7 +143,7 @@ class ShelfCell: UICollectionViewCell, Designable{
         
         //elementos
         bookTitle.stylize(with: designSystem.text.title)
-        bookTitle.numberOfLines = 0
+        bookTitle.numberOfLines = 4
         
         //favButton
         //testando o botao de fav
@@ -180,8 +180,9 @@ class ShelfCell: UICollectionViewCell, Designable{
         bookTitle.text = book.title
         ///rating do livro
         stars.setRating(rating: Int(book.rating))
+        imgView.setImage(with: ImageFetcher.shared.image(for: book.imagePath))
         ///fav Button
-        stylize(with: DefaultDesignSystem.shared)        
+        stylize(with: DefaultDesignSystem.shared)
     }
 
     ///funcao que eh recebe informacao do coreData

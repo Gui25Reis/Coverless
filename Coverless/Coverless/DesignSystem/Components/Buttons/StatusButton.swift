@@ -8,7 +8,7 @@
 import UIKit
 
 enum BookStatus: Int{
-    case read,reading,abandoned
+    case read,reading,want
 }
 
 
@@ -34,22 +34,22 @@ final class StatusButton: UIButton, Designable {
             if status == .read{
                 setButtonStyle(color: designSystem.palette.readColor, text: "Read")
             }
-            else if status  == .reading{
-                setButtonStyle(color: designSystem.palette.readingColor, text: "Reading")
+            else if status  == .want{
+                setButtonStyle(color: designSystem.palette.wantColor, text: "Want to read")
             }
             else{
-                setButtonStyle(color: designSystem.palette.abandonedColor, text: "Abandoned")
+                setButtonStyle(color: designSystem.palette.readingColor, text: "Reading")
             }
         }
         else{
             if status == .read{
                 setButtonStyleInative(color: designSystem.palette.readColor)
             }
-            else if status  == .reading{
-                setButtonStyleInative(color: designSystem.palette.readingColor)
+            else if status  == .want{
+                setButtonStyleInative(color: designSystem.palette.wantColor)
             }
             else{
-                setButtonStyleInative(color: designSystem.palette.abandonedColor)
+                setButtonStyleInative(color: designSystem.palette.readingColor)
             }
             
         }

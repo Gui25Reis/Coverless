@@ -17,7 +17,7 @@ struct DefaultDesignPalette: DesignPalette {
     ///botoes de status
     let readColor: UIColor = .readColor
     let readingColor: UIColor = .readingColor
-    let abandonedColor: UIColor = .abandonedColor
+    let wantColor: UIColor = .wantColor
     let buttonTextPrimary: UIColor = .buttonTextPrimary
     let buttonBackgroundPrimary: UIColor = .accent
 }

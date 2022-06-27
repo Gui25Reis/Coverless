@@ -23,7 +23,7 @@ final class DiscoverViewFooter: UICollectionReusableView {
             b.heightAnchor.constraint(equalToConstant: 44),
             b.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.6),
             b.centerXAnchor.constraint(equalTo: centerXAnchor),
-            b.centerYAnchor.constraint(equalTo: centerYAnchor)
+            b.topAnchor.constraint(equalTo: topAnchor)
         ])
         
         b.setTitle("Refresh books", for: .normal)
@@ -37,6 +37,24 @@ final class DiscoverViewFooter: UICollectionReusableView {
         b.layer.cornerRadius = 12
         
         return b
+    }()
+    
+    private lazy var apiLabel: UILabel = {
+        let l = UILabel()
+        
+        l.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(l)
+        
+        NSLayoutConstraint.activate([
+            l.topAnchor.constraint(equalTo: fetchButton.bottomAnchor, constant: \.smallPositive),
+            l.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor, constant: \.smallPositive),
+            l.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor, constant: \.smallNegative),
+            l.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
+        
+        l.font = .systemFont(ofSize: 12, weight: .light)
+        l.textColor = .secondaryLabel
+        return l
     }()
     
     override init(frame: CGRect) {
@@ -54,6 +72,7 @@ final class DiscoverViewFooter: UICollectionReusableView {
         }
         self.delegate = delegate
         fetchButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        apiLabel.text = "Data provided by the Google Books"
     }
     
     @objc

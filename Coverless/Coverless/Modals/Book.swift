@@ -18,8 +18,8 @@ struct Book {
     let isbn10:String?
     let title:String
     let description:String
-    let image:String
+    let image:String?
     let author:String
     let publisher:String
-    let buyLinks:[String:String]
+    let buyLinks:[String:String]?
 }

@@ -102,7 +102,7 @@ final class AsyncImage: UIView {
     
     func setDefaultPlaceholder() {
         hideLoadingAndShowImage()
-        imageView.image = .remove
+        imageView.image = UIImage(named: "ImageBookDefault")
     }
     
     func setImageView(with image: UIImage) {
